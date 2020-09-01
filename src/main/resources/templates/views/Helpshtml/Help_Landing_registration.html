@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>公告</title>
+  <title>帮助</title>
   <link rel="stylesheet" href="../../layui/css/layui.css">
 </head>
 <body class="layui-layout-body">
@@ -16,9 +16,9 @@
       <li class="layui-nav-item"><a href="">帖子</a></li>
       <li class="layui-nav-item"><a href="">知识专栏</a></li>
       <li class="layui-nav-item"><a href="">马铃薯图像库</a></li>
-      <li class="layui-nav-item"><a th:href="@{/Notice/Notice_Privacy_copyright(title='隐私和版权')}">相关连接</a></li>
-      <li class="layui-nav-item"><a href="">帮助</a></li>
-      <li class="layui-nav-item"><a href="">公告</a></li>
+      <li class="layui-nav-item"><a href="">相关连接</a></li>
+      <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='登陆与注册')}">帮助</a></li>
+      <li class="layui-nav-item"><a th:href="@{/Notices/Notice_Privacy_copyright(title='隐私和版权')}">公告</a></li>
       <div class="layui-nav-item">
       	<form method="post">
 	  	 	<li class="layui-nav-item"><input type="text"  class="layui-input"></li>   
@@ -35,7 +35,7 @@
           <dd><a href="">个人中心</a></dd>
         </dl>
       </li>
-      <li class="layui-nav-item"><a href="">安全退出</a></li>
+      <li class="layui-nav-item"><a href="/">安全退出</a></li>
     </ul>
   </div>
   
@@ -43,11 +43,11 @@
     <div class="layui-side-scroll">
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-        <li class="layui-nav-item"><a th:href="@{/Notice/Notice_Privacy_copyright(title='隐私和版权')}">隐私和版权</a></li>
-        <li class="layui-nav-item"><a th:href="@{/Notice/Notice_Privacy_copyright(title='系统测试')}">社区平台测试</a></li>
-        <li class="layui-nav-item"><a th:href="@{/Notice/Notice_Privacy_copyright(title='反馈作者')}">反馈作者</a></li>
-        <li class="layui-nav-item"><a th:href="@{/Notice/Notice_Privacy_copyright(title='关于社区')}">关于社区</a></li>
-        <li class="layui-nav-item"><a th:href="@{/Notice/Notice_Privacy_copyright(title='关于作者')}">关于作者</a></li>
+        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='登陆与注册')}">登陆与注册</a></li>
+        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='密码注意事项')}">密码注意事项</a></li>
+        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='如何发表帖子')}">如何发表帖子</a></li>
+        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='如何评论帖子')}">如何评论帖子</a></li>
+        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='联系我们')}">联系我们</a></li>
       </ul>
     </div>
   </div>
@@ -55,12 +55,12 @@
   <div class="layui-body">
     <!-- 内容主体区域 -->
     <div style="padding: 15px;">
-      <h1 align="center" th:text="${notice.getTitle()}"></h1>
+      <h1 align="center" th:text="${helps.getTitle()}"></h1>
       <br/>
-      <p th:utext="${notice.getAnnouncement()}" ></p>
+      <p th:utext="${helps.getContent()}" ></p>
       <br/>
-      <h4>发布于:<span th:text="${#dates.format(notice.getNewtime(),'yyyy-MM-dd HH:mm:ss')}"></span></h4>
-</div>
+      <h4>发布于:<span th:text="${#dates.format(helps.getNewtime(),'yyyy-MM-dd HH:mm:ss')}"></span></h4>
+    </div>
   </div>
   
   <div class="layui-footer">

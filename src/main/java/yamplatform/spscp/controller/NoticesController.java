@@ -5,23 +5,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import yamplatform.spscp.pojo.Notices;
 import yamplatform.spscp.service.NoticesService;
 
 @Controller
-@RequestMapping("/Notice")
+@RequestMapping("/Notices")
+@SessionAttributes({"user"})
 public class NoticesController {
     @Autowired
     NoticesService noticesService;
-    @RequestMapping("/i")
-    public String i(){
-        return "views/index";
-    }
     @RequestMapping("/Notice_Privacy_copyright")
     public String Notice_Privacy_copyright(@Param("title") String title, Model model){
         Notices notice=noticesService.SelectOne(title);
         model.addAttribute("notice",notice);
-
-        return "views/Noticehtml/Notice_Privacy_copyright";
+        return "views/Noticeshtml/Notice_Privacy_copyright";
     }
 }

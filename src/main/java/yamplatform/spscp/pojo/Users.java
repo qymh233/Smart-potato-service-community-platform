@@ -5,24 +5,25 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Users {
-    private int id;
+    private Integer id;
     private String username;
     private String password;
     private String nickname; // 昵称
     private String sex = "男";
-    private String picture = "/DS-Java/image/ds-java.png"; // 头像
+    private String picture = "/img/ds-java.png"; // 头像
     private String email = "";
     private String comefrom = ""; // 来自
     private String introduction = ""; // 个人简介
     private String profession = ""; // 职业，专业
-    private int gradeIntegral=0;
-    private int integral = 50; // 积分
-    private int roleId = 0; // 权限
-    private int clock = 0; // 未读消息
-    private int topCount = 0; // 帖子数
-    private int comCount = 0; // 评论数
+    private Integer gradeIntegral=0;
+    private Integer integral = 50; // 积分
+    private Integer roleId = 0; // 权限
+    private Integer clock = 0; // 未读消息
+    private Integer topCount = 0; // 帖子数
+    private Integer comCount = 0; // 评论数
     private Date registerTime;
-    private int status; // 0表示未禁用，1表示禁用
+    private Integer status; // 0表示未禁用，1表示禁用
+
 
     private Grades usersGrade; // 等级
 
@@ -31,11 +32,11 @@ public class Users {
     private Set<Comments> userComments = new HashSet<Comments>();
     private Set<News> userCommentNews = new HashSet<News>();
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -111,51 +112,51 @@ public class Users {
         this.profession = profession;
     }
 
-    public int getGradeIntegral() {
+    public Integer getGradeIntegral() {
         return gradeIntegral;
     }
 
-    public void setGradeIntegral(int gradeIntegral) {
+    public void setGradeIntegral(Integer gradeIntegral) {
         this.gradeIntegral = gradeIntegral;
     }
 
-    public int getIntegral() {
+    public Integer getIntegral() {
         return integral;
     }
 
-    public void setIntegral(int integral) {
+    public void setIntegral(Integer integral) {
         this.integral = integral;
     }
 
-    public int getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
-    public int getClock() {
+    public Integer getClock() {
         return clock;
     }
 
-    public void setClock(int clock) {
+    public void setClock(Integer clock) {
         this.clock = clock;
     }
 
-    public int getTopCount() {
+    public Integer getTopCount() {
         return topCount;
     }
 
-    public void setTopCount(int topCount) {
+    public void setTopCount(Integer topCount) {
         this.topCount = topCount;
     }
 
-    public int getComCount() {
+    public Integer getComCount() {
         return comCount;
     }
 
-    public void setComCount(int comCount) {
+    public void setComCount(Integer comCount) {
         this.comCount = comCount;
     }
 
@@ -167,11 +168,11 @@ public class Users {
         this.registerTime = registerTime;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
