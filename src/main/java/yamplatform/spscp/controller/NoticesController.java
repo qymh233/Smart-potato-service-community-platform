@@ -21,6 +21,7 @@ public class NoticesController {
     public String Notice_Privacy_copyright(@Param("title") String title, Model model){
         Notices notice=noticesService.SelectOne(title);
         model.addAttribute("notice",notice);
+
         return "views/Noticehtml/Notice_Privacy_copyright";
     }
 }
