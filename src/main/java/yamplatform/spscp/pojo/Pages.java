@@ -7,7 +7,7 @@ public class Pages {
     private List<Comments> listComments;
     private List<News> listNews;
     private List<Users> listUser;
-    private List<Announces> ListAnno;
+    private List<Notices> ListAnno;
     private List<Helps> listHelp;
 
     private int currentPage; // 当前页数
@@ -52,11 +52,11 @@ public class Pages {
         this.listUser = listUser;
     }
 
-    public List<Announces> getListAnno() {
+    public List<Notices> getListAnno() {
         return ListAnno;
     }
 
-    public void setListAnno(List<Announces> listAnno) {
+    public void setListAnno(List<Notices> listAnno) {
         ListAnno = listAnno;
     }
 

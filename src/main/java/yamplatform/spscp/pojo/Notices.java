@@ -2,11 +2,11 @@ package yamplatform.spscp.pojo;
 
 import java.util.Date;
 
-public class Announces {
+public class Notices {
     private Integer id;
     private String announcement;
     private String title;
-    private Date thetime;
+    private Date newtime;
 
     public Integer getId() {
         return id;
@@ -32,12 +32,12 @@ public class Announces {
         this.title = title;
     }
 
-    public Date getThetime() {
-        return thetime;
+    public Date getNewtime() {
+        return newtime;
     }
 
-    public void setThetime(Date thetime) {
-        this.thetime = thetime;
+    public void setNewtime(Date newtime) {
+        this.newtime = newtime;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Announces {
                 "id=" + id +
                 ", announcement='" + announcement + '\'' +
                 ", title='" + title + '\'' +
-                ", thetime=" + thetime +
+                ", newtime=" + newtime +
                 '}';
     }
 }
