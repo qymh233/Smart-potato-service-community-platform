@@ -2,8 +2,10 @@ package yamplatform.spscp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
+@SessionAttributes({"user"})
 public class PageController {
     @RequestMapping("/i")
     public String i(){
@@ -23,5 +25,10 @@ public class PageController {
     @RequestMapping("/register")
     public String register(){
         return "views/register";
+    }
+    //首页
+    @RequestMapping("/home")
+    public String home(){
+        return "views/HomePage";
     }
 }

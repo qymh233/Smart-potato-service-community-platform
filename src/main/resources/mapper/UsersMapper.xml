@@ -10,13 +10,13 @@
 	<!-- 插入用户 -->
 	<insert id="InsertUsers" parameterType="yamplatform.spscp.pojo.Users">
 		insert into t_user(username,password,nickname,sex,picture,email,comefrom,introduction,profession,gradeIntegral,
-		integral,roleId,clock,topCount,comCount,registerTime,status,usersGrade)
+		integral,roleId,clock,topCount,comCount,registerTime,status,usersGradeid)
 		values(#{users.username,jdbcType=VARCHAR},#{users.password,jdbcType=VARCHAR},#{users.nickname,jdbcType=VARCHAR},
 		#{users.sex,jdbcType=VARCHAR},#{users.picture,jdbcType=VARCHAR},#{users.email,jdbcType=VARCHAR},
-		#{users.comefrom,jdbcType=VARCHAR},#{users.introduction,jdbcType=LONGTEXT},#{users.profession,jdbcType=VARCHAR},
-		#{users.gradeIntegral,jdbcType=Integer},#{users.integral,jdbcType=Integer},#{users.roleId,jdbcType=Integer},
-		#{users.clock,jdbcType=Integer},#{users.topCount,jdbcType=Integer},#{users.comCount,jdbcType=Integer},
-		now(),#{users.status,jdbcType=Integer},#{users.usersGrade,jdbcType=Integer})
+		#{users.comefrom,jdbcType=VARCHAR},#{users.introduction,jdbcType=LONGVARCHAR},#{users.profession,jdbcType=VARCHAR},
+		#{users.gradeIntegral,jdbcType=INTEGER},#{users.integral,jdbcType=INTEGER},#{users.roleId,jdbcType=INTEGER},
+		#{users.clock,jdbcType=INTEGER},#{users.topCount,jdbcType=INTEGER},#{users.comCount,jdbcType=INTEGER},
+		now(),#{users.status,jdbcType=INTEGER},#{users.usersGradeid,jdbcType=INTEGER})
 	</insert>
 	<!-- 更新用户 -->
 	<update id="UpdateUsers">
@@ -44,7 +44,7 @@
 		<result property="comCount" column="comCount"/>
 		<result property="registerTime" column="registerTime"/>
 		<result property="status" column="status"/>
-		<result property="usersGrade" column="usersGrade"/>
+		<result property="usersGradeid" column="usersGradeid"/>
 	</resultMap>
 
 </mapper>

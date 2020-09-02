@@ -12,7 +12,7 @@
     <div class="layui-logo">智慧马铃薯服务社区平台</div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
-      <li class="layui-nav-item"><a href="">首页</a></li>
+      <li class="layui-nav-item"><a href="/home">首页</a></li>
       <li class="layui-nav-item"><a href="">帖子</a></li>
       <li class="layui-nav-item"><a href="">知识专栏</a></li>
       <li class="layui-nav-item"><a href="">马铃薯图像库</a></li>
@@ -28,11 +28,10 @@
     </ul>	
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
-        <a href="javascript:;">
-          贤心
+        <a href="javascript:;" th:text="${user.getNickname()}">
         </a>
         <dl class="layui-nav-child">
-          <dd><a href="">个人中心</a></dd>
+          <dd><a href="/Users/Personal_Center">个人中心</a></dd>
         </dl>
       </li>
       <li class="layui-nav-item"><a href="/">安全退出</a></li>

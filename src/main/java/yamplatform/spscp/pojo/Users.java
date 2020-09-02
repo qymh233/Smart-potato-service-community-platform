@@ -23,6 +23,7 @@ public class Users {
     private Integer comCount = 0; // 评论数
     private Date registerTime;
     private Integer status; // 0表示未禁用，1表示禁用
+    private Integer usersGradeid;//用户等级编号
 
 
     private Grades usersGrade; // 等级
@@ -174,6 +175,14 @@ public class Users {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getUsersGradeid() {
+        return usersGradeid;
+    }
+
+    public void setUsersGradeid(Integer usersGradeid) {
+        this.usersGradeid = usersGradeid;
     }
 
     public Grades getUsersGrade() {

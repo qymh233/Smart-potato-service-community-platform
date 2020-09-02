@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>首页</title>
+  <link rel="stylesheet" href="../layui/css/layui.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo">智慧马铃薯服务社区平台</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item"><a href="">首页</a></li>
+      <li class="layui-nav-item"><a href="">帖子</a></li>
+      <li class="layui-nav-item"><a href="">知识专栏</a></li>
+      <li class="layui-nav-item"><a href="">马铃薯图像库</a></li>
+      <li class="layui-nav-item"><a href="">相关连接</a></li>
+      <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='登陆与注册')}">帮助</a></li>
+      <li class="layui-nav-item"><a th:href="@{/Notices/Notice_Privacy_copyright(title='隐私和版权')}">公告</a></li>
+      <div class="layui-nav-item">
+      	<form method="post">
+	  	 	<li class="layui-nav-item"><input type="text"  class="layui-input"></li>   
+	  		<li class="layui-nav-item"><button type="submit" formaction="/admin/findSignIn" class="layui-btn layui-btn-radius">Search</button></li>   
+	  	</form> 
+      </div>
+    </ul>	
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;" th:text="${user.getNickname()}">
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="/Users/Personal_Center">个人中心</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="/">安全退出</a></li>
+    </ul>
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item layui-nav-itemed">
+          <a href="javascript:;">公告</a>
+          <dl class="layui-nav-child">
+            <dd><a th:href="@{/Notices/Notice_Privacy_copyright(title='隐私和版权')}">隐私和版权</a></dd>
+            <dd><a th:href="@{/Notices/Notice_Privacy_copyright(title='系统测试')}">社区平台测试</a></dd>
+            <dd><a th:href="@{/Notices/Notice_Privacy_copyright(title='反馈作者')}">反馈作者</a></dd>
+            <dd><a th:href="@{/Notices/Notice_Privacy_copyright(title='关于社区')}">关于社区</a></dd>
+            <dd><a th:href="@{/Notices/Notice_Privacy_copyright(title='关于作者')}">关于作者</a></dd>
+          </dl>
+        </li>
+      </ul>
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <button type="button" class="layui-btn layui-btn-lg" style="margin-left: 15px;margin-right: 0px;">我要发帖</button>
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item layui-nav-itemed">
+          <a href="javascript:;">帮助</a>
+          <dl class="layui-nav-child">
+            <dd><a th:href="@{/Helps/Help_Landing_registration(title='登陆与注册')}">登陆与注册</a></dd>
+            <dd><a th:href="@{/Helps/Help_Landing_registration(title='密码注意事项')}">密码注意事项</a></dd>
+            <dd><a th:href="@{/Helps/Help_Landing_registration(title='如何发表帖子')}">如何发表帖子</a></dd>
+            <dd><a th:href="@{/Helps/Help_Landing_registration(title='如何评论帖子')}">如何评论帖子</a></dd>
+            <dd><a th:href="@{/Helps/Help_Landing_registration(title='联系我们')}">联系我们</a></dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div class="layui-row">
+      <blockquote class="layui-elem-quote" style="color: red;font-size: 20px;font-weight: 500;">热帖榜TOP10</blockquote>
+            <div class="layui-card">
+              <div class="table-responsive">
+
+            <table class="layui-table" lay-skin="line" lay-size="lg" id="table">              
+              <thead>
+                <tr>
+                  <th>类型</th>
+                  <th>标题</th>
+                  <th>作者</th> 
+                  <th>积分</th>
+                  <th>评论量</th>
+                  <th>发布时间</th>
+                  <th>操作</th>
+                </tr> 
+              </thead>
+              <tbody>
+                <tr>
+                  <td>01</td>
+                  <td>国庆节放假七天！</td>
+                  <td>国庆节放假七天国庆节放假七天</td>
+                  <td></td>
+                  <td>2019-11-29</td>                                  
+                  <td>
+                      <div class="layui-table-cell laytable-cell-1-0-10">                            
+                          <a class="layui-btn layui-btn-danger layui-btn-xs delete">删除</a> 
+                      </div>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+
+        <div class="layui-row">
+      <blockquote class="layui-elem-quote" style="color: green;font-size: 20px;font-weight: 500;">新帖榜TOP10</blockquote>
+            <div class="layui-card">
+              <div class="table-responsive">
+
+            <table class="layui-table" lay-skin="line" lay-size="lg" id="table">              
+              <thead>
+                <tr>
+                  <th>类型</th>
+                  <th>标题</th>
+                  <th>作者</th> 
+                  <th>积分</th>
+                  <th>评论量</th>
+                  <th>发布时间</th>
+                  <th>操作</th>
+                </tr> 
+              </thead>
+              <tbody>
+                <tr>
+                  <td>01</td>
+                  <td>国庆节放假七天！</td>
+                  <td>国庆节放假七天国庆节放假七天</td>
+                  <td></td>
+                  <td>2019-11-29</td>                                  
+                  <td>
+                      <div class="layui-table-cell laytable-cell-1-0-10">                            
+                          <a class="layui-btn layui-btn-danger layui-btn-xs delete">删除</a> 
+                      </div>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+
+
+
+        <div class="layui-row">
+      <blockquote class="layui-elem-quote" style="color: blue;font-size: 20px;font-weight: 500;">精帖榜TOP10</blockquote>
+            <div class="layui-card">
+              <div class="table-responsive">
+
+            <table class="layui-table" lay-skin="line" lay-size="lg" id="table">              
+              <thead>
+                <tr>
+                  <th>类型</th>
+                  <th>标题</th>
+                  <th>作者</th> 
+                  <th>积分</th>
+                  <th>评论量</th>
+                  <th>发布时间</th>
+                  <th>操作</th>
+                </tr> 
+              </thead>
+              <tbody>
+                <tr>
+                  <td>01</td>
+                  <td>国庆节放假七天！</td>
+                  <td>国庆节放假七天国庆节放假七天</td>
+                  <td></td>
+                  <td>2019-11-29</td>                                  
+                  <td>
+                      <div class="layui-table-cell laytable-cell-1-0-10">                            
+                          <a class="layui-btn layui-btn-danger layui-btn-xs delete">删除</a> 
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>01</td>
+                  <td>国庆节放假七天！</td>
+                  <td>国庆节放假七天国庆节放假七天</td>
+                  <td></td>
+                  <td>2019-11-29</td>                                  
+                  <td>
+                      <div class="layui-table-cell laytable-cell-1-0-10">                            
+                          <a class="layui-btn layui-btn-danger layui-btn-xs delete">删除</a> 
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>01</td>
+                  <td>国庆节放假七天！</td>
+                  <td>国庆节放假七天国庆节放假七天</td>
+                  <td></td>
+                  <td>2019-11-29</td>                                  
+                  <td>
+                      <div class="layui-table-cell laytable-cell-1-0-10">                            
+                          <a class="layui-btn layui-btn-danger layui-btn-xs delete">删除</a> 
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>01</td>
+                  <td>国庆节放假七天！</td>
+                  <td>国庆节放假七天国庆节放假七天</td>
+                  <td></td>
+                  <td>2019-11-29</td>                                  
+                  <td>
+                      <div class="layui-table-cell laytable-cell-1-0-10">                            
+                          <a class="layui-btn layui-btn-danger layui-btn-xs delete">删除</a> 
+                      </div>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+
+
+
+
+  </div>
+  
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    智慧马铃薯服务社区平台
+  </div>
+</div>
+<script src="../layui/layui.js"></script>
+<script>
+//JavaScript代码区域
+layui.use('element', function(){
+  var element = layui.element;
+  
+});
+</script>
+</body>
+</html>
