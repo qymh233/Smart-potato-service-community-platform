@@ -1,20 +1,23 @@
 package yamplatform.spscp.pojo;
 
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Categorys {
-    private int id;
+    private Integer id;
     private String name;
-    private int countTopics = 0;
-    private int countComments = 0;
-    private Set<Types> categoryTypes = new HashSet<Types>();
+    private Integer countTopics = 0;
+    private Integer countComments = 0;
 
-    public int getId() {
+
+    private List<Types> categoryTypes;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -26,27 +29,27 @@ public class Categorys {
         this.name = name;
     }
 
-    public int getCountTopics() {
+    public Integer getCountTopics() {
         return countTopics;
     }
 
-    public void setCountTopics(int countTopics) {
+    public void setCountTopics(Integer countTopics) {
         this.countTopics = countTopics;
     }
 
-    public int getCountComments() {
+    public Integer getCountComments() {
         return countComments;
     }
 
-    public void setCountComments(int countComments) {
+    public void setCountComments(Integer countComments) {
         this.countComments = countComments;
     }
 
-    public Set<Types> getCategoryTypes() {
+    public List<Types> getCategoryTypes() {
         return categoryTypes;
     }
 
-    public void setCategoryTypes(Set<Types> categoryTypes) {
+    public void setCategoryTypes(List<Types> categoryTypes) {
         this.categoryTypes = categoryTypes;
     }
 

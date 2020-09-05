@@ -4,20 +4,22 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Types {
-    private int id;
+    private Integer id;
     private String name;
-    private int countTopics = 0;
-    private int countComments = 0;
+    private Integer countTopics = 0;
+    private Integer countComments = 0;
+    private Integer typescategoryid;
+    private String url;
 
     private Categorys typesCategory;
 
     private Set<Topics> typeTopics = new HashSet<Topics>();
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -29,19 +31,19 @@ public class Types {
         this.name = name;
     }
 
-    public int getCountTopics() {
+    public Integer getCountTopics() {
         return countTopics;
     }
 
-    public void setCountTopics(int countTopics) {
+    public void setCountTopics(Integer countTopics) {
         this.countTopics = countTopics;
     }
 
-    public int getCountComments() {
+    public Integer getCountComments() {
         return countComments;
     }
 
-    public void setCountComments(int countComments) {
+    public void setCountComments(Integer countComments) {
         this.countComments = countComments;
     }
 
@@ -51,6 +53,22 @@ public class Types {
 
     public void setTypesCategory(Categorys typesCategory) {
         this.typesCategory = typesCategory;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Integer getTypescategoryid() {
+        return typescategoryid;
+    }
+
+    public void setTypescategoryid(Integer typescategoryid) {
+        this.typescategoryid = typescategoryid;
     }
 
     public Set<Topics> getTypeTopics() {
@@ -68,6 +86,8 @@ public class Types {
                 ", name='" + name + '\'' +
                 ", countTopics=" + countTopics +
                 ", countComments=" + countComments +
+                ", typescategoryid=" + typescategoryid +
+                ", url='" + url + '\'' +
                 ", typesCategory=" + typesCategory +
                 ", typeTopics=" + typeTopics +
                 '}';
