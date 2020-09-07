@@ -22,10 +22,13 @@ public interface TopicsMapper {
     //查询列表byuid
     public List<Topics>  TopicsListbyuid(@Param("uid") Integer uid);
     //条件查询
+    //时间排序
     public List<Topics>  TopicsListbyxin();
     public List<Topics>  TopicsListbyxin_ten();
+    //查询>50 ,时间排序
     public List<Topics>  TopicsListbyre();
     public List<Topics>  TopicsListbyre_ten();
+    //查询>50 , 点赞>50 时间排序
     public List<Topics>  TopicsListbyjin();
     public List<Topics>  TopicsListbyjin_ten();
 
