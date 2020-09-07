@@ -7,6 +7,9 @@
 	<select id="SelectOne" parameterType="String" resultType="yamplatform.spscp.pojo.Users">
     select * from t_user where username = #{username}
   </select>
+	<select id="SelectOnebyid" parameterType="INTEGER" resultType="yamplatform.spscp.pojo.Users">
+    select * from t_user where id = #{id}
+  </select>
 	<!-- 插入用户 -->
 	<insert id="InsertUsers" parameterType="yamplatform.spscp.pojo.Users">
 		insert into t_user(username,password,nickname,sex,picture,email,comefrom,introduction,profession,gradeIntegral,

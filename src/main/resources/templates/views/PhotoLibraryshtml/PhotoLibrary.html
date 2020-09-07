@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>帮助</title>
+  <title>首页</title>
   <link rel="stylesheet" href="../../layui/css/layui.css">
 </head>
 <body class="layui-layout-body">
@@ -42,24 +42,52 @@
     <div class="layui-side-scroll">
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='登陆与注册')}">登陆与注册</a></li>
-        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='密码注意事项')}">密码注意事项</a></li>
-        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='如何发表帖子')}">如何发表帖子</a></li>
-        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='如何评论帖子')}">如何评论帖子</a></li>
-        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='联系我们')}">联系我们</a></li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a href="/PhotoLibrarys/PhotoLibrary">马铃薯图像库</a>
+        </li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a href="/PhotoLibrarys/PhotoLibrary_upload">我要上传</a>
+        </li>
       </ul>
     </div>
   </div>
   
   <div class="layui-body">
     <!-- 内容主体区域 -->
-    <div style="padding: 15px;">
-      <h1 align="center" th:text="${helps.getTitle()}"></h1>
-      <br/>
-      <p th:utext="${helps.getContent()}" ></p>
-      <br/>
-      <h4>发布于:<span th:text="${#dates.format(helps.getNewtime(),'yyyy-MM-dd HH:mm:ss')}"></span></h4>
-    </div>
+    <div class="layui-row">
+      <blockquote class="layui-elem-quote" style="color: green;font-size: 20px;font-weight: 500;">马铃薯图像库</blockquote>
+            <div class="layui-card">
+              <div class="table-responsive">
+
+            <table class="layui-table" lay-skin="line" lay-size="lg" id="table">              
+              <thead>
+                <tr>
+                  <th>标题</th>
+                  <th>上传者</th> 
+                  <th>上传时间</th>
+                  <th>被浏览次数</th>
+                  <th>详情</th>
+                  <th>操作</th>
+                </tr> 
+              </thead>
+              <tbody>
+                <tr th:each="p: ${photoLibrarysList}">
+                  <td th:text="${p.getTitle()}"></td>
+                  <td th:text="${p.getUser().getNickname()}"></td>
+                  <td th:text="${#dates.format(p.getUptime(),'yyyy-MM-dd HH:mm:ss')}"></td>
+                  <td th:text="${p.getConDownload()}"></td>
+                  <td>          
+                    <a th:href="@{/PhotoLibrarys/PhotoLibrary_see(id=${p.getId()})}" class="layui-btn layui-btn-xs layui-btn-normal">查看</a>
+                  </td>                              
+                  <td>              
+                    <a class="layui-btn layui-btn-danger layui-btn-xs delete" th:href="@{${p.getUrl()}}" th:download="${p.getTitle()}">下载</a>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+
+       
   </div>
   
   <div class="layui-footer">

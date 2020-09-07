@@ -21,6 +21,12 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
+    public Users SelectOnebyid(Integer id) {
+        Users user=usersMapper.SelectOnebyid(id);
+        return user;
+    }
+
+    @Override
     public int InsertUsers(Users users) {
         return 0;
     }
