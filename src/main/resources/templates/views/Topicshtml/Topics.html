@@ -43,10 +43,19 @@
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
         <li class="layui-nav-item layui-nav-itemed">
-          <a href="/PhotoLibrarys/PhotoLibrary">马铃薯图像库</a>
+          <a href="javascript:;">我要发贴</a>
         </li>
         <li class="layui-nav-item layui-nav-itemed">
-          <a href="/PhotoLibrarys/PhotoLibrary_upload">我要上传</a>
+          <a th:href="@{/Topics/Topics(page='xin')}">新帖榜</a>
+        </li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a th:href="@{/Topics/Topics(page='re')}">热帖榜</a>
+        </li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a th:href="@{/Topics/Topics(page='jin')}">精帖榜</a>
+        </li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a th:href="@{/Topics/Topics(page='lun')}">论坛</a>
         </li>
       </ul>
     </div>
@@ -55,59 +64,36 @@
   <div class="layui-body">
     <!-- 内容主体区域 -->
     <div class="layui-row">
-      <blockquote class="layui-elem-quote" style="color: green;font-size: 20px;font-weight: 500;">查看详情</blockquote>
-        <div id="form-box">
-          <div class="layui-form-item">
-            <label class="layui-form-label font-style">标题</label>
-            <label class="layui-form-label">
-              <span class="span-style" th:text="${photoLibrary.getTitle()}"></span>
-            </label>
-          </div>
-
-          <div class="layui-form-item">
-            <label class="layui-form-label font-style">上传者</label>
-            <label class="layui-form-label">
-              <span class="span-style" th:text="${photoLibrary.getUser().getNickname()}"></span>
-            </label>
-          </div>
-
-          <div class="layui-form-item">
-            <label class="layui-form-label font-style">上传时间</label>
-            <label class="layui-form-label" style="width: 150px;">
-              <span class="span-style"  th:text="${#dates.format(photoLibrary.getUptime(),'yyyy-MM-dd HH:mm:ss')}"></span>
-            </label>
-          </div>
-
-          <div class="layui-form-item">
-            <label class="layui-form-label font-style">被浏览次数</label>
-            <label class="layui-form-label">
-              <span class="span-style" th:text="${photoLibrary.getConDownload()}"></span>
-            </label>
-          </div>
-
-          <div class="layui-form-item">
-            <label class="layui-form-label font-style">描述</label>
-            <div class="layui-input-block">
-              <textarea readonly class="layui-textarea" th:text="${photoLibrary.getDescribed()}"></textarea>
-            </div>
-          </div>
-
-          <div class="layui-form-item">
-            <label class="layui-form-label">
-              <a href="/PhotoLibrarys/PhotoLibrary" class="layui-btn layui-btn-lg layui-btn-normal">返回上一页</a>
-            </label>
-            <div class=" layui-inline" style="margin-left: 50px;">
-              <label class="layui-form-label">
-              <a class="layui-btn layui-btn-danger layui-btn-lg" th:href="@{${photoLibrary.getUrl()}}" th:download="${photoLibrary.getTitle()}">下载</a>
-            </label>
-            </div>
-          </div>
+      <blockquote th:if="${stat}=='lun'" class="layui-elem-quote" style="color: green;font-size: 20px;font-weight: 500;">欢迎来到论坛</blockquote>
+      <blockquote th:if="${stat}=='xin'" class="layui-elem-quote" style="color: dodgerblue;font-size: 20px;font-weight: 500;">新帖榜</blockquote>
+      <blockquote th:if="${stat}=='re'" class="layui-elem-quote" style="color: orangered;font-size: 20px;font-weight: 500;">热帖榜</blockquote>
+      <blockquote th:if="${stat}=='jin'" class="layui-elem-quote" style="color: orange;font-size: 20px;font-weight: 500;">精帖榜</blockquote>
+            <div class="layui-card">
+              <div class="table-responsive">
+            <table class="layui-table" lay-skin="line" lay-size="lg" id="table">              
+              <thead>
+                <tr>
+                  <th>标题</th>
+                  <th>发布者</th> 
+                  <th>发布时间</th>
+                  <th>点赞数</th>
+                  <th>详情</th>
+                </tr> 
+              </thead>
+              <tbody>
+                <tr th:each="t: ${topicsList}">
+                  <td th:text="${t.getTitle()}"></td>
+                  <td th:text="${t.getUser().getNickname()}"></td>
+                  <td th:text="${#dates.format(t.getTopicTime(),'yyyy-MM-dd HH-mm-ss')}"></td>
+                  <td th:text="${t.getCountnice()}"></td>
+                  <td>          
+                    <a class="layui-btn layui-btn-xs layui-btn-normal">查看</a> 
+                  </td>                              
+                </tr>
+              </tbody>
+          </table>
         </div>
 
-
-
-    </div>
-            
        
   </div>
   

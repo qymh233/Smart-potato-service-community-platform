@@ -2,29 +2,28 @@ package yamplatform.spscp.pojo;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 public class Topics {
-    private int id;
+    private Integer id;
     private String title; // 标题
     private String content; // 内容
-    private int countComment = 0; // 评论数
+    private String picturl; // 内容
+    private Integer countnice = 0; // 点赞数
+    private Integer countsee = 0; // 查看数
     private Date topicTime; // 发布时间
-    private int niceTopic = 0; // 精品帖：0不是，1是
-    private int status = 0; // 帖子状态：0未结帖，1已结贴
-    private int integral = 10; // 默认帖子发布所耗积分
-    // 多对一
-    private Users topicsUser;
-    private Types topicsType;
-    // 集合，一对多
-    private Set<Comments> topicComments = new HashSet<Comments>();
-    private Set<News> topicNews = new HashSet<News>();
+    private Integer uid;//用户id
+    private Integer status = 0; // 帖子状态：0未结帖，1已结贴
 
-    public int getId() {
+    private Users User;
+    // 集合，一对多
+    private List<Comments> commentsList;//回复
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -44,12 +43,28 @@ public class Topics {
         this.content = content;
     }
 
-    public int getCountComment() {
-        return countComment;
+    public String getPicturl() {
+        return picturl;
     }
 
-    public void setCountComment(int countComment) {
-        this.countComment = countComment;
+    public void setPicturl(String picturl) {
+        this.picturl = picturl;
+    }
+
+    public Integer getCountnice() {
+        return countnice;
+    }
+
+    public void setCountnice(Integer countnice) {
+        this.countnice = countnice;
+    }
+
+    public Integer getCountsee() {
+        return countsee;
+    }
+
+    public void setCountsee(Integer countsee) {
+        this.countsee = countsee;
     }
 
     public Date getTopicTime() {
@@ -60,60 +75,36 @@ public class Topics {
         this.topicTime = topicTime;
     }
 
-    public int getNiceTopic() {
-        return niceTopic;
+    public Integer getUid() {
+        return uid;
     }
 
-    public void setNiceTopic(int niceTopic) {
-        this.niceTopic = niceTopic;
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public int getIntegral() {
-        return integral;
+    public Users getUser() {
+        return User;
     }
 
-    public void setIntegral(int integral) {
-        this.integral = integral;
+    public void setUser(Users user) {
+        User = user;
     }
 
-    public Users getTopicsUser() {
-        return topicsUser;
+    public List<Comments> getCommentsList() {
+        return commentsList;
     }
 
-    public void setTopicsUser(Users topicsUser) {
-        this.topicsUser = topicsUser;
-    }
-
-    public Types getTopicsType() {
-        return topicsType;
-    }
-
-    public void setTopicsType(Types topicsType) {
-        this.topicsType = topicsType;
-    }
-
-    public Set<Comments> getTopicComments() {
-        return topicComments;
-    }
-
-    public void setTopicComments(Set<Comments> topicComments) {
-        this.topicComments = topicComments;
-    }
-
-    public Set<News> getTopicNews() {
-        return topicNews;
-    }
-
-    public void setTopicNews(Set<News> topicNews) {
-        this.topicNews = topicNews;
+    public void setCommentsList(List<Comments> commentsList) {
+        this.commentsList = commentsList;
     }
 
     @Override
@@ -122,15 +113,14 @@ public class Topics {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", countComment=" + countComment +
+                ", picturl='" + picturl + '\'' +
+                ", countnice=" + countnice +
+                ", countsee=" + countsee +
                 ", topicTime=" + topicTime +
-                ", niceTopic=" + niceTopic +
+                ", uid=" + uid +
                 ", status=" + status +
-                ", integral=" + integral +
-                ", topicsUser=" + topicsUser +
-                ", topicsType=" + topicsType +
-                ", topicComments=" + topicComments +
-                ", topicNews=" + topicNews +
+                ", User=" + User +
+                ", commentsList=" + commentsList +
                 '}';
     }
 }

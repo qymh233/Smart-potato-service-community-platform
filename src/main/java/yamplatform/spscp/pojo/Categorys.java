@@ -1,7 +1,5 @@
 package yamplatform.spscp.pojo;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Categorys {

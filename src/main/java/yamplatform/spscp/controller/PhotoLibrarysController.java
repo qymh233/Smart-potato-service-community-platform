@@ -61,7 +61,15 @@ public class PhotoLibrarysController {
             if (pos != -1)
                 filename = filename.substring(pos + 1);
             String fname=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" +filename;
-            dbname=fname;
+            String newstr=filename.substring(filename.length() - 3);
+            if(newstr.equals("jpg")||newstr.equals("png")){
+                dbname="马铃薯图片";
+            }else if(newstr.equals("zip")||newstr.equals("rar")){
+                dbname="马铃薯图片压缩包";
+            }else {
+                dbname=fname;
+            }
+
             pathString = "E:\\ideaproject\\spscp\\src\\main\\resources\\static\\img\\PhotoLibrary\\" + fname;//上传到本地
         }
         Map map = new HashMap<String,Object>();

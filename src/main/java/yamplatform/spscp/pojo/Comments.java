@@ -4,14 +4,15 @@ import java.util.Date;
 
 public class Comments {
     private int id;
-    private String content;
-    private int floor;
+    private String content; // 内容
+    private String picturl; // 内容
     private Date commentTime;
-    private int integral;
+    private Integer countnice = 0; // 点赞数
+    private Integer uid;//用户id
+    private Integer tid;//帖子id
     private int status;  //评论的状态，是否被删除，0表示没有，1表示被删除
     // 多对一
-    private Topics commentsTopic;
-    private Users commentsUser;
+    private Users User;
 
     public int getId() {
         return id;
@@ -29,12 +30,12 @@ public class Comments {
         this.content = content;
     }
 
-    public int getFloor() {
-        return floor;
+    public String getPicturl() {
+        return picturl;
     }
 
-    public void setFloor(int floor) {
-        this.floor = floor;
+    public void setPicturl(String picturl) {
+        this.picturl = picturl;
     }
 
     public Date getCommentTime() {
@@ -45,12 +46,20 @@ public class Comments {
         this.commentTime = commentTime;
     }
 
-    public int getIntegral() {
-        return integral;
+    public Integer getUid() {
+        return uid;
     }
 
-    public void setIntegral(int integral) {
-        this.integral = integral;
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
+
+    public Integer getTid() {
+        return tid;
+    }
+
+    public void setTid(Integer tid) {
+        this.tid = tid;
     }
 
     public int getStatus() {
@@ -61,20 +70,20 @@ public class Comments {
         this.status = status;
     }
 
-    public Topics getCommentsTopic() {
-        return commentsTopic;
+    public Users getUser() {
+        return User;
     }
 
-    public void setCommentsTopic(Topics commentsTopic) {
-        this.commentsTopic = commentsTopic;
+    public void setUser(Users user) {
+        User = user;
     }
 
-    public Users getCommentsUser() {
-        return commentsUser;
+    public Integer getCountnice() {
+        return countnice;
     }
 
-    public void setCommentsUser(Users commentsUser) {
-        this.commentsUser = commentsUser;
+    public void setCountnice(Integer countnice) {
+        this.countnice = countnice;
     }
 
     @Override
@@ -82,12 +91,13 @@ public class Comments {
         return "Comments{" +
                 "id=" + id +
                 ", content='" + content + '\'' +
-                ", floor=" + floor +
+                ", picturl='" + picturl + '\'' +
                 ", commentTime=" + commentTime +
-                ", integral=" + integral +
+                ", countnice=" + countnice +
+                ", uid=" + uid +
+                ", tid=" + tid +
                 ", status=" + status +
-                ", commentsTopic=" + commentsTopic +
-                ", commentsUser=" + commentsUser +
+                ", User=" + User +
                 '}';
     }
 }

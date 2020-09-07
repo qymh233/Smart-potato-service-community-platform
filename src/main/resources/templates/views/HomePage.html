@@ -13,7 +13,7 @@
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
       <li class="layui-nav-item"><a href="/home">首页</a></li>
-      <li class="layui-nav-item"><a href="">帖子</a></li>
+      <li class="layui-nav-item"><a th:href="@{/Topics/Topics(page='lun')}">论坛</a></li>
       <li class="layui-nav-item"><a href="/Categorys/Knowledge_column">知识专栏</a></li>
       <li class="layui-nav-item"><a href="/PhotoLibrarys/PhotoLibrary">马铃薯图像库</a></li>
       <li class="layui-nav-item"><a href="">相关连接</a></li>
@@ -79,28 +79,23 @@
             <table class="layui-table" lay-skin="line" lay-size="lg" id="table">              
               <thead>
                 <tr>
-                  <th>类型</th>
                   <th>标题</th>
-                  <th>作者</th> 
-                  <th>积分</th>
-                  <th>评论量</th>
+                  <th>发布者</th>
                   <th>发布时间</th>
-                  <th>操作</th>
+                  <th>点赞数</th>
+                  <th>详情</th>
                 </tr> 
               </thead>
               <tbody>
-                <tr>
-                  <td>01</td>
-                  <td>国庆节放假七天！</td>
-                  <td>国庆节放假七天国庆节放假七天</td>
-                  <td></td>
-                  <td>2019-11-29</td>                                  
-                  <td>
-                      <div class="layui-table-cell laytable-cell-1-0-10">                            
-                          <a class="layui-btn layui-btn-danger layui-btn-xs delete">删除</a> 
-                      </div>
-                  </td>
-                </tr>
+              <tr th:each="t: ${topicsListre}">
+                <td th:text="${t.getTitle()}"></td>
+                <td th:text="${t.getUser().getNickname()}"></td>
+                <td th:text="${#dates.format(t.getTopicTime(),'yyyy-MM-dd HH-mm-ss')}"></td>
+                <td th:text="${t.getCountnice()}"></td>
+                <td>
+                  <a class="layui-btn layui-btn-xs layui-btn-normal">查看</a>
+                </td>
+              </tr>
               </tbody>
           </table>
         </div>
@@ -113,28 +108,23 @@
             <table class="layui-table" lay-skin="line" lay-size="lg" id="table">              
               <thead>
                 <tr>
-                  <th>类型</th>
                   <th>标题</th>
-                  <th>作者</th> 
-                  <th>积分</th>
-                  <th>评论量</th>
+                  <th>发布者</th>
                   <th>发布时间</th>
-                  <th>操作</th>
+                  <th>点赞数</th>
+                  <th>详情</th>
                 </tr> 
               </thead>
               <tbody>
-                <tr>
-                  <td>01</td>
-                  <td>国庆节放假七天！</td>
-                  <td>国庆节放假七天国庆节放假七天</td>
-                  <td></td>
-                  <td>2019-11-29</td>                                  
-                  <td>
-                      <div class="layui-table-cell laytable-cell-1-0-10">                            
-                          <a class="layui-btn layui-btn-danger layui-btn-xs delete">删除</a> 
-                      </div>
-                  </td>
-                </tr>
+              <tr th:each="t: ${topicsListxin}">
+                <td th:text="${t.getTitle()}"></td>
+                <td th:text="${t.getUser().getNickname()}"></td>
+                <td th:text="${#dates.format(t.getTopicTime(),'yyyy-MM-dd HH-mm-ss')}"></td>
+                <td th:text="${t.getCountnice()}"></td>
+                <td>
+                  <a class="layui-btn layui-btn-xs layui-btn-normal">查看</a>
+                </td>
+              </tr>
               </tbody>
           </table>
         </div>
@@ -149,64 +139,23 @@
             <table class="layui-table" lay-skin="line" lay-size="lg" id="table">              
               <thead>
                 <tr>
-                  <th>类型</th>
                   <th>标题</th>
-                  <th>作者</th> 
-                  <th>积分</th>
-                  <th>评论量</th>
+                  <th>发布者</th>
                   <th>发布时间</th>
-                  <th>操作</th>
+                  <th>点赞数</th>
+                  <th>详情</th>
                 </tr> 
               </thead>
               <tbody>
-                <tr>
-                  <td>01</td>
-                  <td>国庆节放假七天！</td>
-                  <td>国庆节放假七天国庆节放假七天</td>
-                  <td></td>
-                  <td>2019-11-29</td>                                  
-                  <td>
-                      <div class="layui-table-cell laytable-cell-1-0-10">                            
-                          <a class="layui-btn layui-btn-danger layui-btn-xs delete">删除</a> 
-                      </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>01</td>
-                  <td>国庆节放假七天！</td>
-                  <td>国庆节放假七天国庆节放假七天</td>
-                  <td></td>
-                  <td>2019-11-29</td>                                  
-                  <td>
-                      <div class="layui-table-cell laytable-cell-1-0-10">                            
-                          <a class="layui-btn layui-btn-danger layui-btn-xs delete">删除</a> 
-                      </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>01</td>
-                  <td>国庆节放假七天！</td>
-                  <td>国庆节放假七天国庆节放假七天</td>
-                  <td></td>
-                  <td>2019-11-29</td>                                  
-                  <td>
-                      <div class="layui-table-cell laytable-cell-1-0-10">                            
-                          <a class="layui-btn layui-btn-danger layui-btn-xs delete">删除</a> 
-                      </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>01</td>
-                  <td>国庆节放假七天！</td>
-                  <td>国庆节放假七天国庆节放假七天</td>
-                  <td></td>
-                  <td>2019-11-29</td>                                  
-                  <td>
-                      <div class="layui-table-cell laytable-cell-1-0-10">                            
-                          <a class="layui-btn layui-btn-danger layui-btn-xs delete">删除</a> 
-                      </div>
-                  </td>
-                </tr>
+              <tr th:each="t: ${topicsListjin}">
+                <td th:text="${t.getTitle()}"></td>
+                <td th:text="${t.getUser().getNickname()}"></td>
+                <td th:text="${#dates.format(t.getTopicTime(),'yyyy-MM-dd HH-mm-ss')}"></td>
+                <td th:text="${t.getCountnice()}"></td>
+                <td>
+                  <a class="layui-btn layui-btn-xs layui-btn-normal">查看</a>
+                </td>
+              </tr>
               </tbody>
           </table>
         </div>

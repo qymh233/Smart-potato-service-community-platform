@@ -6,8 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import yamplatform.spscp.pojo.Topics;
 import yamplatform.spscp.pojo.Users;
+import yamplatform.spscp.service.TopicsService;
 import yamplatform.spscp.service.UsersService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("Users")
@@ -15,6 +19,8 @@ import yamplatform.spscp.service.UsersService;
 public class UsersController {
     @Autowired
     UsersService usersService;
+    @Autowired
+    TopicsService topicsService;
     //登陆
     @RequestMapping("/login")
     public String login(@Param("username")String username, @Param("password")String password, Model model){
@@ -25,6 +31,12 @@ public class UsersController {
         }
         model.addAttribute("user",user);
         //帖子查询
+        List<Topics> topicsListxin=topicsService.TopicsListbyxin_ten();
+        model.addAttribute("topicsListxin",topicsListxin);
+        List<Topics> topicsListre=topicsService.TopicsListbyre_ten();
+        model.addAttribute("topicsListre",topicsListre);
+        List<Topics> topicsListjin=topicsService.TopicsListbyjin_ten();
+        model.addAttribute("topicsListjin",topicsListjin);
         return "views/HomePage";
     }
     //TODO

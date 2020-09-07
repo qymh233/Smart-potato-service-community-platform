@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yamplatform.spscp.mapper.TopicsMapper">
+	<!-- 查询一个栏目 -->
+	<select id="SelectOne" parameterType="Integer" resultType="yamplatform.spscp.pojo.Topics">
+    select * from t_topic where id = #{id}
+  </select>
+	<!-- 插入栏目 -->
+	<insert id="InsertTopics" parameterType="yamplatform.spscp.pojo.Topics">
+		insert into t_topic(title,content,picturl,countnice,countsee,topicTime,uid,status) values(
+		#{topics.title,jdbcType=VARCHAR},#{topics.content,jdbcType=VARCHAR},#{topics.picturl,jdbcType=VARCHAR},
+		#{topics.countnice,jdbcType=INTEGER},#{topics.countsee,jdbcType=INTEGER},now(),
+		#{topics.uid,jdbcType=INTEGER},#{topics.status,jdbcType=INTEGER})
+	</insert>
+	<!-- 更新栏目 -->
+	<update id="UpdateTopics">
+	  update t_topic set title = #{topics.title} , content = #{topics.content}  , picturl = #{topics.picturl}, countnice = #{topics.countnice}, countsee = #{topics.countsee} , status = #{topics.status} where id = #{topics.id}
+	</update>
+	<!-- 查询所有栏目 -->
+	<resultMap type="yamplatform.spscp.pojo.Topics" id="SelectAll">
+		<result property="id" column="id"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="picturl" column="picturl"/>
+		<result property="countnice" column="countnice"/>
+		<result property="countsee" column="countsee"/>
+		<result property="topicTime" column="topicTime"/>
+		<result property="uid" column="uid"/>
+		<result property="status" column="status"/>
+	</resultMap>
+	<select id="TopicsList" resultMap="SelectAll">
+    	select * from t_topic
+  	</select>
+	<select id="TopicsListbyuid" resultMap="SelectAll">
+    	select * from t_topic where uid = #{uid}
+  	</select>
+
+
+	<select id="TopicsListbyxin" resultMap="SelectAll">
+    	select * from t_topic order by topicTime desc
+  	</select>
+	<select id="TopicsListbyxin_ten" resultMap="SelectAll">
+    	select * from t_topic order by topicTime desc limit 0,10
+  	</select>
+	<select id="TopicsListbyre" resultMap="SelectAll">
+    	select * from t_topic where countsee > 50 order by topicTime desc
+  	</select>
+	<select id="TopicsListbyre_ten" resultMap="SelectAll">
+    	select * from t_topic where countsee >50 order by topicTime desc limit 0,10
+  	</select>
+	<select id="TopicsListbyjin" resultMap="SelectAll">
+    	select * from t_topic where countsee > 50 and countnice >50 order by topicTime desc
+  	</select>
+	<select id="TopicsListbyjin_ten" resultMap="SelectAll">
+    	select * from t_topic where countsee > 50 and countnice >50 order by topicTime desc limit 0,10
+  	</select>
+</mapper>
