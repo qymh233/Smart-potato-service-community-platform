@@ -53,7 +53,11 @@
         </li>
       </ul>
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-      <button type="button" class="layui-btn layui-btn-lg" style="margin-left: 15px;margin-right: 0px;">我要发帖</button>
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item layui-nav-itemed">
+          <a href="/Topics/Topic_up">我要发贴</a>
+        </li>
+      </ul>
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
         <li class="layui-nav-item layui-nav-itemed">
           <a href="javascript:;">帮助</a>
@@ -93,7 +97,7 @@
                 <td th:text="${#dates.format(t.getTopicTime(),'yyyy-MM-dd HH-mm-ss')}"></td>
                 <td th:text="${t.getCountnice()}"></td>
                 <td>
-                  <a class="layui-btn layui-btn-xs layui-btn-normal">查看</a>
+                  <a th:href="@{/Topics/Topic_see(id=${t.getId()})}" class="layui-btn layui-btn-xs layui-btn-normal">查看</a>
                 </td>
               </tr>
               </tbody>
@@ -122,7 +126,7 @@
                 <td th:text="${#dates.format(t.getTopicTime(),'yyyy-MM-dd HH-mm-ss')}"></td>
                 <td th:text="${t.getCountnice()}"></td>
                 <td>
-                  <a class="layui-btn layui-btn-xs layui-btn-normal">查看</a>
+                  <a th:href="@{/Topics/Topic_see(id=${t.getId()})}" class="layui-btn layui-btn-xs layui-btn-normal">查看</a>
                 </td>
               </tr>
               </tbody>
@@ -153,7 +157,7 @@
                 <td th:text="${#dates.format(t.getTopicTime(),'yyyy-MM-dd HH-mm-ss')}"></td>
                 <td th:text="${t.getCountnice()}"></td>
                 <td>
-                  <a class="layui-btn layui-btn-xs layui-btn-normal">查看</a>
+                  <a th:href="@{/Topics/Topic_see(id=${t.getId()})}" class="layui-btn layui-btn-xs layui-btn-normal">查看</a>
                 </td>
               </tr>
               </tbody>
