@@ -68,7 +68,22 @@ public class TopicsServiceImpl implements TopicsService{
         }
         return topicsList;
     }
-//条件查询
+
+    @Override
+    public List<Topics> searchTopicsList(String question) {
+        List<Topics> topicsList=topicsMapper.searchTopicsList(question);
+        if(topicsList!=null){
+            for(Topics t:topicsList){
+                List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
+                t.setCommentsList(commentsList);
+                Users user=usersService.SelectOnebyid(t.getUid());
+                t.setUser(user);
+            }
+        }
+        return topicsList;
+    }
+
+    //条件查询
     @Override
     public List<Topics> TopicsListbyxin() {
         List<Topics> topicsList=topicsMapper.TopicsListbyxin();

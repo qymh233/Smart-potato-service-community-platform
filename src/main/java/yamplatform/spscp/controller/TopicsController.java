@@ -122,4 +122,18 @@ public class TopicsController {
         model.addAttribute("topic",topic);
         return "views/Topicshtml/Topics_see";
     }
+
+    @RequestMapping("/findSignIn")
+    public String findSignIn(Model model,@Param("question")String question){
+        List<Topics> topicsList=topicsService.searchTopicsList(question);
+        if(topicsList!=null){
+            model.addAttribute("topicsList",topicsList);
+            model.addAttribute("stat","ok");
+        }else {
+            System.out.println("控");
+            model.addAttribute("stat","no");
+        }
+        model.addAttribute("question",question);
+        return "views/Topicshtml/findSignIn";
+    }
 }

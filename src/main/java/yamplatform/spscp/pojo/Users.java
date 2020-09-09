@@ -31,7 +31,6 @@ public class Users {
     // 集合，一对多
     private Set<Topics> userTopics = new HashSet<Topics>();
     private Set<Comments> userComments = new HashSet<Comments>();
-    private Set<News> userCommentNews = new HashSet<News>();
 
     public Integer getId() {
         return id;
@@ -209,13 +208,6 @@ public class Users {
         this.userComments = userComments;
     }
 
-    public Set<News> getUserCommentNews() {
-        return userCommentNews;
-    }
-
-    public void setUserCommentNews(Set<News> userCommentNews) {
-        this.userCommentNews = userCommentNews;
-    }
 
     @Override
     public String toString() {
@@ -241,7 +233,6 @@ public class Users {
                 ", usersGrade=" + usersGrade +
                 ", userTopics=" + userTopics +
                 ", userComments=" + userComments +
-                ", userCommentNews=" + userCommentNews +
                 '}';
     }
 }

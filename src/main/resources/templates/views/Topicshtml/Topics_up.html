@@ -16,15 +16,16 @@
         <li class="layui-nav-item"><a th:href="@{/Topics/Topics(page='lun')}">论坛</a></li>
         <li class="layui-nav-item"><a href="/Categorys/Knowledge_column">知识专栏</a></li>
         <li class="layui-nav-item"><a href="/PhotoLibrarys/PhotoLibrary">马铃薯图像库</a></li>
-        <li class="layui-nav-item"><a href="">相关连接</a></li>
+        <li class="layui-nav-item"><a href="/Rellinks/Rellinks">友情连接</a></li>
         <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='登陆与注册')}">帮助</a></li>
         <li class="layui-nav-item"><a th:href="@{/Notices/Notice_Privacy_copyright(title='隐私和版权')}">公告</a></li>
-      <div class="layui-nav-item">
-      	<form method="post">
-	  	 	<li class="layui-nav-item"><input type="text"  class="layui-input"></li>   
-	  		<li class="layui-nav-item"><button type="submit" formaction="/admin/findSignIn" class="layui-btn layui-btn-radius">Search</button></li>   
-	  	</form> 
-      </div>
+        <li class="layui-nav-item"><a th:href="@{/LiveMsgs/LiveMsgs_see}">留言版</a></li>
+        <div class="layui-nav-item">
+            <form method="post" onsubmit="return validate_form(this)">
+                <li class="layui-nav-item"><input  name="question" id="question" type="text"  class="layui-input"></li>
+                <li class="layui-nav-item"><button type="submit" formaction="/Topics/findSignIn" class="layui-btn layui-btn-radius">Search</button></li>
+            </form>
+        </div>
     </ul>	
     <ul class="layui-nav layui-layout-right">
         <li class="layui-nav-item">
@@ -166,6 +167,26 @@ layui.use(['form', 'layedit', 'laydate'], function(){
             }
         });
     });
+
+
+function validate_required(field,alerttxt)
+{
+    with (field)
+    {
+        if (value==null||value=="")
+        {alert(alerttxt);return false}
+        else {return true}
+    }
+}
+
+function validate_form(thisform)
+{
+    with (thisform)
+    {
+        if (validate_required(question,"搜索框不可以为空")==false)
+        {question.focus();return false}
+    }
+}
 </script>
 </body>
 </html>

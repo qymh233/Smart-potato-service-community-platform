@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>首页</title>
+  <link rel="stylesheet" href="../../layui/css/layui.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo">智慧马铃薯服务社区平台</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+        <li class="layui-nav-item"><a href="/home">首页</a></li>
+        <li class="layui-nav-item"><a th:href="@{/Topics/Topics(page='lun')}">论坛</a></li>
+        <li class="layui-nav-item"><a href="/Categorys/Knowledge_column">知识专栏</a></li>
+        <li class="layui-nav-item"><a href="/PhotoLibrarys/PhotoLibrary">马铃薯图像库</a></li>
+        <li class="layui-nav-item"><a href="/Rellinks/Rellinks">友情连接</a></li>
+        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='登陆与注册')}">帮助</a></li>
+        <li class="layui-nav-item"><a th:href="@{/Notices/Notice_Privacy_copyright(title='隐私和版权')}">公告</a></li>
+        <li class="layui-nav-item"><a th:href="@{/LiveMsgs/LiveMsgs_see}">留言版</a></li>
+      <div class="layui-nav-item">
+          <form method="post" onsubmit="return validate_form(this)">
+              <li class="layui-nav-item"><input  name="question" id="question" type="text"  class="layui-input"></li>
+              <li class="layui-nav-item"><button type="submit" formaction="/Topics/findSignIn" class="layui-btn layui-btn-radius">Search</button></li>
+          </form>
+      </div>
+    </ul>	
+    <ul class="layui-nav layui-layout-right">
+        <li class="layui-nav-item">
+            <a href="javascript:;" th:text="${user.getNickname()}">
+            </a>
+            <dl class="layui-nav-child">
+                <dd><a href="/Users/Personal_Center">个人中心</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item"><a href="/">安全退出</a></li>
+    </ul>
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='登陆与注册')}">登陆与注册</a></li>
+        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='密码注意事项')}">密码注意事项</a></li>
+        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='如何发表帖子')}">如何发表帖子</a></li>
+        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='如何评论帖子')}">如何评论帖子</a></li>
+        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='联系我们')}">联系我们</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+      <blockquote class="layui-elem-quote" style="color: green;font-size: 20px;font-weight: 500;" >留言版</blockquote>
+
+		<form class="layui-form" method="post" th:action="@{/LiveMsgs/LiveMsgs_add}">
+		  <div class="layui-form-item layui-form-text">
+			   <div class="layui-form-item layui-form-text">
+				<div class="layui-input-block">
+				  <textarea name="cont" placeholder="请输入内容" class="layui-textarea" lay-verify="required" lay-reqtext="内容不可以为空哦"></textarea>
+				</div>
+			  </div>
+			  <div class="layui-form-item">
+				<div class="layui-input-block">
+				  <button   type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">发表留言</button>
+				</div>
+			  </div>
+		  </div>
+		</form>
+
+		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+				  <legend>其他留言</legend>
+				</fieldset>
+
+		<div class="layui-col-md12 layadmin-homepage-list-imgtxt message-content">
+		       <div class="media-body" th:each="l: ${liveMsgsList}">
+		          <a href="javascript:;" class="media-left" style="float: left;">
+		             <img th:src="${l.getUser().getPicture()}" height="46px" width="46px">
+		          </a>
+		          <div class="pad-btm">
+		            <p class="fontColor" th:text="${l.getUser().getNickname()}"></p>
+		            <p class="min-font">
+		              <span class="layui-breadcrumb" lay-separator="-" style="visibility: visible;">
+		                 <span lay-separator="" th:text="${ #dates.format(l.getNewtime(),'yyyy-MM-dd HH:mm:ss')}"></span>
+		              </span>
+		            </p>         
+		         </div>
+		          <p class="message-text" th:text="${l.getContent()}"></p>
+				   <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+				   </fieldset>
+		       </div>
+		     </div>
+  </div>
+  
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    智慧马铃薯服务社区平台
+  </div>
+</div>
+<script src="../layui/layui.js"></script>
+<script>
+//JavaScript代码区域
+layui.use(['form', 'layedit', 'laydate'], function(){
+  var form = layui.form
+  ,layer = layui.layer
+  ,layedit = layui.layedit
+  ,laydate = layui.laydate;
+});
+function validate_required(field,alerttxt)
+{
+    with (field)
+    {
+        if (value==null||value=="")
+        {alert(alerttxt);return false}
+        else {return true}
+    }
+}
+
+function validate_form(thisform)
+{
+    with (thisform)
+    {
+        if (validate_required(question,"搜索框不可以为空")==false)
+        {question.focus();return false}
+    }
+}
+</script>
+</body>
+</html>

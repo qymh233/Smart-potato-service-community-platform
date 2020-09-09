@@ -19,6 +19,8 @@ public interface TopicsMapper {
     public int UpdateTopics(@Param("topics") Topics topics);
     //查询列表
     public List<Topics>  TopicsList();
+    //查询列表
+    public List<Topics>  searchTopicsList(@Param("question") String question);
     //查询列表byuid
     public List<Topics>  TopicsListbyuid(@Param("uid") Integer uid);
     //条件查询

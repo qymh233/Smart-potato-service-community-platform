@@ -15,7 +15,8 @@ public interface TopicsService {
     public List<Topics>  TopicsList();
     //查询列表byuid
     public List<Topics>  TopicsListbyuid(Integer uid);
-
+    //查询列表
+    public List<Topics>  searchTopicsList(String question);
     //条件查询
     public List<Topics>  TopicsListbyxin();
     public List<Topics>  TopicsListbyxin_ten();

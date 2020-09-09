@@ -36,7 +36,9 @@
 	<select id="TopicsListbyuid" resultMap="SelectAll">
     	select * from t_topic where uid = #{uid}
   	</select>
-
+	<select id="searchTopicsList" resultMap="SelectAll">
+    	select * from t_topic where title like "%"#{question,jdbcType=VARCHAR}"%"
+  	</select>
 
 	<select id="TopicsListbyxin" resultMap="SelectAll">
     	select * from t_topic order by topicTime desc

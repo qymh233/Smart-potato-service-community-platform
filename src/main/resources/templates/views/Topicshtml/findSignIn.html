@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>公告</title>
+  <title>首页</title>
   <link rel="stylesheet" href="../../layui/css/layui.css">
 </head>
 <body class="layui-layout-body">
@@ -43,24 +43,59 @@
     <div class="layui-side-scroll">
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-        <li class="layui-nav-item"><a th:href="@{/Notices/Notice_Privacy_copyright(title='隐私和版权')}">隐私和版权</a></li>
-        <li class="layui-nav-item"><a th:href="@{/Notices/Notice_Privacy_copyright(title='系统测试')}">社区平台测试</a></li>
-        <li class="layui-nav-item"><a th:href="@{/Notices/Notice_Privacy_copyright(title='反馈作者')}">反馈作者</a></li>
-        <li class="layui-nav-item"><a th:href="@{/Notices/Notice_Privacy_copyright(title='关于社区')}">关于社区</a></li>
-        <li class="layui-nav-item"><a th:href="@{/Notices/Notice_Privacy_copyright(title='关于作者')}">关于作者</a></li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a href="/Topics/Topic_up">我要发贴</a>
+        </li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a th:href="@{/Topics/Topics(page='xin')}">新帖榜</a>
+        </li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a th:href="@{/Topics/Topics(page='re')}">热帖榜</a>
+        </li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a th:href="@{/Topics/Topics(page='jin')}">精帖榜</a>
+        </li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a th:href="@{/Topics/Topics(page='lun')}">论坛</a>
+        </li>
       </ul>
     </div>
   </div>
   
   <div class="layui-body">
     <!-- 内容主体区域 -->
-    <div style="padding: 15px;">
-      <h1 align="center" th:text="${notice.getTitle()}"></h1>
-      <br/>
-      <p th:utext="${notice.getAnnouncement()}" ></p>
-      <br/>
-      <h4>发布于:<span th:text="${#dates.format(notice.getNewtime(),'yyyy-MM-dd HH:mm:ss')}"></span></h4>
-    </div>
+    <div class="layui-row">
+      <blockquote  class="layui-elem-quote" style="color: green;font-size: 20px;font-weight: 500;">搜索
+        <span style="color: red;" th:text="${question}"></span>
+        结果如下:
+      </blockquote>
+            <div class="layui-card">
+              <div class="table-responsive">
+            <table th:if="${stat} eq 'ok'" class="layui-table" lay-skin="line" lay-size="lg" id="table">              
+              <thead>
+                <tr>
+                  <th>标题</th>
+                  <th>发布者</th> 
+                  <th>发布时间</th>
+                  <th>点赞数</th>
+                  <th>详情</th>
+                </tr> 
+              </thead>
+              <tbody>
+                <tr th:each="t: ${topicsList}">
+                  <td th:text="${t.getTitle()}"></td>
+                  <td th:text="${t.getUser().getNickname()}"></td>
+                  <td th:text="${#dates.format(t.getTopicTime(),'yyyy-MM-dd HH:mm:ss')}"></td>
+                  <td th:text="${t.getCountnice()}"></td>
+                  <td>          
+                    <a th:href="@{/Topics/Topic_see(id=${t.getId()})}" class="layui-btn layui-btn-xs layui-btn-normal">查看</a>
+                  </td>                              
+                </tr>
+              </tbody>
+          </table>
+        </div>
+
+       
   </div>
   
   <div class="layui-footer">
@@ -77,19 +112,19 @@ layui.use('element', function(){
 });
 function validate_required(field,alerttxt)
 {
-  with (field)
+with (field)
   {
-    if (value==null||value=="")
+  if (value==null||value=="")
     {alert(alerttxt);return false}
-    else {return true}
+  else {return true}
   }
 }
 
 function validate_form(thisform)
 {
-  with (thisform)
+with (thisform)
   {
-    if (validate_required(question,"搜索框不可以为空")==false)
+  if (validate_required(question,"搜索框不可以为空")==false)
     {question.focus();return false}
   }
 }

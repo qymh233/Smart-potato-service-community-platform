@@ -7,17 +7,19 @@ import yamplatform.spscp.mapper.*;
 import yamplatform.spscp.pojo.*;
 import yamplatform.spscp.service.CategorysService;
 import yamplatform.spscp.service.PhotoLibrarysService;
+import yamplatform.spscp.service.RellinksService;
+import yamplatform.spscp.service.TopicsService;
 
 import java.util.List;
 
 @SpringBootTest
 public class demotest {
     @Autowired
-    TopicsMapper topicsMapper;
+    RellinksService rellinksService;
     @Test
     void contextLoads() {
-        List<Topics> topicsList=topicsMapper.TopicsListbyjin_ten();
-        for(Topics t:topicsList){
+        List<Rellinks> rellinksList=rellinksService.RellinksList();
+        for(Rellinks t:rellinksList){
             System.out.println(t);
         }
     }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yamplatform.spscp.mapper.RellinksMapper">
+	<resultMap type="yamplatform.spscp.pojo.Rellinks" id="SelectAll">
+		<result property="id" column="id"/>
+		<result property="title" column="title"/>
+		<result property="url" column="url"/>
+	</resultMap>
+	<!-- 查询一个栏目 -->
+	<select id="SelectOne" parameterType="Integer" resultType="yamplatform.spscp.pojo.Rellinks">
+    select * from t_rellinks where id = #{id}
+  </select>
+	<!-- 插入栏目 -->
+	<insert id="InsertRellinks" parameterType="yamplatform.spscp.pojo.Rellinks">
+		insert into t_rellinks(title,url) values(
+		#{rellinks.title,jdbcType=VARCHAR},#{rellinks.url,jdbcType=VARCHAR})
+	</insert>
+	<!-- 更新栏目 -->
+	<update id="UpdateRellinks">
+	  update t_rellinks set title = #{rellinks.title} , url = #{rellinks.url} where id = #{rellinks.id}
+	</update>
+	<!-- 查询所有栏目 -->
+
+	<select id="RellinksList" resultMap="SelectAll">
+    	select * from t_rellinks
+  	</select>
+</mapper>
