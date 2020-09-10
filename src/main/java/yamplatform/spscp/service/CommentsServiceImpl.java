@@ -37,6 +37,12 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
     @Override
+    public int DeleteComments(Integer tid) {
+        int t=commentsMapper.DeleteComments(tid);
+        return t;
+    }
+
+    @Override
     public List<Comments> CommentsList() {
         List<Comments> commentsList=commentsMapper.CommentsList();
         if(commentsList!=null){

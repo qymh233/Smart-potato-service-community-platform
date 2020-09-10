@@ -17,6 +17,8 @@ public interface TopicsMapper {
     public int InsertTopics(@Param("topics") Topics topics);
     //更新一条帮助
     public int UpdateTopics(@Param("topics") Topics topics);
+    //删除一条帮助
+    public int DeleteTopics(@Param("id") Integer id);
     //查询列表
     public List<Topics>  TopicsList();
     //查询列表

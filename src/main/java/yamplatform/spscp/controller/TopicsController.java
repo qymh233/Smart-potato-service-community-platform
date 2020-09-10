@@ -136,4 +136,39 @@ public class TopicsController {
         model.addAttribute("question",question);
         return "views/Topicshtml/findSignIn";
     }
+
+    @RequestMapping("/Personal_topic")
+    public String Personal_topic(Model model){
+        Users user=(Users) model.getAttribute("user");
+        List<Topics> topicsList=topicsService.TopicsListbyuid(user.getId());
+        if(topicsList!=null){
+            model.addAttribute("topicsList",topicsList);
+            model.addAttribute("stat","ok");
+        }else {
+            System.out.println("控");
+            model.addAttribute("stat","no");
+        }
+        return "views/Usershtml/Personal_topic";
+    }
+    @RequestMapping("/Personal_Topic_see")
+    public String Personal_Topic_see(Model model,@Param("id") Integer id){
+        Topics topic=topicsService.SelectOne(id);
+        model.addAttribute("topic",topic);
+        return "views/Usershtml/Personal_Topics_see";
+    }
+    @RequestMapping("/Topic_delete")
+    public String Topic_delete(Model model,@Param("id") Integer id){
+        topicsService.DeleteTopics(id);
+        Users user=(Users) model.getAttribute("user");
+        List<Topics> topicsList=topicsService.TopicsListbyuid(user.getId());
+        if(topicsList!=null){
+            model.addAttribute("topicsList",topicsList);
+            model.addAttribute("stat","ok");
+        }else {
+            System.out.println("控");
+            model.addAttribute("stat","no");
+        }
+        return "views/Usershtml/Personal_topic";
+    }
+
 }

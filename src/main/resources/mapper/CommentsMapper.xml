@@ -18,6 +18,9 @@
 	<update id="UpdateComments">
 	  update t_comment set content = #{comments.content}  , picturl = #{comments.picturl}, countnice = #{comments.countnice}, status = #{comments.status} where id = #{comments.id}
 	</update>
+	<delete id="DeleteComments">
+    	delete from t_comment where tid = #{tid}
+  	</delete>
 	<!-- 查询所有栏目 -->
 	<resultMap type="yamplatform.spscp.pojo.Comments" id="SelectAll">
 		<result property="id" column="id"/>

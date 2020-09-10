@@ -52,10 +52,10 @@
         <li class="layui-nav-item layui-nav-itemed">
           <a href="javascript:;">个人中心</a>
           <dl class="layui-nav-child">
-              <dd><a href="/Users/Personal_Center">个人信息</a></dd>
-              <dd><a href="/Topics/Personal_topic">我的帖子</a></dd>
-              <dd><a href="/Users/Personal_Modify">修改资料</a></dd>
-              <dd><a href="/Users/Personal_password">修改密码</a></dd>
+            <dd><a href="/Users/Personal_Center">个人信息</a></dd>
+            <dd><a href="/Topics/Personal_topic">我的帖子</a></dd>
+            <dd><a href="/Users/Personal_Modify">修改资料</a></dd>
+            <dd><a href="/Users/Personal_password">修改密码</a></dd>
           </dl>
         </li>
       </ul>
@@ -64,36 +64,37 @@
   
   <div class="layui-body">
     <!-- 内容主体区域 -->
+    <!-- 内容主体区域 -->
     <div class="layui-row">
-      <div id="form-bg" class="layui-card positionbox">
-            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-              <legend style="font-size:18px; color:#000000; font-weight: bold; ">修改密码</legend>
-          </fieldset>
-        <div id="form-box">
-          <form class="layui-form">
-             <div class="layui-form-item">
-                  <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">旧密码</label>
-                  <div class="layui-input-block">
-                    <input type="password" name="password" lay-verify="title" autocomplete="off" placeholder="请输入旧密码" class="layui-input" style="width: 200px;">
-                  </div>
-              </div>
-              <div class="layui-form-item">
-                  <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">新密码</label>
-                  <div class="layui-input-block">
-                    <input type="password" name="newpd" lay-verify="title" autocomplete="off" placeholder="请输入新密码" class="layui-input" style="width: 200px;">
-                  </div>
-              </div>
-              <div class="layui-form-item">
-                  <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">新密码</label>
-                  <div class="layui-input-block">
-                    <input type="password" name="newpd1" lay-verify="title" autocomplete="off" placeholder="请输入新密码" class="layui-input" style="width: 200px;">
-                  </div>
-              </div>
-            <center><button type="submit" formaction="/Users/PW_Modify" class="layui-btn layui-btn-normal">确认修改</button></center>
-          </form>
-        </div>
-            </div>   
-
+      <blockquote class="layui-elem-quote" style="color: green;font-size: 20px;font-weight: 500;">我的帖子</blockquote>
+     
+            <div class="layui-card" th:if="${stat} eq 'ok' ">
+              <div class="table-responsive">
+				            <table class="layui-table" lay-skin="line" lay-size="lg" id="table">              
+				              <thead>
+				                <tr>
+				                  <th>标题</th>
+				                  <th>发布者</th> 
+				                  <th>发布时间</th>
+				                  <th>点赞数</th>
+				                  <th>详情</th>
+				                </tr> 
+				              </thead>
+				              <tbody>
+				                <tr th:each="t: ${topicsList}">
+				                  <td th:text="${t.getTitle()}"></td>
+				                  <td th:text="${t.getUser().getNickname()}"></td>
+				                  <td th:text="${#dates.format(t.getTopicTime(),'yyyy-MM-dd HH:mm:ss')}"></td>
+				                  <td th:text="${t.getCountnice()}"></td>
+				                  <td>          
+				                    <a th:href="@{/Topics/Personal_Topic_see(id=${t.getId()})}" class="layui-btn layui-btn-xs layui-btn-normal">查看</a>
+				                    <a th:href="@{/Topics/Topic_delete(id=${t.getId()})}" class="layui-btn layui-btn-xs layui-btn-danger">删除</a>
+				                  </td>                              
+				                </tr>
+				              </tbody>
+				          </table>
+        		</div>
+    		</div>
     </div>
 
   </div>

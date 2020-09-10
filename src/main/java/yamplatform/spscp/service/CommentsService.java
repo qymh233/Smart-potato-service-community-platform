@@ -13,6 +13,8 @@ public interface CommentsService {
     public int InsertComments(Comments comments);
     //更新一条帮助
     public int UpdateComments(Comments comments);
+    //删除一条帮助
+    public int DeleteComments(Integer tid);
     //查询列表
     public List<Comments>  CommentsList();
     //查询列表byuid

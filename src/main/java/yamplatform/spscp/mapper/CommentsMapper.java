@@ -17,6 +17,8 @@ public interface CommentsMapper {
     public int InsertComments(@Param("comments") Comments comments);
     //更新一条帮助
     public int UpdateComments(@Param("comments") Comments comments);
+    //删除一条帮助
+    public int DeleteComments(@Param("tid") Integer tid);
     //查询列表
     public List<Comments>  CommentsList();
     //查询列表byuid

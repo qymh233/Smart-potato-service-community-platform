@@ -42,6 +42,13 @@ public class TopicsServiceImpl implements TopicsService{
     }
 
     @Override
+    public int DeleteTopics(Integer id) {
+        commentsService.DeleteComments(id);
+        int t=topicsMapper.DeleteTopics(id);
+        return t;
+    }
+
+    @Override
     public List<Topics> TopicsList() {
         List<Topics> topicsList=topicsMapper.TopicsList();
         if(topicsList!=null){

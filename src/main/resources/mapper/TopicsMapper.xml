@@ -18,6 +18,10 @@
 	<update id="UpdateTopics">
 	  update t_topic set title = #{topics.title} , content = #{topics.content}  , picturl = #{topics.picturl}, countnice = #{topics.countnice}, countsee = #{topics.countsee} , status = #{topics.status} where id = #{topics.id}
 	</update>
+
+	<delete id="DeleteTopics">
+    	delete from t_topic where id = #{id}
+  	</delete>
 	<!-- 查询所有栏目 -->
 	<resultMap type="yamplatform.spscp.pojo.Topics" id="SelectAll">
 		<result property="id" column="id"/>
