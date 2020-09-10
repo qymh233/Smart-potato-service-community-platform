@@ -15,11 +15,11 @@ import java.util.List;
 @SpringBootTest
 public class demotest {
     @Autowired
-    RellinksService rellinksService;
+    TopicsService topicsService;
     @Test
     void contextLoads() {
-        List<Rellinks> rellinksList=rellinksService.RellinksList();
-        for(Rellinks t:rellinksList){
+        List<Topics> topicsList=topicsService.TopicsListbyuid(1);
+        for(Topics t:topicsList){
             System.out.println(t);
         }
     }

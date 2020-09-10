@@ -1,11 +1,8 @@
 package yamplatform.spscp.util;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 import java.util.List;
 
-public class ObjectToJson {
+public class Pages {
     public static List<?> listSub(List<?> list, Integer page, Integer limit){
 
         List<?> subList;
@@ -17,12 +14,4 @@ public class ObjectToJson {
         return  subList;
     }
 
-    public static JSONObject filterObject(JSONObject jsonObj, List<?> subList, Integer count){
-        JSONArray jsonArray = JSONArray.fromObject(subList);
-        NullToEmpty.filterNull(jsonArray);
-        jsonObj.put("msg", "");
-        jsonObj.put("count", count);
-        jsonObj.put("data", jsonArray);
-        return jsonObj;
-    }
 }

@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import yamplatform.spscp.pojo.Topics;
 import yamplatform.spscp.pojo.Users;
 import yamplatform.spscp.service.TopicsService;
+import yamplatform.spscp.util.Pages;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -25,6 +26,9 @@ import java.util.Map;
 public class TopicsController {
     @Autowired
     TopicsService topicsService;
+
+    List<Topics> topicsList;
+
     @RequestMapping("/Topics")
     public String Topics(Model model, @Param("page")String page){
         if(page.equals("xin")){
@@ -136,19 +140,35 @@ public class TopicsController {
         model.addAttribute("question",question);
         return "views/Topicshtml/findSignIn";
     }
-
     @RequestMapping("/Personal_topic")
     public String Personal_topic(Model model){
         Users user=(Users) model.getAttribute("user");
+        topicsList=topicsService.TopicsListbyuid(user.getId());
+       /* Users user=(Users) model.getAttribute("user");
         List<Topics> topicsList=topicsService.TopicsListbyuid(user.getId());
         if(topicsList!=null){
             model.addAttribute("topicsList",topicsList);
             model.addAttribute("stat","ok");
         }else {
-            System.out.println("控");
             model.addAttribute("stat","no");
-        }
+        }*/
         return "views/Usershtml/Personal_topic";
+    }
+
+    @RequestMapping("/per_topicsList")
+    @ResponseBody
+    public Map<String,Object> topicsList(Model model,Integer page, Integer limit){
+        List<Topics> topicsListSub;
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("code", 0);
+        if(topicsList == null) {
+            return result;
+        }
+        Pages pages=new Pages();
+        topicsListSub = (List<Topics>) pages.listSub(topicsList, page, limit);
+        result.put("data",topicsListSub);
+        result.put("count",topicsList.size());
+        return result;
     }
     @RequestMapping("/Personal_Topic_see")
     public String Personal_Topic_see(Model model,@Param("id") Integer id){
@@ -160,14 +180,7 @@ public class TopicsController {
     public String Topic_delete(Model model,@Param("id") Integer id){
         topicsService.DeleteTopics(id);
         Users user=(Users) model.getAttribute("user");
-        List<Topics> topicsList=topicsService.TopicsListbyuid(user.getId());
-        if(topicsList!=null){
-            model.addAttribute("topicsList",topicsList);
-            model.addAttribute("stat","ok");
-        }else {
-            System.out.println("控");
-            model.addAttribute("stat","no");
-        }
+        topicsList=topicsService.TopicsListbyuid(user.getId());
         return "views/Usershtml/Personal_topic";
     }
 
