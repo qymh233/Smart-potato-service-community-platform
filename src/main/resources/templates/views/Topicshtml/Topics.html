@@ -69,30 +69,11 @@
       <blockquote th:if="${stat}=='xin'" class="layui-elem-quote" style="color: dodgerblue;font-size: 20px;font-weight: 500;">新帖榜</blockquote>
       <blockquote th:if="${stat}=='re'" class="layui-elem-quote" style="color: orangered;font-size: 20px;font-weight: 500;">热帖榜</blockquote>
       <blockquote th:if="${stat}=='jin'" class="layui-elem-quote" style="color: orange;font-size: 20px;font-weight: 500;">精帖榜</blockquote>
-            <div class="layui-card">
-              <div class="table-responsive">
-            <table class="layui-table" lay-skin="line" lay-size="lg" id="table">              
-              <thead>
-                <tr>
-                  <th>标题</th>
-                  <th>发布者</th> 
-                  <th>发布时间</th>
-                  <th>点赞数</th>
-                  <th>详情</th>
-                </tr> 
-              </thead>
-              <tbody>
-                <tr th:each="t: ${topicsList}">
-                  <td th:text="${t.getTitle()}"></td>
-                  <td th:text="${t.getUser().getNickname()}"></td>
-                  <td th:text="${#dates.format(t.getTopicTime(),'yyyy-MM-dd HH:mm:ss')}"></td>
-                  <td th:text="${t.getCountnice()}"></td>
-                  <td>          
-                    <a th:href="@{/Topics/Topic_see(id=${t.getId()})}" class="layui-btn layui-btn-xs layui-btn-normal">查看</a>
-                  </td>                              
-                </tr>
-              </tbody>
-          </table>
+      <div class="layui-card">
+        <div class="table-responsive">
+          <table id="topicsList" lay-filter="test"></table>
+        </div>
+      </div>
         </div>
 
        
@@ -103,7 +84,54 @@
     智慧马铃薯服务社区平台
   </div>
 </div>
+
 <script src="../layui/layui.js"></script>
+<script type="text/html" id="doBar">
+  <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">查看</a>
+</script>
+<script>
+  layui.use('table', function(){
+    var table = layui.table;
+    //第一个实例
+    table.render({
+      elem: '#topicsList'
+      ,height: 466
+      ,url: '/Topics/mytopicsList' //数据接口
+      ,page: true //开启分页
+      ,method: 'post'
+      ,totalRow: true //开启合计行
+      ,layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+      ,limit:5 //默认为10
+      ,limits:[5,10,15,20,25]   //显示的几页
+      ,cols: [
+        [ //表头
+          {field: 'title', title: '标题', fixed: 'left'}
+          ,{field:'nickname',title: '发布者',templet:'<div>{{d.user.nickname}}</div>'}
+          ,{field: 'topicTime', title: '发布时间', sort: true,templet : "<div>{{layui.util.toDateString(d.topicTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
+          ,{field: 'countnice', title: '点赞数', sort: true}
+          ,{title: '操作', toolbar:"#doBar", width:200}
+        ]
+      ]
+    });
+
+    table.on('tool(test)', function(obj){
+      var data = obj.data;
+      var layEvent = obj.event;
+
+      if(layEvent === 'edit'){ //修改
+        location.href="/Topics/Topic_see?id="+data.id;
+      } else if(layEvent === 'delete'){ //删除i
+        layer.confirm('真的要删除帖子么', function(index){
+          location.href="/Topics/Topic_delete?id="+data.id;
+        });
+      }
+    });
+  });
+  layui.use('form', function(){
+    var form = layui.form;
+    form.render();
+  })
+</script>
 <script>
 //JavaScript代码区域
 layui.use('element', function(){

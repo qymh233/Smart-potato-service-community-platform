@@ -26,30 +26,52 @@ import java.util.Map;
 public class TopicsController {
     @Autowired
     TopicsService topicsService;
-
-    List<Topics> topicsList;
-
+    String mypagestat="";
+    String myquestion="";
     @RequestMapping("/Topics")
     public String Topics(Model model, @Param("page")String page){
         if(page.equals("xin")){
-            List<Topics> topicsList=topicsService.TopicsListbyxin();
-            model.addAttribute("topicsList",topicsList);
+            mypagestat="xin";
             model.addAttribute("stat","xin");
         }else if(page.equals("jin")){
-            List<Topics> topicsList=topicsService.TopicsListbyjin();
-            model.addAttribute("topicsList",topicsList);
+            mypagestat="jin";
             model.addAttribute("stat","jin");
         }else if(page.equals("re")){
-            List<Topics> topicsList=topicsService.TopicsListbyre();
-            model.addAttribute("topicsList",topicsList);
+            mypagestat="re";
             model.addAttribute("stat","re");
         }else {
-            List<Topics> topicsList=topicsService.TopicsList();
-            model.addAttribute("topicsList",topicsList);
+            mypagestat="lun";
             model.addAttribute("stat","lun");
         }
         return "views/Topicshtml/Topics";
     }
+
+    @RequestMapping("/mytopicsList")
+    @ResponseBody
+    public Map<String,Object> mytopicsList(Model model,Integer page, Integer limit){
+        List<Topics> topicsListSub;
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("code", 0);
+        List<Topics> topicsList;
+        if(mypagestat.equals("xin")){
+            topicsList=topicsService.TopicsListbyxin();
+        }else if(mypagestat.equals("jin")){
+           topicsList=topicsService.TopicsListbyjin();
+        }else if(mypagestat.equals("re")){
+            topicsList=topicsService.TopicsListbyre();
+        }else {
+            topicsList=topicsService.TopicsList();
+        }
+        if(topicsList == null) {
+            return result;
+        }
+        Pages pages=new Pages();
+        topicsListSub = (List<Topics>) pages.listSub(topicsList, page, limit);
+        result.put("data",topicsListSub);
+        result.put("count",topicsList.size());
+        return result;
+    }
+
     @RequestMapping("/Topic_up")
     public String Topic_up(){
         return "views/Topicshtml/Topics_up";
@@ -127,40 +149,54 @@ public class TopicsController {
         return "views/Topicshtml/Topics_see";
     }
 
-    @RequestMapping("/findSignIn")
+   /* @RequestMapping("/findSignIn")
     public String findSignIn(Model model,@Param("question")String question){
         List<Topics> topicsList=topicsService.searchTopicsList(question);
         if(topicsList!=null){
             model.addAttribute("topicsList",topicsList);
             model.addAttribute("stat","ok");
         }else {
-            System.out.println("控");
             model.addAttribute("stat","no");
         }
         model.addAttribute("question",question);
         return "views/Topicshtml/findSignIn";
+    }*/
+   @RequestMapping("/findSignIn")
+   public String findSignIn(Model model,@Param("question")String question){
+       myquestion=question;
+       model.addAttribute("question",question);
+       return "views/Topicshtml/findSignIn";
+   }
+    @RequestMapping("/findSignInlist")
+    @ResponseBody
+    public Map<String,Object> findSignInlist(Model model,Integer page, Integer limit){
+        List<Topics> topicsListSub;
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("code", 0);
+        List<Topics> topicsList=topicsService.searchTopicsList(myquestion);
+        if(topicsList == null) {
+            return result;
+        }
+        Pages pages=new Pages();
+        topicsListSub = (List<Topics>) pages.listSub(topicsList, page, limit);
+        result.put("data",topicsListSub);
+        result.put("count",topicsList.size());
+        return result;
     }
+
     @RequestMapping("/Personal_topic")
     public String Personal_topic(Model model){
-        Users user=(Users) model.getAttribute("user");
-        topicsList=topicsService.TopicsListbyuid(user.getId());
-       /* Users user=(Users) model.getAttribute("user");
-        List<Topics> topicsList=topicsService.TopicsListbyuid(user.getId());
-        if(topicsList!=null){
-            model.addAttribute("topicsList",topicsList);
-            model.addAttribute("stat","ok");
-        }else {
-            model.addAttribute("stat","no");
-        }*/
         return "views/Usershtml/Personal_topic";
     }
 
     @RequestMapping("/per_topicsList")
     @ResponseBody
-    public Map<String,Object> topicsList(Model model,Integer page, Integer limit){
+    public Map<String,Object> per_topicsList(Model model,Integer page, Integer limit){
         List<Topics> topicsListSub;
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("code", 0);
+        Users user=(Users) model.getAttribute("user");
+        List<Topics> topicsList=topicsService.TopicsListbyuid(user.getId());
         if(topicsList == null) {
             return result;
         }
@@ -179,8 +215,6 @@ public class TopicsController {
     @RequestMapping("/Topic_delete")
     public String Topic_delete(Model model,@Param("id") Integer id){
         topicsService.DeleteTopics(id);
-        Users user=(Users) model.getAttribute("user");
-        topicsList=topicsService.TopicsListbyuid(user.getId());
         return "views/Usershtml/Personal_topic";
     }
 

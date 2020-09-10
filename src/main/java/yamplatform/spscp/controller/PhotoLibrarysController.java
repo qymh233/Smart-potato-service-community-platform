@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import yamplatform.spscp.pojo.PhotoLibrarys;
 import yamplatform.spscp.pojo.Users;
 import yamplatform.spscp.service.PhotoLibrarysService;
+import yamplatform.spscp.util.Pages;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -25,10 +26,25 @@ public class PhotoLibrarysController {
     PhotoLibrarysService photoLibrarysService;
     @RequestMapping("/PhotoLibrary")
     public String PhotoLibrary(Model model){
-        List<PhotoLibrarys> photoLibrarysList=photoLibrarysService.PhotoLibrarysList();
-        model.addAttribute("photoLibrarysList",photoLibrarysList);
         return "views/PhotoLibraryshtml/PhotoLibrary";
     }
+    @RequestMapping("/photoLibrarysList")
+    @ResponseBody
+    public Map<String,Object> photoLibrarysList(Model model,Integer page, Integer limit){
+        List<PhotoLibrarys> photoLibrarysListSub;
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("code", 0);
+        List<PhotoLibrarys> photoLibrarysList=photoLibrarysService.PhotoLibrarysList();
+        if(photoLibrarysList == null) {
+            return result;
+        }
+        Pages pages=new Pages();
+        photoLibrarysListSub = (List<PhotoLibrarys>) pages.listSub(photoLibrarysList, page, limit);
+        result.put("data",photoLibrarysListSub);
+        result.put("count",photoLibrarysList.size());
+        return result;
+    }
+
     @RequestMapping("/PhotoLibrary_see")
     public String PhotoLibrary_see(Model model, @Param("id")Integer id) {
         PhotoLibrarys photoLibrary = photoLibrarysService.SelectOne(id);
@@ -69,13 +85,11 @@ public class PhotoLibrarysController {
             }else {
                 dbname=fname;
             }
-
             pathString = "E:\\ideaproject\\spscp\\src\\main\\resources\\static\\img\\PhotoLibrary\\" + fname;//上传到本地
         }
         Map map = new HashMap<String,Object>();
         try {
             File files=new File(pathString);//在内存中创建File文件映射对象
-
             //打印查看上传路径
             System.out.println(pathString);
             if(!files.getParentFile().exists()){//判断映射文件的父文件是否真实存在
@@ -92,15 +106,11 @@ public class PhotoLibrarysController {
             photoLibrary.setUid(user.getId());
             photoLibrarysService.InsertPhotoLibrarys(photoLibrary);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             map.put("msg","error");
             map.put("code",100);
             e.printStackTrace();
         }
-
         return map;
-        //return "{\"code\":0, \"msg\":\"success\", \"fileUrl\":\"" + pathString + "\"}";
-
     }
 
 }

@@ -119,13 +119,11 @@
                 location.href="/Topics/Personal_Topic_see?id="+data.id;
             } else if(layEvent === 'delete'){ //删除i
                 layer.confirm('真的要删除帖子么', function(index){
-                    location.href="/Topics/Topic_delete?d="+data.id;
+                    location.href="/Topics/Topic_delete?id="+data.id;
                 });
             }
         });
-
     });
-
     layui.use('form', function(){
         var form = layui.form;
         form.render();
