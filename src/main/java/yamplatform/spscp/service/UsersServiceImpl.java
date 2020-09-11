@@ -28,12 +28,13 @@ public class UsersServiceImpl implements UsersService{
 
     @Override
     public int InsertUsers(Users users) {
-        return 0;
+        int t=usersMapper.InsertUsers(users);
+        return t;
     }
 
     @Override
     public int UpdateUsers(Users users) {
-        usersMapper.UpdateUsers(users);
-        return 0;
+        int t=usersMapper.UpdateUsers(users);
+        return t;
     }
 }

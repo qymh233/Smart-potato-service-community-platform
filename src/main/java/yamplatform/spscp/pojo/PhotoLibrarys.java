@@ -3,6 +3,7 @@ package yamplatform.spscp.pojo;
 import java.util.Date;
 
 public class PhotoLibrarys {
+    //图片库
     private Integer id;
     private String title;//标题
     private String url;//地址

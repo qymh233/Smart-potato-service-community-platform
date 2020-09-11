@@ -26,8 +26,9 @@ import java.util.Map;
 public class TopicsController {
     @Autowired
     TopicsService topicsService;
-    String mypagestat="";
-    String myquestion="";
+    String mypagestat="";//页面状态
+    String myquestion="";//搜索
+    //跳转论坛页面
     @RequestMapping("/Topics")
     public String Topics(Model model, @Param("page")String page){
         if(page.equals("xin")){
@@ -45,7 +46,7 @@ public class TopicsController {
         }
         return "views/Topicshtml/Topics";
     }
-
+//返回帖子list
     @RequestMapping("/mytopicsList")
     @ResponseBody
     public Map<String,Object> mytopicsList(Model model,Integer page, Integer limit){
@@ -71,12 +72,12 @@ public class TopicsController {
         result.put("count",topicsList.size());
         return result;
     }
-
+//跳转上传帖子页面
     @RequestMapping("/Topic_up")
     public String Topic_up(){
         return "views/Topicshtml/Topics_up";
     }
-
+//上传图片
     @RequestMapping(value = "/uploadimg" , method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> upload(HttpServletRequest servletRequest,
@@ -114,6 +115,8 @@ public class TopicsController {
             return res;
         }
     }
+
+    //添加帖子
     @RequestMapping("/topic_add")
     public String topic_add(Model model,@Param("title") String title,@Param("content")String cont,@Param("picturl")String picturl){
         Users user=(Users) model.getAttribute("user");
@@ -130,14 +133,14 @@ public class TopicsController {
         model.addAttribute("stat","xin");
         return "views/Topicshtml/Topics";
     }
-
+//查看帖子
     @RequestMapping("/Topic_see")
     public String Topic_see(Model model,@Param("id") Integer id){
         Topics topic=topicsService.SelectOne(id);
         model.addAttribute("topic",topic);
         return "views/Topicshtml/Topics_see";
     }
-
+//点赞帖子
     @RequestMapping("/Topic_nice")
     public String Topic_nice(Model model,@Param("id") Integer id){
         Topics oldtopic=topicsService.SelectOne(id);
@@ -149,24 +152,14 @@ public class TopicsController {
         return "views/Topicshtml/Topics_see";
     }
 
-   /* @RequestMapping("/findSignIn")
-    public String findSignIn(Model model,@Param("question")String question){
-        List<Topics> topicsList=topicsService.searchTopicsList(question);
-        if(topicsList!=null){
-            model.addAttribute("topicsList",topicsList);
-            model.addAttribute("stat","ok");
-        }else {
-            model.addAttribute("stat","no");
-        }
-        model.addAttribute("question",question);
-        return "views/Topicshtml/findSignIn";
-    }*/
+    //跳转查询结果
    @RequestMapping("/findSignIn")
    public String findSignIn(Model model,@Param("question")String question){
        myquestion=question;
        model.addAttribute("question",question);
        return "views/Topicshtml/findSignIn";
    }
+   //查询结果list
     @RequestMapping("/findSignInlist")
     @ResponseBody
     public Map<String,Object> findSignInlist(Model model,Integer page, Integer limit){
@@ -183,12 +176,12 @@ public class TopicsController {
         result.put("count",topicsList.size());
         return result;
     }
-
+//用户自己帖子
     @RequestMapping("/Personal_topic")
     public String Personal_topic(Model model){
         return "views/Usershtml/Personal_topic";
     }
-
+//返回用户帖子列表
     @RequestMapping("/per_topicsList")
     @ResponseBody
     public Map<String,Object> per_topicsList(Model model,Integer page, Integer limit){
@@ -206,12 +199,14 @@ public class TopicsController {
         result.put("count",topicsList.size());
         return result;
     }
+    //用户查看帖子
     @RequestMapping("/Personal_Topic_see")
     public String Personal_Topic_see(Model model,@Param("id") Integer id){
         Topics topic=topicsService.SelectOne(id);
         model.addAttribute("topic",topic);
         return "views/Usershtml/Personal_Topics_see";
     }
+    //用户删除帖子
     @RequestMapping("/Topic_delete")
     public String Topic_delete(Model model,@Param("id") Integer id){
         topicsService.DeleteTopics(id);

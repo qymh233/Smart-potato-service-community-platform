@@ -3,6 +3,7 @@ package yamplatform.spscp.util;
 import java.util.List;
 
 public class Pages {
+    //分页
     public static List<?> listSub(List<?> list, Integer page, Integer limit){
 
         List<?> subList;

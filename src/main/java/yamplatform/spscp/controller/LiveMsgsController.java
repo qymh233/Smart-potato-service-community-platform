@@ -18,12 +18,14 @@ import java.util.List;
 public class LiveMsgsController {
     @Autowired
     LiveMsgsService liveMsgsService;
+    //留言查看
     @RequestMapping("/LiveMsgs_see")
     public String LiveMsgs_see(Model model){
         List<LiveMsgs> liveMsgsList=liveMsgsService.LiveMsgsList();
         model.addAttribute("liveMsgsList",liveMsgsList);
         return "views/LiveMsgshtml/LiveMsgs_see";
     }
+    //添加留言
     @RequestMapping("/LiveMsgs_add")
     public String LiveMsgs_add(Model model, @Param("cont")String cont){
         Users user=(Users)model.getAttribute("user");

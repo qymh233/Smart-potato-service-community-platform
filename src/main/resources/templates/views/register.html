@@ -10,7 +10,7 @@
 </head>
 <body class="login-wrap">
     <div class="login-container">
-        <form class="login-form">
+        <form class="login-form" method="post">
             <div class="input-group">
                 <input name="username" type="text" id="username" class="input-field">
                 <label for="username" class="input-label">
@@ -18,32 +18,83 @@
                 </label>
             </div>
             <div class="input-group">
-                <input name="nickname" type="text" id="nickname" class="input-field">
+                <input name="nickname" type="text" id="nickname" class="input-field" >
                 <label for="nickname" class="input-label">
                     <span class="label-title">昵称</span>
                 </label>
             </div>
             <div class="input-group">
-                <input name="password" type="password" id="password" class="input-field">
-                <label for="password" class="input-label">
+                <input name="password" type="password" id="newpd" class="input-field" >
+                <label for="newpd" class="input-label">
                     <span class="label-title">密码</span>
                 </label>
             </div>
             <div class="input-group">
-                <input name="newpassword" type="password" id="newpassword" class="input-field">
-                <label for="newpassword" class="input-label">
+                <input name="newpassword" type="password" id="newpd1" class="input-field" >
+                <label for="newpd1" class="input-label">
                     <span class="label-title">确认密码</span>
                 </label>
             </div>
             <div class="input-group">
-                <input name="email" type="text" id="email" class="input-field">
+                <input name="email" type="text" id="email" class="input-field" >
                 <label for="email" class="input-label">
                     <span class="label-title">邮箱</span>
                 </label>
             </div>
-            <button type="submit" formaction="/Users/register" class="login-button">注册<i class="ai ai-enter"></i></button>
+            <button type="submit" formaction="/Users/register" class="login-button" onclick='return checkpasswd()'>注册<i class="ai ai-enter"></i></button>
         </form>
     </div>
 </body>
 <script src="layui/layui.js"></script>
+<script>
+    function checkpasswd(){
+        var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
+        var passwd = document.getElementById('newpd').value;
+        var repasswd = document.getElementById('newpd1').value;
+        var username = document.getElementById('username').value;
+        var nickname = document.getElementById('nickname').value;
+        var email = document.getElementById('email').value;
+        var res=0;
+        if(passwd!=null&&passwd!=""){
+            res=res+1;
+        }else{
+            window.alert('密码不可以为空');
+            return false;
+        }
+        if(passwd == repasswd){
+            res=res+1;
+        }else{
+            window.alert('两次输入密码不一致');
+            return false;
+        }
+        if(username!=null&&username!=""){
+            res=res+1;
+        }else{
+            window.alert('用户名不可以为空');
+            return false;
+        }
+        if(nickname!=null&&nickname!=""){
+            res=res+1;
+        }else{
+            window.alert('昵称不可以为空');
+            return false;
+        }
+        if(email==null||email==""){
+            window.alert('邮箱不可以为空');
+            return false;
+        }else if(!reg.test(email)){
+            //正则验证不通过，格式不对
+            window.alert('邮箱格式错误');
+            return false;
+        }else {
+            res=res+1;
+        }
+        if(res==5){
+            return true;
+        }else{
+            window.alert( res+'请填入必要信息');
+            return false;
+        }
+    }
+</script>
 </html>

@@ -15,6 +15,7 @@ import yamplatform.spscp.service.NoticesService;
 public class NoticesController {
     @Autowired
     NoticesService noticesService;
+    //跳转公告页面
     @RequestMapping("/Notice_Privacy_copyright")
     public String Notice_Privacy_copyright(@Param("title") String title, Model model){
         Notices notice=noticesService.SelectOne(title);

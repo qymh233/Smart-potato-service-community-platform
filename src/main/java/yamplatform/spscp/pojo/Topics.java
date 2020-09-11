@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Topics {
+    //帖子
     private Integer id;
     private String title; // 标题
     private String content; // 内容

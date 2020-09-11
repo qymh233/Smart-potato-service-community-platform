@@ -28,12 +28,12 @@ public class CommentsController {
     CommentsService commentsService;
     @Autowired
     TopicsService topicsService;
+    //图片上传
     @RequestMapping(value = "/uploadsee" , method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> uploadsee(HttpServletRequest servletRequest,
                                          @RequestParam("file") MultipartFile file
     ) throws IOException {
-
         //如果文件内容不为空，则写入上传路径
         if (!file.isEmpty()) {
             //上传文件路径
@@ -64,7 +64,7 @@ public class CommentsController {
             return res;
         }
     }
-
+    //添加评论
     @RequestMapping("/comment_add")
     public String comment_add(Model model,@Param("content")String cont, @Param("picturl")String picturl,@Param("id") Integer id){
         Comments comment=new Comments();

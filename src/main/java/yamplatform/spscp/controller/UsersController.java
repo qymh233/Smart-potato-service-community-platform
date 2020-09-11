@@ -39,12 +39,15 @@ public class UsersController {
         model.addAttribute("topicsListjin",topicsListjin);
         return "views/HomePage";
     }
-    //TODO
-    //具体逻辑没写
     //注册
     @RequestMapping("/register")
     public String register(@Param("username")String username,@Param("nickname")String nickname,@Param("password")String password,@Param("email")String email){
-        System.out.println(username+" "+nickname+" "+password+" "+email);
+        Users user=new Users();
+        user.setUsername(username);
+        user.setNickname(nickname);
+        user.setPassword(password);
+        user.setEmail(email);
+        usersService.InsertUsers(user);
         return "views/login";
     }
     //个人中心

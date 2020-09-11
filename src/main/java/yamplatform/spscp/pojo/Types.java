@@ -4,12 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Types {
+    //知识专栏字栏目
     private Integer id;
-    private String name;
-    private Integer countTopics = 0;
-    private Integer countComments = 0;
-    private Integer typescategoryid;
-    private String url;
+    private String name;//名称
+    private Integer countTopics = 0;//可以删除
+    private Integer countComments = 0;//可以删除
+    private Integer typescategoryid;//父标题
+    private String url;//链接
 
     private Categorys typesCategory;
 

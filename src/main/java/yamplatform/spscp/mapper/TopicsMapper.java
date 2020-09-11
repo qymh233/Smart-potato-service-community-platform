@@ -13,11 +13,11 @@ public interface TopicsMapper {
 
     //查询一条数据
     public Topics SelectOne(@Param("id") Integer id);
-    //插入一条帮助
+    //插入
     public int InsertTopics(@Param("topics") Topics topics);
-    //更新一条帮助
+    //更新
     public int UpdateTopics(@Param("topics") Topics topics);
-    //删除一条帮助
+    //删除
     public int DeleteTopics(@Param("id") Integer id);
     //查询列表
     public List<Topics>  TopicsList();

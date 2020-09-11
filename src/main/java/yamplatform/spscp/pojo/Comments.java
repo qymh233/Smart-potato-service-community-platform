@@ -3,10 +3,11 @@ package yamplatform.spscp.pojo;
 import java.util.Date;
 
 public class Comments {
+    //回复/评论
     private int id;
     private String content; // 内容
     private String picturl; // 内容
-    private Date commentTime;
+    private Date commentTime;//回复时间
     private Integer countnice = 0; // 点赞数
     private Integer uid;//用户id
     private Integer tid;//帖子id

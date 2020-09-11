@@ -16,6 +16,8 @@ import java.util.List;
 public class CategorysController {
     @Autowired
     CategorysService categorysService;
+
+    //跳转知识专栏
     @RequestMapping("/Knowledge_column")
     public String Knowledge_column(Model model){
         List<Categorys> categorysList=categorysService.CategorysList();

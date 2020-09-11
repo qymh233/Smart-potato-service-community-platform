@@ -3,10 +3,11 @@ package yamplatform.spscp.pojo;
 import java.util.Date;
 
 public class LiveMsgs {
+    //留言
     private Integer id;
     private Integer uid;
-    private String content;
-    private Date newtime;
+    private String content;//内容
+    private Date newtime;//时间
 
     private Users user;
 

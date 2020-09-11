@@ -3,10 +3,11 @@ package yamplatform.spscp.pojo;
 import java.util.Date;
 
 public class Notices {
+    //公告
     private Integer id;
-    private String announcement;
-    private String title;
-    private Date newtime;
+    private String announcement;//内容
+    private String title;//题目
+    private Date newtime;//时间
 
     public Integer getId() {
         return id;

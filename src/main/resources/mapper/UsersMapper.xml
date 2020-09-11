@@ -12,8 +12,7 @@
   </select>
 	<!-- 插入用户 -->
 	<insert id="InsertUsers" parameterType="yamplatform.spscp.pojo.Users">
-		insert into t_user(username,password,nickname,sex,picture,email,comefrom,introduction,profession,
-		registerTime,status,)
+		insert into t_user(username,password,nickname,sex,picture,email,comefrom,introduction,profession,registerTime,status)
 		values(#{users.username,jdbcType=VARCHAR},#{users.password,jdbcType=VARCHAR},#{users.nickname,jdbcType=VARCHAR},
 		#{users.sex,jdbcType=VARCHAR},#{users.picture,jdbcType=VARCHAR},#{users.email,jdbcType=VARCHAR},
 		#{users.comefrom,jdbcType=VARCHAR},#{users.introduction,jdbcType=LONGVARCHAR},#{users.profession,jdbcType=VARCHAR},

@@ -7,11 +7,11 @@ import java.util.List;
 public interface TopicsService {
     //查询一条数据
     public Topics SelectOne(Integer id);
-    //插入一条帮助
+    //插入
     public int InsertTopics(Topics topics);
-    //更新一条帮助
+    //更新
     public int UpdateTopics(Topics topics);
-    //删除一条帮助
+    //删除
     public int DeleteTopics(Integer id);
     //查询列表
     public List<Topics>  TopicsList();

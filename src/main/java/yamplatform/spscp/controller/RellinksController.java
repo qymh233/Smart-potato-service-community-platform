@@ -16,6 +16,7 @@ import java.util.List;
 public class RellinksController {
     @Autowired
     RellinksService rellinksService;
+    //友情连接
     @RequestMapping("/Rellinks")
     public String Rellinks(Model model){
         List<Rellinks> rellinksList=rellinksService.RellinksList();

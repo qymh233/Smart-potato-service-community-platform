@@ -24,10 +24,12 @@ import java.util.Map;
 public class PhotoLibrarysController {
     @Autowired
     PhotoLibrarysService photoLibrarysService;
+    //跳转图片库首页
     @RequestMapping("/PhotoLibrary")
     public String PhotoLibrary(Model model){
         return "views/PhotoLibraryshtml/PhotoLibrary";
     }
+    //返回图片list
     @RequestMapping("/photoLibrarysList")
     @ResponseBody
     public Map<String,Object> photoLibrarysList(Model model,Integer page, Integer limit){
@@ -44,7 +46,7 @@ public class PhotoLibrarysController {
         result.put("count",photoLibrarysList.size());
         return result;
     }
-
+//查看具体内容
     @RequestMapping("/PhotoLibrary_see")
     public String PhotoLibrary_see(Model model, @Param("id")Integer id) {
         PhotoLibrarys photoLibrary = photoLibrarysService.SelectOne(id);

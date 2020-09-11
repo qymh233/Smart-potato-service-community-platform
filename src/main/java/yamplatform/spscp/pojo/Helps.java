@@ -3,10 +3,11 @@ package yamplatform.spscp.pojo;
 import java.util.Date;
 
 public class Helps {
+    //帮助
     private int id;
-    private String title;
-    private String content;
-    private Date newtime;
+    private String title;//标题
+    private String content;//内容
+    private Date newtime;//时间
 
     public int getId() {
         return id;

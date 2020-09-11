@@ -3,10 +3,11 @@ package yamplatform.spscp.pojo;
 import java.util.List;
 
 public class Categorys {
+    //知识专栏大标题
     private Integer id;
     private String name;
-    private Integer countTopics = 0;
-    private Integer countComments = 0;
+    private Integer countTopics = 0;//可以删除
+    private Integer countComments = 0;//可以删除
 
 
     private List<Types> categoryTypes;

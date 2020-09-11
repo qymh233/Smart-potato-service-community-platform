@@ -1,9 +1,10 @@
 package yamplatform.spscp.pojo;
 
 public class Rellinks {
+    //友情连接
     private Integer id;
-    private String title;
-    private String url;
+    private String title;//题目
+    private String url;//连接
 
     public Integer getId() {
         return id;

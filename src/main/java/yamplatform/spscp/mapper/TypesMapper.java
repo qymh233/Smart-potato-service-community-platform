@@ -13,9 +13,9 @@ public interface TypesMapper {
 
     //查询一条数据
     public Types SelectOne(@Param("id") Integer id);
-    //插入一条帮助
+    //插入
     public int InsertTypes(@Param("types") Types types);
-    //更新一条帮助
+    //更新
     public int UpdateTypes(@Param("types") Types types);
     //查询列表
     public List<Types>  typesList();

@@ -10,13 +10,13 @@ public class Users {
     private String password;
     private String nickname; // 昵称
     private String sex = "男";
-    private String picture = "/img/ds-java.png"; // 头像
+    private String picture = "http://localhost:8080/img/Avatar/default.jpg"; // 头像
     private String email = "";
     private String comefrom = ""; // 来自
     private String introduction = ""; // 个人简介
     private String profession = ""; // 职业，专业
     private Date registerTime;
-    private Integer status; // 0表示未禁用，1表示禁用
+    private Integer status=0; // 0表示未禁用，1表示禁用
 
 
     // 集合，一对多

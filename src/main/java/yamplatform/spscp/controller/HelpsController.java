@@ -15,7 +15,7 @@ import yamplatform.spscp.service.HelpsService;
 public class HelpsController {
     @Autowired
     HelpsService helpsService;
-
+//跳转帮助页面
     @RequestMapping("/Help_Landing_registration")
     public String Help_Landing_registration(@Param("title") String title, Model model){
         Helps helps=helpsService.SelectOne(title);

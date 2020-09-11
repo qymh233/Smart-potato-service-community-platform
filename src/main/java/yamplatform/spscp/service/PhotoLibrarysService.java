@@ -7,9 +7,9 @@ import java.util.List;
 public interface PhotoLibrarysService {
     //查询一条数据
     public PhotoLibrarys SelectOne(Integer id);
-    //插入一条帮助
+    //插入
     public int InsertPhotoLibrarys(PhotoLibrarys photoLibrarys);
-    //更新一条帮助
+    //更新
     public int UpdatePhotoLibrarys(PhotoLibrarys photoLibrarys);
     //查询列表
     public List<PhotoLibrarys> PhotoLibrarysList();
