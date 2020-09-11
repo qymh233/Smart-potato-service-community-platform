@@ -33,6 +33,7 @@ public class UsersServiceImpl implements UsersService{
 
     @Override
     public int UpdateUsers(Users users) {
+        usersMapper.UpdateUsers(users);
         return 0;
     }
 }

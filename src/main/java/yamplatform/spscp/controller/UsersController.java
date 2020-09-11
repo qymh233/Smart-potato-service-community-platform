@@ -58,27 +58,43 @@ public class UsersController {
     public String Personal_Modify(Model model){
         return "views/Usershtml/Personal_Modify";
     }
-    //TODO
-    //具体逻辑没写
     //修改资料
     @RequestMapping("/self_Modify")
     public String self_Modify(Model model,@Param("nickname") String nickname,@Param("sex") String sex,@Param("email") String email,@Param("profession") String profession,@Param("comefrom") String comefrom,@Param("introduction") String introduction){
-        System.out.println(nickname+" "+sex+" "+email+" "+profession+" "+comefrom+" "+introduction);
+        Users user=(Users)model.getAttribute("user");
+        if(nickname!=null&&!nickname.equals("")){
+            user.setNickname(nickname);
+        }
+        if(sex!=null&&!sex.equals("")){
+            user.setSex(sex);
+        }
+        if(email!=null&&!email.equals("")){
+            user.setEmail(email);
+        }
+        if(profession!=null&&!profession.equals("")){
+            user.setProfession(profession);
+        }
+        if(comefrom!=null&&!comefrom.equals("")){
+            user.setComefrom(comefrom);
+        }
+        if(introduction!=null&&!introduction.equals("")){
+            user.setIntroduction(introduction);
+        }
+        usersService.UpdateUsers(user);
         return "views/Usershtml/Personal_Center";
     }
-    //修改资料页面
+    //修改密码页面
     @RequestMapping("/Personal_password")
     public String Personal_password(Model model){
-        /*Users users=(Users) model.getAttribute("user");
-        model.addAttribute("user",users);*/
         return "views/Usershtml/Personal_password";
     }
-    //TODO
-    //具体逻辑没写
     //修改密码
     @RequestMapping("/PW_Modify")
-    public String PW_Modify(Model model,@Param("password") String password,@Param("newpd") String newpd){
-        System.out.println(password+" "+newpd);
+    public String PW_Modify(Model model,@Param("newpd") String newpd){
+        Users user=(Users)model.getAttribute("user");
+        user.setPassword(newpd);
+        usersService.UpdateUsers(user);
+
         return "views/login";
     }
 }

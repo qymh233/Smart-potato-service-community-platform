@@ -12,14 +12,12 @@
   </select>
 	<!-- 插入用户 -->
 	<insert id="InsertUsers" parameterType="yamplatform.spscp.pojo.Users">
-		insert into t_user(username,password,nickname,sex,picture,email,comefrom,introduction,profession,gradeIntegral,
-		integral,roleId,clock,topCount,comCount,registerTime,status,usersGradeid)
+		insert into t_user(username,password,nickname,sex,picture,email,comefrom,introduction,profession,
+		registerTime,status,)
 		values(#{users.username,jdbcType=VARCHAR},#{users.password,jdbcType=VARCHAR},#{users.nickname,jdbcType=VARCHAR},
 		#{users.sex,jdbcType=VARCHAR},#{users.picture,jdbcType=VARCHAR},#{users.email,jdbcType=VARCHAR},
 		#{users.comefrom,jdbcType=VARCHAR},#{users.introduction,jdbcType=LONGVARCHAR},#{users.profession,jdbcType=VARCHAR},
-		#{users.gradeIntegral,jdbcType=INTEGER},#{users.integral,jdbcType=INTEGER},#{users.roleId,jdbcType=INTEGER},
-		#{users.clock,jdbcType=INTEGER},#{users.topCount,jdbcType=INTEGER},#{users.comCount,jdbcType=INTEGER},
-		now(),#{users.status,jdbcType=INTEGER},#{users.usersGradeid,jdbcType=INTEGER})
+		now(),#{users.status,jdbcType=INTEGER})
 	</insert>
 	<!-- 更新用户 -->
 	<update id="UpdateUsers">
@@ -39,15 +37,8 @@
 		<result property="comefrom" column="comefrom"/>
 		<result property="introduction" column="introduction"/>
 		<result property="profession" column="profession"/>
-		<result property="gradeIntegral" column="gradeIntegral"/>
-		<result property="integral" column="integral"/>
-		<result property="roleId" column="roleId"/>
-		<result property="clock" column="clock"/>
-		<result property="topCount" column="topCount"/>
-		<result property="comCount" column="comCount"/>
 		<result property="registerTime" column="registerTime"/>
 		<result property="status" column="status"/>
-		<result property="usersGradeid" column="usersGradeid"/>
 	</resultMap>
 
 </mapper>

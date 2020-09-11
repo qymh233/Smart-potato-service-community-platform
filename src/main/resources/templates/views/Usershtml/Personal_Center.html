@@ -66,15 +66,15 @@
         </fieldset>
         <div id="form-box">
           <div class="layui-form-item">
+            <label class="layui-form-label" style="margin-right: 500px;">
+              <img th:src="${user.getPicture()}">
+            </label>
+          </div>
+          <div class="layui-form-item">
             <label class="layui-form-label font-style">用户名</label>
             <label class="layui-form-label">
               <span class="span-style" th:text="${user.getUsername()}"></span>
             </label>
-            <div class=" layui-inline" style="float:right;margin-right: 500px;">
-              <label class="layui-form-label">
-                <img th:src="${user.getPicture()}">
-              </label>
-            </div>
           </div>
           <div class="layui-form-item">
             <label class="layui-form-label font-style">昵称</label>
@@ -105,56 +105,17 @@
               <span class="span-style" th:text="${user.getComefrom()}"></span>
             </label>
           </div>
-          <div class="layui-form-item">
-            <label class="layui-form-label  font-style">用户权限</label>
-            <label class="layui-form-label">
-              <span class="span-style" th:if="${user.getRoleId()}==0">普通用户</span>
-              <span class="span-style" th:if="${user.getRoleId()}==1">管理员</span>
-            </label>
-          </div>
-          <div class="layui-form-item">
-            <label class="layui-form-label  font-style">等级</label>
-            <label class="layui-form-label">
-              <span class="span-style" th:text="${user.getUsersGrade()}"></span>
-            </label>
-          </div>
-          <div class="layui-form-item">
-            <label class="layui-form-label  font-style">头衔</label>
-            <label class="layui-form-label">
-              <span class="span-style" th:text="${user.getGradeIntegral()}"></span>
-            </label>
-          </div>
-          <div class="layui-form-item">
-            <label class="layui-form-label  font-style">可用积分</label>
-            <label class="layui-form-label">
-              <span class="span-style" th:text="${user.getIntegral()}"></span>
-            </label>
-          </div>
-          <div class="layui-form-item">
-            <div class=" layui-inline">
-              <label class="layui-form-label  font-style">我的帖子数</label>
-              <label class="layui-form-label">
-                <span class="span-style" th:text="${user.getTopCount()}"></span>
-              </label>
-            </div>
-            <div class=" layui-inline">
-              <label class="layui-form-label  font-style">我的评论数</label>
-              <label class="layui-form-label">
-                <span class="span-style" th:text="${user.getComCount()}"></span>
-              </label>
-            </div>
-          </div>
           <div class="layui-form-item" >
             <label class="layui-form-label  font-style">注册时间</label>
             <label class="layui-form-label">
-              <span class="span-style" th:text="${#dates.format(user.getRegisterTime(),'yyyy-mm-dd HH:mm:ss')}"></span>
+              <span class="span-style" th:text="${#dates.format(user.getRegisterTime(),'yyyy-MM-dd')}"></span>
             </label>
           </div>
           <div class="layui-form-item">
             <label class="layui-form-label  font-style">个人简介</label>
-            <label class="layui-form-label">
-              <span class="span-style" th:text="${user.getIntroduction()}"></span>
-            </label>
+            <div class="layui-input-block">
+              <textarea readonly class="layui-textarea" th:text="${user.getIntroduction()}"></textarea>
+            </div>
           </div>
 
         </div>
