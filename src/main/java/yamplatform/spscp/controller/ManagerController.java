@@ -7,14 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import yamplatform.spscp.pojo.Helps;
-import yamplatform.spscp.pojo.Notices;
-import yamplatform.spscp.pojo.Rellinks;
-import yamplatform.spscp.pojo.Users;
-import yamplatform.spscp.service.HelpsService;
-import yamplatform.spscp.service.NoticesService;
-import yamplatform.spscp.service.RellinksService;
-import yamplatform.spscp.service.UsersService;
+import yamplatform.spscp.pojo.*;
+import yamplatform.spscp.service.*;
 import yamplatform.spscp.util.Pages;
 
 import java.util.HashMap;
@@ -33,6 +27,8 @@ public class ManagerController {
     HelpsService helpsService;
     @Autowired
     NoticesService noticesService;
+    @Autowired
+    CategorysService categorysService;
     //登陆
     //todo
     //创建管理员表
@@ -149,6 +145,24 @@ public class ManagerController {
         noticesListSub = (List<Notices>) pages.listSub(noticesList, page, limit);
         result.put("data",noticesListSub);
         result.put("count",noticesList.size());
+        return result;
+    }
+
+    //返回栏目列表
+    @RequestMapping("/categorysList")
+    @ResponseBody
+    public Map<String,Object> categorysList(Model model, Integer page, Integer limit){
+        List<Categorys> categorysListSub;
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("code", 0);
+        List<Categorys> categorysList=categorysService.CategorysList();
+        if(categorysList == null) {
+            return result;
+        }
+        Pages pages=new Pages();
+        categorysListSub = (List<Categorys>) pages.listSub(categorysList, page, limit);
+        result.put("data",categorysListSub);
+        result.put("count",categorysList.size());
         return result;
     }
 }

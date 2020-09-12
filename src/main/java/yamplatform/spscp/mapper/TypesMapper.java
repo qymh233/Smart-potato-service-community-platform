@@ -22,4 +22,7 @@ public interface TypesMapper {
     //查询列表bycid
     public List<Types>  typesListbycid(@Param("cid") Integer cid);
 
+    //删除
+    public int Delete(@Param("id") Integer id);
+
 }

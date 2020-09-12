@@ -7,14 +7,11 @@ public class Types {
     //知识专栏字栏目
     private Integer id;
     private String name;//名称
-    private Integer countTopics = 0;//可以删除
-    private Integer countComments = 0;//可以删除
+    private String content;//内容
     private Integer typescategoryid;//父标题
     private String url;//链接
 
     private Categorys typesCategory;
-
-    private Set<Topics> typeTopics = new HashSet<Topics>();
 
     public Integer getId() {
         return id;
@@ -32,20 +29,12 @@ public class Types {
         this.name = name;
     }
 
-    public Integer getCountTopics() {
-        return countTopics;
+    public String getContent() {
+        return content;
     }
 
-    public void setCountTopics(Integer countTopics) {
-        this.countTopics = countTopics;
-    }
-
-    public Integer getCountComments() {
-        return countComments;
-    }
-
-    public void setCountComments(Integer countComments) {
-        this.countComments = countComments;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Categorys getTypesCategory() {
@@ -72,25 +61,16 @@ public class Types {
         this.typescategoryid = typescategoryid;
     }
 
-    public Set<Topics> getTypeTopics() {
-        return typeTopics;
-    }
-
-    public void setTypeTopics(Set<Topics> typeTopics) {
-        this.typeTopics = typeTopics;
-    }
 
     @Override
     public String toString() {
         return "Types{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", countTopics=" + countTopics +
-                ", countComments=" + countComments +
+                ", content='" + content + '\'' +
                 ", typescategoryid=" + typescategoryid +
                 ", url='" + url + '\'' +
                 ", typesCategory=" + typesCategory +
-                ", typeTopics=" + typeTopics +
                 '}';
     }
 }

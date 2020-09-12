@@ -9,18 +9,19 @@
   </select>
 	<!-- 插入栏目 -->
 	<insert id="InsertCategorys" parameterType="yamplatform.spscp.pojo.Categorys">
-		insert into t_category(name,countTopics,countComments) values(#{categorys.name,jdbcType=VARCHAR},#{categorys.countTopics,jdbcType=INTEGER},#{categorys.countComments,jdbcType=INTEGER})
+		insert into t_category(name) values(#{categorys.name,jdbcType=VARCHAR})
 	</insert>
+	<delete id="Delete">
+    	delete from t_category where id = #{id}
+  	</delete>
 	<!-- 更新栏目 -->
 	<update id="UpdateCategorys">
-	  update t_category set name=#{categorys.name} , countTopics = #{categorys.countTopics}  , countComments = #{categorys.countComments}where id=#{categorys.id}
+	  update t_category set name=#{categorys.name} where id=#{categorys.id}
 	</update>
 	<!-- 查询所有栏目 -->
 	<resultMap type="yamplatform.spscp.pojo.Categorys" id="SelectAll">
 		<result property="id" column="id"/>
 		<result property="name" column="name"/>
-		<result property="countTopics" column="countTopics"/>
-		<result property="countComments" column="countComments"/>
 	</resultMap>
 	<select id="CategorysList" resultMap="SelectAll">
     	select * from t_category

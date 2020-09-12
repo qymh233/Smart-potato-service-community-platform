@@ -40,4 +40,10 @@ public class TypesServiceImpl implements TypesService{
         List<Types> typesList=typesMapper.typesListbycid(cid);
         return typesList;
     }
+
+    @Override
+    public int Delete(Integer id) {
+        int t=typesMapper.Delete(id);
+        return t;
+    }
 }

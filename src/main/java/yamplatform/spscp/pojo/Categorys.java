@@ -6,8 +6,6 @@ public class Categorys {
     //知识专栏大标题
     private Integer id;
     private String name;
-    private Integer countTopics = 0;//可以删除
-    private Integer countComments = 0;//可以删除
 
 
     private List<Types> categoryTypes;
@@ -28,22 +26,6 @@ public class Categorys {
         this.name = name;
     }
 
-    public Integer getCountTopics() {
-        return countTopics;
-    }
-
-    public void setCountTopics(Integer countTopics) {
-        this.countTopics = countTopics;
-    }
-
-    public Integer getCountComments() {
-        return countComments;
-    }
-
-    public void setCountComments(Integer countComments) {
-        this.countComments = countComments;
-    }
-
     public List<Types> getCategoryTypes() {
         return categoryTypes;
     }
@@ -57,8 +39,6 @@ public class Categorys {
         return "Categorys{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", countTopics=" + countTopics +
-                ", countComments=" + countComments +
                 ", categoryTypes=" + categoryTypes +
                 '}';
     }

@@ -43,4 +43,10 @@ public class CategorysServiceImpl implements CategorysService{
         }
         return categorysList;
     }
+
+    @Override
+    public int Delete(Integer id) {
+        int t=categorysMapper.Delete(id);
+        return t;
+    }
 }

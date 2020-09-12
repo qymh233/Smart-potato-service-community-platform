@@ -19,4 +19,6 @@ public interface CategorysMapper {
     public int UpdateCategorys(@Param("categorys") Categorys categorys);
     //查询列表
     public List<Categorys>  CategorysList();
+    //删除
+    public int Delete(@Param("id") Integer id);
 }

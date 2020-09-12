@@ -13,4 +13,6 @@ public interface CategorysService {
     public int UpdateCategorys(Categorys categorys);
     //查询列表
     public List<Categorys> CategorysList();
+    //删除
+    public int Delete(Integer id);
 }

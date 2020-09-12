@@ -15,4 +15,6 @@ public interface TypesService {
     public List<Types>  typesList();
     //查询列表bycid
     public List<Types>  typesListbycid(Integer cid);
+    //删除
+    public int Delete(Integer id);
 }

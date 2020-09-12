@@ -9,18 +9,20 @@
   </select>
 	<!-- 插入栏目 -->
 	<insert id="InsertTypes" parameterType="yamplatform.spscp.pojo.Types">
-		insert into t_type(name,countTopics,countComments,typescategoryid,url) values(#{types.name,jdbcType=VARCHAR},#{types.countTopics,jdbcType=INTEGER},#{types.countComments,jdbcType=INTEGER},#{types.typescategoryid,jdbcType=INTEGER},#{types.url,jdbcType=VARCHAR})
+		insert into t_type(name,content,typescategoryid,url) values(#{types.name,jdbcType=VARCHAR},#{types.content,jdbcType=VARCHAR},#{types.typescategoryid,jdbcType=INTEGER},#{types.url,jdbcType=VARCHAR})
 	</insert>
+	<delete id="Delete">
+    	delete from t_type where id = #{id}
+  	</delete>
 	<!-- 更新栏目 -->
 	<update id="UpdateTypes">
-	  update t_type set name=#{types.name} , countTopics = #{types.countTopics}  , countComments = #{types.countComments}, typescategoryid = #{types.typescategoryid}, url = #{types.url}where id=#{types.id}
+	  update t_type set name=#{types.name} , content = #{types.content}, url = #{types.url} where id=#{types.id}
 	</update>
 	<!-- 查询所有栏目 -->
 	<resultMap type="yamplatform.spscp.pojo.Types" id="SelectAll">
 		<result property="id" column="id"/>
 		<result property="name" column="name"/>
-		<result property="countTopics" column="countTopics"/>
-		<result property="countComments" column="countComments"/>
+		<result property="content" column="content"/>
 		<result property="typescategoryid" column="typescategoryid"/>
 		<result property="url" column="url"/>
 	</resultMap>

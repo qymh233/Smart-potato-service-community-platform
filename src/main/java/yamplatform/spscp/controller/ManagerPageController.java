@@ -22,7 +22,7 @@ public class ManagerPageController {
     //专栏管理页面
     @RequestMapping("/Manager_knowledges")
     public String Manager_knowledges(Model model){
-        return "";
+        return "views/Managershtml/Manager_categorys";
     }
     //图片库管理页面
     @RequestMapping("/Manager_photoLibrarys")
