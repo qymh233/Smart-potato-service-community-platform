@@ -7,14 +7,21 @@
 	<select id="SelectOne" parameterType="String" resultType="yamplatform.spscp.pojo.Notices">
     select * from t_announce where title = #{title}
   </select>
+	<select id="Selectbyid" parameterType="INTEGER" resultType="yamplatform.spscp.pojo.Notices">
+    select * from t_announce where id = #{id}
+  </select>
 	<!-- 插入公告 -->
 	<insert id="InsertNotice" parameterType="yamplatform.spscp.pojo.Notices">
 		insert into t_announce(announcement,title,newtime) values(#{notice.announcement,jdbcType=VARCHAR},#{notice.title,jdbcType=VARCHAR},now())
 	</insert>
 	<!-- 更新公告 -->
 	<update id="UpdateNotice">
-	  update t_announce set announcement=#{notice.announcement} , title = #{notice.title} , newtime= now() where title=#{notice.title}
+	  update t_announce set announcement=#{notice.announcement} , title = #{notice.title} , newtime= now() where id=#{notice.id}
 	</update>
+	<!-- 删除 -->
+	<delete id="Delete">
+    	delete from t_announce where id = #{id}
+  	</delete>
 	<!-- 查询所有用户 -->
 	<resultMap type="yamplatform.spscp.pojo.Notices" id="SelectAll">
 		<result property="id" column="id"/>
@@ -22,5 +29,7 @@
 		<result property="title" column="title"/>
 		<result property="newtime" column="newtime"/>
 	</resultMap>
-
+	<select id="noticesList" resultMap="SelectAll">
+    	select * from t_announce
+	</select>
 </mapper>

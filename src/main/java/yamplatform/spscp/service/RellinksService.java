@@ -14,4 +14,6 @@ public interface RellinksService {
     public int UpdateRellinks(Rellinks rellinks);
     //查询列表
     public List<Rellinks>  RellinksList();
+    //
+    public int Delete(Integer id);
 }

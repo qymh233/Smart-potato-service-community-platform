@@ -22,7 +22,10 @@
 	  update t_rellinks set title = #{rellinks.title} , url = #{rellinks.url} where id = #{rellinks.id}
 	</update>
 	<!-- 查询所有栏目 -->
-
+	<!-- 删除 -->
+	<delete id="Delete">
+    	delete from t_rellinks where id = #{id}
+  	</delete>
 	<select id="RellinksList" resultMap="SelectAll">
     	select * from t_rellinks
   	</select>

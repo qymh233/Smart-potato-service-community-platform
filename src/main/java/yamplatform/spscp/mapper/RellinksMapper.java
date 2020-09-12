@@ -19,4 +19,6 @@ public interface RellinksMapper {
     public int UpdateRellinks(@Param("rellinks") Rellinks rellinks);
     //查询列表
     public List<Rellinks>  RellinksList();
+    //删除
+    public int Delete(@Param("id") Integer id);
 }

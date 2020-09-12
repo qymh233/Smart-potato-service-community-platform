@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yamplatform.spscp.mapper.NoticesMapper;
 import yamplatform.spscp.pojo.Notices;
+
+import java.util.List;
+
 @Service
 public class NoticesServiceImpl implements NoticesService {
     @Autowired
@@ -11,6 +14,12 @@ public class NoticesServiceImpl implements NoticesService {
     @Override
     public Notices SelectOne(String title) {
         Notices notice=noticesMapper.SelectOne(title);
+        return notice;
+    }
+
+    @Override
+    public Notices Selectbyid(Integer id) {
+        Notices notice=noticesMapper.Selectbyid(id);
         return notice;
     }
 
@@ -23,6 +32,18 @@ public class NoticesServiceImpl implements NoticesService {
     @Override
     public int UpdateNotice(Notices notice) {
         int t=noticesMapper.UpdateNotice(notice);
+        return t;
+    }
+
+    @Override
+    public List<Notices> noticesList() {
+        List<Notices> noticesList=noticesMapper.noticesList();
+        return noticesList;
+    }
+
+    @Override
+    public int Delete(Integer id) {
+        int t=noticesMapper.Delete(id);
         return t;
     }
 }

@@ -34,4 +34,10 @@ public class RellinksServiceImpl implements RellinksService{
         List<Rellinks> rellinksList=rellinksMapper.RellinksList();
         return rellinksList;
     }
+
+    @Override
+    public int Delete(Integer id) {
+        int t=rellinksMapper.Delete(id);
+        return t;
+    }
 }

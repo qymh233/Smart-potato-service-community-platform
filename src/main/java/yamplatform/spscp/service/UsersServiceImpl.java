@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yamplatform.spscp.mapper.UsersMapper;
 import yamplatform.spscp.pojo.Users;
+
+import java.util.List;
+
 @Service
 public class UsersServiceImpl implements UsersService{
     @Autowired
@@ -35,6 +38,18 @@ public class UsersServiceImpl implements UsersService{
     @Override
     public int UpdateUsers(Users users) {
         int t=usersMapper.UpdateUsers(users);
+        return t;
+    }
+
+    @Override
+    public List<Users> usersList() {
+        List<Users> usersList=usersMapper.usersList();
+        return usersList;
+    }
+
+    @Override
+    public int DeleteUsers(Integer id) {
+        int t=usersMapper.DeleteUsers(id);
         return t;
     }
 }

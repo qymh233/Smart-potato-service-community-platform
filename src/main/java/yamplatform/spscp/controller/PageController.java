@@ -29,6 +29,11 @@ public class PageController {
     public String login(){
         return "views/login";
     }
+    //登陆
+    @RequestMapping("/managerlogin")
+    public String managerlogin(){
+        return "views/managerlogin";
+    }
     //注册
     @RequestMapping("/register")
     public String register(){

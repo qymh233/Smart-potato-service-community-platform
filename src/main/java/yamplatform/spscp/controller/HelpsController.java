@@ -11,7 +11,7 @@ import yamplatform.spscp.service.HelpsService;
 
 @Controller
 @RequestMapping("/Helps")
-@SessionAttributes({"user"})
+@SessionAttributes({"user","manager","manager_helps"})
 public class HelpsController {
     @Autowired
     HelpsService helpsService;
@@ -21,5 +21,45 @@ public class HelpsController {
         Helps helps=helpsService.SelectOne(title);
         model.addAttribute("helps",helps);
         return "views/Helpshtml/Help_Landing_registration";
+    }
+
+
+    //修改页面
+    @RequestMapping("/Modeify")
+    public String Modeify(Model model,@Param("title") String title ){
+        Helps helps=helpsService.SelectOne(title);
+        model.addAttribute("manager_helps",helps);
+        return "views/Managershtml/Modeify_help";
+    }
+    @RequestMapping("/Modeify_help")
+    public String Modeify_help(Model model,@Param("title") String title,@Param("cont") String cont){
+       Helps help=(Helps) model.getAttribute("manager_helps");
+        if(title!=null&&!title.equals("")){
+            help.setTitle(title);
+        }
+        if(cont!=null&&!cont.equals("")){
+            help.setContent(cont);
+        }
+        helpsService.UpdateHelps(help);
+        return "views/Managershtml/Manager_helps";
+    }
+    //删除
+    @RequestMapping("/delete")
+    public String delete(Model model,@Param("id") Integer id){
+        helpsService.Delete(id);
+        return "views/Managershtml/Manager_helps";
+    }
+    //添加页面
+    @RequestMapping("/add")
+    public String add(Model model){
+        return "views/Managershtml/add_help";
+    }
+    @RequestMapping("/add_help")
+    public String add_help(Model model,@Param("title") String title,@Param("cont") String cont){
+        Helps help=new Helps();
+        help.setTitle(title);
+        help.setContent(cont);
+        helpsService.InsertHelp(help);
+        return "views/Managershtml/Manager_helps";
     }
 }

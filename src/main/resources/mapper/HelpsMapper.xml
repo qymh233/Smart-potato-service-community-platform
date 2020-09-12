@@ -7,13 +7,20 @@
 	<select id="SelectOne" parameterType="String" resultType="yamplatform.spscp.pojo.Helps">
     select * from t_help where title = #{title}
   </select>
+	<select id="Selectbyid" parameterType="INTEGER" resultType="yamplatform.spscp.pojo.Helps">
+    select * from t_help where id = #{id}
+  </select>
 	<!-- 插入公告 -->
 	<insert id="InsertHelps" parameterType="yamplatform.spscp.pojo.Helps">
 		insert into t_help(content,title,newtime) values(#{helps.content,jdbcType=VARCHAR},#{helps.title,jdbcType=VARCHAR},now())
 	</insert>
+	<!-- 删除 -->
+	<delete id="Delete">
+    	delete from t_help where id = #{id}
+  	</delete>
 	<!-- 更新公告 -->
 	<update id="UpdateHelps">
-	  update t_help set content=#{helps.content} , title = #{helps.title} , newtime= now() where title=#{helps.title}
+	  update t_help set content=#{helps.content} , title = #{helps.title} , newtime= now() where id=#{helps.id}
 	</update>
 	<!-- 查询所有用户 -->
 	<resultMap type="yamplatform.spscp.pojo.Helps" id="SelectAll">
@@ -22,5 +29,7 @@
 		<result property="title" column="title"/>
 		<result property="newtime" column="newtime"/>
 	</resultMap>
-
+	<select id="helpsList" resultMap="SelectAll">
+    	select * from t_help
+	</select>
 </mapper>

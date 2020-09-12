@@ -100,4 +100,11 @@ public class UsersController {
 
         return "views/login";
     }
+
+    //用户删除帖子Users
+    @RequestMapping("/Users_delete")
+    public String Users_delete(Model model,@Param("id") Integer id){
+        usersService.DeleteUsers(id);
+        return "views/Manager_HomePage";
+    }
 }
