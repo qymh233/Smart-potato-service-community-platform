@@ -13,4 +13,6 @@ public interface PhotoLibrarysService {
     public int UpdatePhotoLibrarys(PhotoLibrarys photoLibrarys);
     //查询列表
     public List<PhotoLibrarys> PhotoLibrarysList();
+    //删除
+    public int Delete(Integer id);
 }

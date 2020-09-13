@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import yamplatform.spscp.pojo.Helps;
 import yamplatform.spscp.pojo.PhotoLibrarys;
 import yamplatform.spscp.pojo.Users;
 import yamplatform.spscp.service.PhotoLibrarysService;
@@ -20,7 +21,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/PhotoLibrarys")
-@SessionAttributes({"user"})
+@SessionAttributes({"user","manager","manager_photolibrarys"})
 public class PhotoLibrarysController {
     @Autowired
     PhotoLibrarysService photoLibrarysService;
@@ -113,6 +114,37 @@ public class PhotoLibrarysController {
             e.printStackTrace();
         }
         return map;
+    }
+
+
+
+    //修改页面
+    @RequestMapping("/Modeify")
+    public String Modeify(Model model,@Param("id") Integer id ){
+        PhotoLibrarys photoLibrary=photoLibrarysService.SelectOne(id);
+        model.addAttribute("manager_photolibrarys",photoLibrary);
+        return "views/Managershtml/Modeify_photolibrarys";
+    }
+    @RequestMapping("/Modeify_photolibrarys")
+    public String Modeify_photolibrarys(Model model,@Param("title") String title,@Param("url") String url,@Param("cont") String cont){
+        PhotoLibrarys photoLibrary=(PhotoLibrarys) model.getAttribute("manager_photolibrarys");
+        if(title!=null&&!title.equals("")){
+            photoLibrary.setTitle(title);
+        }
+        if(cont!=null&&!cont.equals("")){
+            photoLibrary.setDescribed(cont);
+        }
+        if(url!=null&&!url.equals("")){
+            photoLibrary.setUrl(cont);
+        }
+        photoLibrarysService.UpdatePhotoLibrarys(photoLibrary);
+        return "views/Managershtml/Manager_photolibrarys";
+    }
+    //删除
+    @RequestMapping("/delete")
+    public String delete(Model model,@Param("id") Integer id){
+        photoLibrarysService.Delete(id);
+        return "views/Managershtml/Manager_photolibrarys";
     }
 
 }

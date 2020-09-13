@@ -11,6 +11,7 @@ public class PhotoLibrarys {
     private Date uptime;//上传时间
     private String described;//描述
     private Integer uid;//用户id;
+
     private Users user;//上传者；
 
     public Integer getId() {

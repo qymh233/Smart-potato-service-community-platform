@@ -29,6 +29,10 @@ public class ManagerController {
     NoticesService noticesService;
     @Autowired
     CategorysService categorysService;
+    @Autowired
+    PhotoLibrarysService photoLibrarysService;
+    @Autowired
+    TopicsService topicsService;
     //登陆
     //todo
     //创建管理员表
@@ -163,6 +167,42 @@ public class ManagerController {
         categorysListSub = (List<Categorys>) pages.listSub(categorysList, page, limit);
         result.put("data",categorysListSub);
         result.put("count",categorysList.size());
+        return result;
+    }
+
+    //返回图片库列表
+    @RequestMapping("/photolibrarysList")
+    @ResponseBody
+    public Map<String,Object> photolibrarysList(Model model, Integer page, Integer limit){
+        List<PhotoLibrarys> photolibararysListSub;
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("code", 0);
+        List<PhotoLibrarys> photoLibrarysList=photoLibrarysService.PhotoLibrarysList();
+        if(photoLibrarysList == null) {
+            return result;
+        }
+        Pages pages=new Pages();
+        photolibararysListSub = (List<PhotoLibrarys>) pages.listSub(photoLibrarysList, page, limit);
+        result.put("data",photolibararysListSub);
+        result.put("count",photoLibrarysList.size());
+        return result;
+    }
+
+    //返回论坛列表
+    @RequestMapping("/topicsList")
+    @ResponseBody
+    public Map<String,Object> topicsList(Model model, Integer page, Integer limit){
+        List<Topics> topicsListSub;
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("code", 0);
+        List<Topics> topicsList=topicsService.TopicsList();
+        if(topicsList == null) {
+            return result;
+        }
+        Pages pages=new Pages();
+        topicsListSub = (List<Topics>) pages.listSub(topicsList, page, limit);
+        result.put("data",topicsListSub);
+        result.put("count",topicsList.size());
         return result;
     }
 }

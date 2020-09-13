@@ -19,4 +19,6 @@ public interface PhotoLibrarysMapper {
     public int UpdatephotoLibrarys(@Param("photoLibrarys") PhotoLibrarys photoLibrarys);
     //查询列表
     public List<PhotoLibrarys>  photoLibrarysList();
+    //删除
+    public int Delete(@Param("id") Integer id);
 }

@@ -17,7 +17,7 @@ public class ManagerPageController {
     //论坛管理页面
     @RequestMapping("/Manager_topics")
     public String Manager_topics(Model model){
-        return "";
+        return "views/Managershtml/Manager_topics";
     }
     //专栏管理页面
     @RequestMapping("/Manager_knowledges")
@@ -27,7 +27,7 @@ public class ManagerPageController {
     //图片库管理页面
     @RequestMapping("/Manager_photoLibrarys")
     public String Manager_photoLibrarys(Model model){
-        return "";
+        return "views/Managershtml/Manager_photolibrarys";
     }
     //连接管理页面
     @RequestMapping("/Manager_relinks")

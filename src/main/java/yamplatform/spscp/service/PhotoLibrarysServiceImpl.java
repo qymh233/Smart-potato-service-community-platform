@@ -48,4 +48,10 @@ public class PhotoLibrarysServiceImpl implements PhotoLibrarysService{
         }
         return photoLibrarysList;
     }
+
+    @Override
+    public int Delete(Integer id) {
+        int t=photoLibrarysMapper.Delete(id);
+        return t;
+    }
 }

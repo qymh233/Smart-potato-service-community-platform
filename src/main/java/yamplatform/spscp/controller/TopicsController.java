@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import yamplatform.spscp.pojo.Helps;
 import yamplatform.spscp.pojo.Topics;
 import yamplatform.spscp.pojo.Users;
 import yamplatform.spscp.service.TopicsService;
@@ -22,7 +23,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/Topics")
-@SessionAttributes({"user"})
+@SessionAttributes({"user","manager"})
 public class TopicsController {
     @Autowired
     TopicsService topicsService;
@@ -211,6 +212,24 @@ public class TopicsController {
     public String Topic_delete(Model model,@Param("id") Integer id){
         topicsService.DeleteTopics(id);
         return "views/Usershtml/Personal_topic";
+    }
+
+
+
+    //修改页面
+    @RequestMapping("/Modeify")
+    public String Modeify(Model model,@Param("id") Integer id ){
+        Topics topic=topicsService.SelectOne(id);
+        topic.setCountnice(topic.getCountnice()+50);
+        topic.setCountsee(topic.getCountsee()+50);
+        topicsService.UpdateTopics(topic);
+        return "views/Managershtml/Manager_topics";
+    }
+    //删除
+    @RequestMapping("/delete")
+    public String delete(Model model,@Param("id") Integer id){
+        topicsService.DeleteTopics(id);
+        return "views/Managershtml/Manager_topics";
     }
 
 }
