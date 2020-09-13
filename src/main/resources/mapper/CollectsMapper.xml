@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yamplatform.spscp.mapper.CollectsMapper">
+	<!-- 插入公告 -->
+	<insert id="Insertone" parameterType="yamplatform.spscp.pojo.Collects">
+		insert into t_collect(tid,uid,ctime,tname,uname) values(#{collect.tid,jdbcType=INTEGER},#{collect.uid,jdbcType=INTEGER},now(),#{collect.tname,jdbcType=VARCHAR},#{collect.uname,jdbcType=VARCHAR})
+	</insert>
+	<!-- 删除 -->
+	<delete id="Delete">
+    	delete from t_collect where id = #{id}
+  	</delete>
+	<!-- 查询所有用户 -->
+	<resultMap type="yamplatform.spscp.pojo.Collects" id="SelectAll">
+		<result property="id" column="id"/>
+		<result property="tid" column="tid"/>
+		<result property="uid" column="uid"/>
+		<result property="ctime" column="ctime"/>
+		<result property="tname" column="tname"/>
+		<result property="uname" column="uname"/>
+	</resultMap>
+	<select id="CollectsList" parameterType="INTEGER" resultMap="SelectAll">
+    	select * from t_collect where uid = #{uid} order by ctime desc
+	</select>
+</mapper>

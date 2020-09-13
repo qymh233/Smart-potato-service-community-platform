@@ -7,9 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import yamplatform.spscp.pojo.Comments;
+import yamplatform.spscp.pojo.News;
 import yamplatform.spscp.pojo.Topics;
 import yamplatform.spscp.pojo.Users;
 import yamplatform.spscp.service.CommentsService;
+import yamplatform.spscp.service.NewsService;
 import yamplatform.spscp.service.TopicsService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +30,8 @@ public class CommentsController {
     CommentsService commentsService;
     @Autowired
     TopicsService topicsService;
+    @Autowired
+    NewsService newsService;
     //图片上传
     @RequestMapping(value = "/uploadsee" , method = RequestMethod.POST)
     @ResponseBody
@@ -76,7 +80,18 @@ public class CommentsController {
         Users user=(Users)model.getAttribute("user");
         comment.setUid(user.getId());
         commentsService.InsertComments(comment);
+        //封装消息
         Topics topic=topicsService.SelectOne(id);
+        if(topic.getUser().getId()!=user.getId()){
+            News news=new News();
+            news.setTid(id);
+            news.setTname(topic.getTitle());
+            news.setUid(topic.getUser().getId());
+            news.setUname(user.getNickname());
+            news.setUpid(user.getId());
+            newsService.Insertone(news);
+        }
+        //返回帖子
         model.addAttribute("topic",topic);
         return "views/Topicshtml/Topics_see";
     }

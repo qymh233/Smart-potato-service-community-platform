@@ -52,12 +52,12 @@
         <li class="layui-nav-item layui-nav-itemed">
           <a href="javascript:;">个人中心</a>
           <dl class="layui-nav-child">
-              <dd><a href="/Users/Personal_Center">个人信息</a></dd>
-              <dd><a href="/Topics/Personal_topic">我的帖子</a></dd>
-              <dd><a href="/Collects/Personal_collect">我的收藏</a></dd>
-              <dd><a href="/News/Personal_news">我的消息</a></dd>
-              <dd><a href="/Users/Personal_Modify">修改资料</a></dd>
-              <dd><a href="/Users/Personal_password">修改密码</a></dd>
+            <dd><a href="/Users/Personal_Center">个人信息</a></dd>
+            <dd><a href="/Topics/Personal_topic">我的帖子</a></dd>
+            <dd><a href="/Collects/Personal_collect">我的收藏</a></dd>
+            <dd><a href="/News/Personal_news">我的消息</a></dd>
+            <dd><a href="/Users/Personal_Modify">修改资料</a></dd>
+            <dd><a href="/Users/Personal_password">修改密码</a></dd>
           </dl>
         </li>
       </ul>
@@ -67,29 +67,12 @@
   <div class="layui-body">
     <!-- 内容主体区域 -->
     <div class="layui-row">
-      <div id="form-bg" class="layui-card positionbox">
-            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-              <legend style="font-size:18px; color:#000000; font-weight: bold; ">修改密码</legend>
-          </fieldset>
-        <div id="form-box">
-          <form class="layui-form" method="post">
-              <div class="layui-form-item">
-                  <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">新密码</label>
-                  <div class="layui-input-block">
-                    <input type="password" id="newpd" name="newpd" lay-verify="required" autocomplete="off" placeholder="请输入新密码" class="layui-input" style="width: 200px;">
-                  </div>
-              </div>
-              <div class="layui-form-item">
-                  <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">新密码</label>
-                  <div class="layui-input-block">
-                    <input type="password" id="newpd1" name="newpd1" lay-verify="required|confirmPass" autocomplete="off" placeholder="请再次输入新新密码" class="layui-input" style="width: 200px;">
-                  </div>
-              </div>
-            <center><button type="submit" formaction="/Users/PW_Modify" class="layui-btn layui-btn-normal" onclick='return checkpasswd()'>确认修改</button></center>
-          </form>
-        </div>
-            </div>   
-
+      <blockquote class="layui-elem-quote" style="color: green;font-size: 20px;font-weight: 500;">我的收藏</blockquote>
+            <div class="layui-card">
+                <div class="table-responsive">
+                    <table id="topicsList" lay-filter="test"></table>
+                </div>
+    		</div>
     </div>
 
   </div>
@@ -99,18 +82,53 @@
     智慧马铃薯服务社区平台
   </div>
 </div>
+
 <script src="../layui/layui.js"></script>
+<script type="text/html" id="doBar">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">查看</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">取消收藏</a>
+</script>
 <script>
-    function checkpasswd(){
-        var passwd = document.getElementById('newpd').value;
-        var repasswd = document.getElementById('newpd1').value;
-        if(passwd == repasswd){
-            return true;
-        }else{
-            window.alert('两次输入密码不一致');
-            return false;
-        }
-    }
+    layui.use('table', function(){
+        var table = layui.table;
+        //第一个实例
+        table.render({
+            elem: '#topicsList'
+            ,height: 466
+            ,url: '/Collects/collectsList' //数据接口
+            ,page: true //开启分页
+            ,method: 'post'
+            ,totalRow: true //开启合计行
+            ,layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+            ,limit:5 //默认为10
+            ,limits:[5,10,15,20,25]   //显示的几页
+            ,cols: [
+                [ //表头
+                    {field: 'tname', title: '标题', fixed: 'left'}
+                  ,{field:'uname',title: '发帖者'}
+                  ,{field: 'ctime', title: '收藏时间', sort: true,templet : "<div>{{layui.util.toDateString(d.ctime, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
+                    ,{title: '操作', toolbar:"#doBar", width:200}
+                ]
+            ]
+        });
+
+        table.on('tool(test)', function(obj){
+            var data = obj.data;
+            var layEvent = obj.event;
+
+            if(layEvent === 'edit'){ //修改
+                location.href="/Topics/Personal_Topic_see?id="+data.tid;
+            } else if(layEvent === 'delete'){ //删除i
+                layer.confirm('真的要取消收藏么', function(index){
+                    location.href="/Collects/delete?id="+data.id;
+                });
+            }
+        });
+    });
+    layui.use('form', function(){
+        var form = layui.form;
+        form.render();
+    })
 </script>
 <script>
 //JavaScript代码区域

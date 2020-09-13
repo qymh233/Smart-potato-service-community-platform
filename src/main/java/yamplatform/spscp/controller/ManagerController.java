@@ -20,6 +20,8 @@ import java.util.Map;
 @SessionAttributes({"manager","manager_user"})
 public class ManagerController {
     @Autowired
+    ManagersService managersService;
+    @Autowired
     UsersService usersService;
     @Autowired
     RellinksService rellinksService;
@@ -34,11 +36,9 @@ public class ManagerController {
     @Autowired
     TopicsService topicsService;
     //登陆
-    //todo
-    //创建管理员表
     @RequestMapping("/login")
     public String login(@Param("username")String username, @Param("password")String password, Model model){
-        Users manager=usersService.SelectOne(username,password);
+        Managers manager=managersService.SelectOne(username,password);
         if(manager==null){
             return "views/managerlogin";
         }

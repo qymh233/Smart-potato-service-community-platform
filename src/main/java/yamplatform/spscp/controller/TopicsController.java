@@ -6,9 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import yamplatform.spscp.pojo.Collects;
 import yamplatform.spscp.pojo.Helps;
 import yamplatform.spscp.pojo.Topics;
 import yamplatform.spscp.pojo.Users;
+import yamplatform.spscp.service.CollectsService;
+import yamplatform.spscp.service.NewsService;
 import yamplatform.spscp.service.TopicsService;
 import yamplatform.spscp.util.Pages;
 
@@ -27,6 +30,10 @@ import java.util.Map;
 public class TopicsController {
     @Autowired
     TopicsService topicsService;
+    @Autowired
+    CollectsService collectsService;
+    @Autowired
+    NewsService newsService;
     String mypagestat="";//页面状态
     String myquestion="";//搜索
     //跳转论坛页面
@@ -152,6 +159,21 @@ public class TopicsController {
         model.addAttribute("topic",topic);
         return "views/Topicshtml/Topics_see";
     }
+    //收藏帖子
+    @RequestMapping("/Topic_Collect")
+    public String Topic_Collect(Model model,@Param("id") Integer id){
+        Collects collect=new Collects();
+        Topics oldtopic=topicsService.SelectOne(id);
+        Users user=(Users) model.getAttribute("user");
+        collect.setTid(id);
+        collect.setTname(oldtopic.getTitle());
+        collect.setUid(user.getId());
+        collect.setUname(oldtopic.getUser().getNickname());
+        collectsService.Insertone(collect);
+        Topics topic=topicsService.SelectOne(id);
+        model.addAttribute("topic",topic);
+        return "views/Topicshtml/Topics_see";
+    }
 
     //跳转查询结果
    @RequestMapping("/findSignIn")
@@ -215,7 +237,15 @@ public class TopicsController {
     }
 
 
-
+    //用户查看消息帖子
+    @RequestMapping("/Personal_Topic_newssee")
+    public String Personal_Topic_newssee(Model model,@Param("id") Integer id){
+        Users user=(Users) model.getAttribute("user");
+        newsService.Delete(id,user.getId());
+        Topics topic=topicsService.SelectOne(id);
+        model.addAttribute("topic",topic);
+        return "views/Usershtml/Personal_Topics_see";
+    }
     //修改页面
     @RequestMapping("/Modeify")
     public String Modeify(Model model,@Param("id") Integer id ){
