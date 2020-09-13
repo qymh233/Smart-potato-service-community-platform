@@ -26,7 +26,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/Topics")
-@SessionAttributes({"user","manager"})
+@SessionAttributes({"user","manager","mypagestat"})
 public class TopicsController {
     @Autowired
     TopicsService topicsService;
@@ -34,22 +34,21 @@ public class TopicsController {
     CollectsService collectsService;
     @Autowired
     NewsService newsService;
-    String mypagestat="";//页面状态
     String myquestion="";//搜索
     //跳转论坛页面
     @RequestMapping("/Topics")
     public String Topics(Model model, @Param("page")String page){
         if(page.equals("xin")){
-            mypagestat="xin";
+            model.addAttribute("mypagestat","xin");
             model.addAttribute("stat","xin");
         }else if(page.equals("jin")){
-            mypagestat="jin";
+            model.addAttribute("mypagestat","jin");
             model.addAttribute("stat","jin");
         }else if(page.equals("re")){
-            mypagestat="re";
+            model.addAttribute("mypagestat","re");
             model.addAttribute("stat","re");
         }else {
-            mypagestat="lun";
+            model.addAttribute("mypagestat","lun");
             model.addAttribute("stat","lun");
         }
         return "views/Topicshtml/Topics";
@@ -62,6 +61,7 @@ public class TopicsController {
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("code", 0);
         List<Topics> topicsList;
+        String mypagestat=(String) model.getAttribute("mypagestat");
         if(mypagestat.equals("xin")){
             topicsList=topicsService.TopicsListbyxin();
         }else if(mypagestat.equals("jin")){
@@ -136,9 +136,8 @@ public class TopicsController {
         }
         topic.setUid(user.getId());
         topicsService.InsertTopics(topic);
-        List<Topics> topicsList=topicsService.TopicsListbyxin();
-        model.addAttribute("topicsList",topicsList);
         model.addAttribute("stat","xin");
+        model.addAttribute("mypagestat","xin");
         return "views/Topicshtml/Topics";
     }
 //查看帖子
