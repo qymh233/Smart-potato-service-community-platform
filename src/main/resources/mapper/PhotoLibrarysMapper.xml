@@ -34,4 +34,11 @@
 	<delete id="Delete">
     	delete from t_photoLibrarys where id = #{id}
   	</delete>
+	<!--模糊查询-->
+	<select id="likelist" resultMap="SelectAll">
+		select * from t_photoLibrarys where
+		<foreach item="item" index="index" collection="findlikelist"  open="(" separator="or" close=")">
+			described like CONCAT('%',#{item},'%')
+		</foreach>
+	</select>
 </mapper>

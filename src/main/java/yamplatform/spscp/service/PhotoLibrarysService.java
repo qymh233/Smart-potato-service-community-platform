@@ -15,4 +15,6 @@ public interface PhotoLibrarysService {
     public List<PhotoLibrarys> PhotoLibrarysList();
     //删除
     public int Delete(Integer id);
+    //模糊查询
+    public List<PhotoLibrarys> likelist(List<String> findlikelist);
 }

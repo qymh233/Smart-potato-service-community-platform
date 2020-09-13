@@ -21,4 +21,6 @@ public interface PhotoLibrarysMapper {
     public List<PhotoLibrarys>  photoLibrarysList();
     //删除
     public int Delete(@Param("id") Integer id);
+    //模糊查询
+    public List<PhotoLibrarys> likelist(@Param("findlikelist") List<String> findlikelist);
 }

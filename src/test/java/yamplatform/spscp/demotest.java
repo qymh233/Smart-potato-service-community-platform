@@ -10,17 +10,29 @@ import yamplatform.spscp.service.PhotoLibrarysService;
 import yamplatform.spscp.service.RellinksService;
 import yamplatform.spscp.service.TopicsService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
 public class demotest {
     @Autowired
-    TopicsService topicsService;
+    PhotoLibrarysService photoLibrarysService;
     @Test
     void contextLoads() {
-        List<Topics> topicsList=topicsService.TopicsListbyuid(1);
-        for(Topics t:topicsList){
-            System.out.println(t);
+        String question="淀粉/氮";
+        String[] strArr = question.split("/");
+        List<String> res=new ArrayList<>();
+        for(String s:strArr){
+            res.add(s);
         }
+        for(String r:res){
+            System.out.println(r);
+        }
+        List<PhotoLibrarys> photoLibrarysList=photoLibrarysService.likelist(res);
+        for(PhotoLibrarys p:photoLibrarysList){
+            System.out.println(p);
+        }
+
+
     }
 }

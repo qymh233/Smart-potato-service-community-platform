@@ -13,14 +13,11 @@ import yamplatform.spscp.util.Pages;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/PhotoLibrarys")
-@SessionAttributes({"user","manager","manager_photolibrarys"})
+@SessionAttributes({"user","manager","manager_photolibrarys","findlikelist"})
 public class PhotoLibrarysController {
     @Autowired
     PhotoLibrarysService photoLibrarysService;
@@ -60,60 +57,6 @@ public class PhotoLibrarysController {
     public String PhotoLibrary_upload(Model model){
         return "views/PhotoLibraryshtml/PhotoLibrary_upload";
     }
-   /* @RequestMapping(value="/uploadSource" , method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String,Object> downloadimg(Model model,@RequestParam("file") MultipartFile file) {
-        System.out.println(file);
-        String pathString = null;
-        String dbname=null;
-        String dburl;
-        if(file!=null) {
-            //获取上传的文件名称
-            String filename = file.getOriginalFilename();
-            //Check for Unix-style path
-            int unixSep = filename.lastIndexOf('/');
-            //Check for Windows-style path
-            int winSep = filename.lastIndexOf('\\');
-            //cut off at latest possible point
-            int pos = (winSep > unixSep ? winSep:unixSep);
-            if (pos != -1)
-                filename = filename.substring(pos + 1);
-            String fname=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" +filename;
-            String newstr=filename.substring(filename.length() - 3);
-            if(newstr.equals("jpg")||newstr.equals("png")){
-                dbname="马铃薯图片";
-            }else if(newstr.equals("zip")||newstr.equals("rar")){
-                dbname="马铃薯图片压缩包";
-            }else {
-                dbname=fname;
-            }
-            pathString = "E:\\ideaproject\\spscp\\src\\main\\resources\\static\\img\\PhotoLibrary\\" + fname;//上传到本地
-        }
-        Map map = new HashMap<String,Object>();
-        try {
-            File files=new File(pathString);//在内存中创建File文件映射对象
-            //打印查看上传路径
-            System.out.println(pathString);
-            if(!files.getParentFile().exists()){//判断映射文件的父文件是否真实存在
-                files.getParentFile().mkdirs();//创建所有父文件夹
-            }
-            file.transferTo(files);//采用file.transferTo 来保存上传的文件
-            map.put("msg","ok");
-            map.put("code",0);
-            dburl="http://localhost:8080/img/PhotoLibrary/"+dbname;
-            PhotoLibrarys photoLibrary=new PhotoLibrarys();
-            photoLibrary.setTitle(dbname);
-            photoLibrary.setUrl(dburl);
-            Users user=(Users)model.getAttribute("user");
-            photoLibrary.setUid(user.getId());
-            photoLibrarysService.InsertPhotoLibrarys(photoLibrary);
-        } catch (Exception e) {
-            map.put("msg","error");
-            map.put("code",100);
-            e.printStackTrace();
-        }
-        return map;
-    }*/
    @RequestMapping(value="/uploadSource" , method = RequestMethod.POST)
    @ResponseBody
    public Map<String,Object> downloadimg(Model model,@RequestParam("file") MultipartFile file) {
@@ -159,6 +102,9 @@ public class PhotoLibrarysController {
         PhotoLibrarys photoLibrary=new PhotoLibrarys();
         photoLibrary.setTitle(title);
         photoLibrary.setUrl(picturl);
+        if(cont!=null&&!cont.equals("")){
+            photoLibrary.setDescribed(cont);
+        }
         photoLibrary.setUid(user.getId());
         photoLibrarysService.InsertPhotoLibrarys(photoLibrary);
         return "views/PhotoLibraryshtml/PhotoLibrary";
@@ -191,5 +137,34 @@ public class PhotoLibrarysController {
         photoLibrarysService.Delete(id);
         return "views/Managershtml/Manager_photolibrarys";
     }
-
+    //模糊查询
+    @RequestMapping("/findlike")
+    public   String findlike(Model model,@Param("title") String title){
+        String question=title;
+        String[] strArr = question.split("/");
+        List<String> res=new ArrayList<>();
+        for(String s:strArr){
+            res.add(s);
+        }
+       model.addAttribute("findlikelist",res);
+        return "views/PhotoLibraryshtml/PhotoLibrary_findlike";
+    }
+    //返回图片list
+    @RequestMapping("/findlikeList")
+    @ResponseBody
+    public Map<String,Object> findlikeList(Model model,Integer page, Integer limit){
+        List<PhotoLibrarys> photoLibrarysListSub;
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("code", 0);
+        List<String> findlikelist=(List<String>) model.getAttribute("findlikelist");
+        List<PhotoLibrarys> photoLibrarysList=photoLibrarysService.likelist(findlikelist);
+        if(photoLibrarysList == null) {
+            return result;
+        }
+        Pages pages=new Pages();
+        photoLibrarysListSub = (List<PhotoLibrarys>) pages.listSub(photoLibrarysList, page, limit);
+        result.put("data",photoLibrarysListSub);
+        result.put("count",photoLibrarysList.size());
+        return result;
+    }
 }

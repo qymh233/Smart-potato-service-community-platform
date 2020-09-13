@@ -54,4 +54,16 @@ public class PhotoLibrarysServiceImpl implements PhotoLibrarysService{
         int t=photoLibrarysMapper.Delete(id);
         return t;
     }
+
+    @Override
+    public List<PhotoLibrarys> likelist(List<String> findlikelist) {
+        List<PhotoLibrarys> photoLibrarysList=photoLibrarysMapper.likelist(findlikelist);
+        if(photoLibrarysList!=null){
+            for(PhotoLibrarys c:photoLibrarysList){
+                Users user=usersService.SelectOnebyid(c.getUid());
+                c.setUser(user);
+            }
+        }
+        return photoLibrarysList;
+    }
 }

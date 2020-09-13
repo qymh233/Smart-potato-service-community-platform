@@ -56,7 +56,7 @@
   <div class="layui-body">
     <!-- 内容主体区域 -->
     <div class="layui-row">
-      <blockquote class="layui-elem-quote" style="color: green;font-size: 20px;font-weight: 500;">马铃薯图像库</blockquote>
+      <blockquote class="layui-elem-quote" style="color: orange;font-size: 20px;font-weight: 500;">查询结果</blockquote>
       <form class="layui-form" method="post">
         <div class="layui-form-item">
           <div class="layui-input-block">
@@ -105,7 +105,7 @@
         table.render({
           elem: '#topicsList'
           ,height: 466
-          ,url: '/PhotoLibrarys/photoLibrarysList' //数据接口
+          ,url: '/PhotoLibrarys/findlikeList' //数据接口
           ,page: true //开启分页
           ,method: 'post'
           ,totalRow: true //开启合计行
