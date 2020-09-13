@@ -21,7 +21,12 @@ import java.util.Map;
 public class TypesController {
     @Autowired
     TypesService typesService;
-
+    @RequestMapping("type_see")
+    public String type_see(Model model,@Param("id") Integer id){
+        Types type=typesService.SelectOne(id);
+        model.addAttribute("type",type);
+        return "views/Categoryshtml/type_see";
+    }
     //返回子栏目列表
     @RequestMapping("/typesList")
     @ResponseBody
