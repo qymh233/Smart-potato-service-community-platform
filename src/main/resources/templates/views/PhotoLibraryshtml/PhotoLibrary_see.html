@@ -60,7 +60,7 @@
         <div id="form-box">
           <div class="layui-form-item">
             <label class="layui-form-label font-style">标题</label>
-            <label class="layui-form-label">
+            <label class="layui-form-label" style="width: 200px;">
               <span class="span-style" th:text="${photoLibrary.getTitle()}"></span>
             </label>
           </div>
@@ -99,7 +99,7 @@
             </label>
             <div class=" layui-inline" style="margin-left: 50px;">
               <label class="layui-form-label">
-              <a class="layui-btn layui-btn-danger layui-btn-lg" th:href="@{${photoLibrary.getUrl()}}" th:download="${photoLibrary.getTitle()}">下载</a>
+              <a class="layui-btn layui-btn-danger layui-btn-lg" th:href="@{${photoLibrary.getUrl()}}" th:download="${photoLibrary.getTitle()}" target="_blank">下载</a>
             </label>
             </div>
           </div>

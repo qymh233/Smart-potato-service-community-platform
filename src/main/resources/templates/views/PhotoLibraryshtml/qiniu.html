@@ -22,6 +22,8 @@
           <button type="button" class="layui-btn" id="test4"><i class="layui-icon"></i>上传文件</button>
           <input type="hidden" id="picturl" name="picturl" value=""/>
         </div>
+<a href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2484368170,822051195&fm=26&gp=0.jpg" onclick="save()">保存</a>
+
 
   </div>
   
@@ -31,6 +33,21 @@
   </div>
 </div>
 <script src="../layui/layui.js"></script>
+<script language='javascript' type='text/javascript'>
+  function save()
+  {
+    var e = window.event.srcElement;
+    alert(e.tagName);
+    if(e.tagName=="A")
+    {
+      var win=window.open(e.href, "_blank", "top=1200px,left=1200px");
+      win.document.execCommand('saveAs');
+      win.opener=null;
+      win.close();
+      event.returnValue=false;
+    }
+  }
+</script>
 <script>
   //JavaScript代码区域
   layui.use(['form', 'layedit', 'laydate'], function(){

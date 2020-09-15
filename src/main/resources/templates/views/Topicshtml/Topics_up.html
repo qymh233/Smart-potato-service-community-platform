@@ -139,7 +139,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){
             , $ = layui.jquery;
         var uploadInst = upload.render({
             elem: '#upload1' //绑定元素
-            ,url: '/Topics/uploadimg'
+            ,url: '/upload/img' //'/Topics/uploadimg'
             ,before: function(obj){
                 //预读本地文件示例，不支持ie8
                 obj.preview(function(index, file, result){

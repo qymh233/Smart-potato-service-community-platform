@@ -156,7 +156,7 @@
 		            <p class="fontColor" th:text="${c.getUser().getNickname()}"></p>
 		            <p class="min-font">
 		              <span class="layui-breadcrumb" lay-separator="-" style="visibility: visible;">
-		                 <span lay-separator="" th:text="${c.getCommentTime()}"></span>
+		                 <span lay-separator="" th:text="${#dates.format(c.getCommentTime(),'yyyy-MM-dd HH:mm:ss')}"></span>
 		              </span>
 		            </p>         
 		         </div>
@@ -208,7 +208,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){
             , $ = layui.jquery;
         var uploadInst = upload.render({
             elem: '#upload1' //绑定元素
-            ,url: '/Comments/uploadsee'
+            ,url: '/upload/img' //'/Comments/uploadsee'
             ,before: function(obj){
                 //预读本地文件示例，不支持ie8
                 obj.preview(function(index, file, result){
