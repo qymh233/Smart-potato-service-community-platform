@@ -19,6 +19,10 @@ public class PageController {
     public String i(){
         return "views/index";
     }
+    @RequestMapping("/qiniu")
+    public String qiniu(){
+        return "views/PhotoLibraryshtml/qiniu";
+    }
     //首页面
     @RequestMapping("/")
     public String index(){
