@@ -17,4 +17,8 @@ public interface HelpsService {
     public List<Helps> helpsList();
     //删除
     public int Delete(Integer id);
+    //总数
+    public int Count();
+    //分页
+    public List<Helps> Listpage(Integer page,Integer lim);
 }

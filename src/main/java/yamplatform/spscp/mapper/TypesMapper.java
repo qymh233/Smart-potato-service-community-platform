@@ -3,6 +3,7 @@ package yamplatform.spscp.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import yamplatform.spscp.pojo.News;
 import yamplatform.spscp.pojo.Types;
 
 import java.util.List;
@@ -24,5 +25,9 @@ public interface TypesMapper {
 
     //删除
     public int Delete(@Param("id") Integer id);
+    //总数
+    public int Count(@Param("cid") Integer cid);
+    //分页
+    public List<Types> Listpage(@Param("page")Integer page, @Param("lim")Integer lim,@Param("cid") Integer cid);
 
 }

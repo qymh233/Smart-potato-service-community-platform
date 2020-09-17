@@ -32,4 +32,10 @@
 	<select id="helpsList" resultMap="SelectAll">
     	select * from t_help
 	</select>
+	<select id="Count" resultType="INTEGER">
+    	select count(*) from t_help
+	</select>
+	<select id="Listpage" resultMap="SelectAll">
+    	select * from t_help limit #{page},#{lim}
+	</select>
 </mapper>

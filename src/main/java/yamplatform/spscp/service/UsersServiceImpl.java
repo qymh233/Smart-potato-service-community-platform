@@ -42,14 +42,21 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    public List<Users> usersList() {
-        List<Users> usersList=usersMapper.usersList();
+    public List<Users> usersList(Integer page,Integer limit) {
+        page=(page-1)*limit;
+        List<Users> usersList=usersMapper.usersList(page,limit);
         return usersList;
     }
 
     @Override
     public int DeleteUsers(Integer id) {
         int t=usersMapper.DeleteUsers(id);
+        return t;
+    }
+
+    @Override
+    public int Count() {
+        int t=usersMapper.Count();
         return t;
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yamplatform.spscp.mapper.PhotoLibrarysMapper;
 import yamplatform.spscp.pojo.PhotoLibrarys;
+import yamplatform.spscp.pojo.Rellinks;
 import yamplatform.spscp.pojo.Users;
 
 import java.util.List;
@@ -58,6 +59,25 @@ public class PhotoLibrarysServiceImpl implements PhotoLibrarysService{
     @Override
     public List<PhotoLibrarys> likelist(List<String> findlikelist) {
         List<PhotoLibrarys> photoLibrarysList=photoLibrarysMapper.likelist(findlikelist);
+        if(photoLibrarysList!=null){
+            for(PhotoLibrarys c:photoLibrarysList){
+                Users user=usersService.SelectOnebyid(c.getUid());
+                c.setUser(user);
+            }
+        }
+        return photoLibrarysList;
+    }
+
+    @Override
+    public int Count() {
+        int t=photoLibrarysMapper.Count();
+        return t;
+    }
+
+    @Override
+    public List<PhotoLibrarys> Listpage(Integer page, Integer lim) {
+        page=(page-1)*lim;
+        List<PhotoLibrarys> photoLibrarysList=photoLibrarysMapper.Listpage(page,lim);
         if(photoLibrarysList!=null){
             for(PhotoLibrarys c:photoLibrarysList){
                 Users user=usersService.SelectOnebyid(c.getUid());

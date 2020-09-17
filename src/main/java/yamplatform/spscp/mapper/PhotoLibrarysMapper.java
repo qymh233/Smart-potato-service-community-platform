@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import yamplatform.spscp.pojo.PhotoLibrarys;
+import yamplatform.spscp.pojo.Rellinks;
 
 import java.util.List;
 
@@ -23,4 +24,8 @@ public interface PhotoLibrarysMapper {
     public int Delete(@Param("id") Integer id);
     //模糊查询
     public List<PhotoLibrarys> likelist(@Param("findlikelist") List<String> findlikelist);
+    //总数
+    public int Count();
+    //分页
+    public List<PhotoLibrarys> Listpage(@Param("page")Integer page, @Param("lim")Integer lim);
 }

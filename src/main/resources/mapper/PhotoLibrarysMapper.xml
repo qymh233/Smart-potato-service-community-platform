@@ -41,4 +41,12 @@
 			described like CONCAT('%',#{item},'%')
 		</foreach>
 	</select>
+
+
+	<select id="Count" resultType="INTEGER">
+    	select count(*) from t_photoLibrarys
+	</select>
+	<select id="Listpage" resultMap="SelectAll">
+    	select * from t_photoLibrarys limit #{page},#{lim}
+	</select>
 </mapper>

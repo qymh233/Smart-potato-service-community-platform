@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yamplatform.spscp.mapper.LiveMsgsMapper;
 import yamplatform.spscp.pojo.LiveMsgs;
+import yamplatform.spscp.pojo.PhotoLibrarys;
 import yamplatform.spscp.pojo.Users;
 
 import java.util.List;
@@ -37,4 +38,22 @@ public class LiveMsgsServiceImpl implements LiveMsgsService{
         }
         return liveMsgsList;
     }
-}
+
+    @Override
+    public int Count() {
+        int t=liveMsgsMapper.Count();
+        return t;
+    }
+
+    @Override
+    public List<LiveMsgs> Listpage(Integer page, Integer lim) {
+        page=(page-1)*lim;
+        List<LiveMsgs> liveMsgsList=liveMsgsMapper.Listpage(page,lim);
+        if(liveMsgsList!=null){
+            for (LiveMsgs l:liveMsgsList){
+                Users user=usersService.SelectOnebyid(l.getUid());
+                l.setUser(user);
+            }
+        }
+        return liveMsgsList;
+    }}

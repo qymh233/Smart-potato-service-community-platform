@@ -1,6 +1,7 @@
 package yamplatform.spscp.service;
 
 import yamplatform.spscp.pojo.Notices;
+import yamplatform.spscp.pojo.Rellinks;
 
 import java.util.List;
 
@@ -17,4 +18,9 @@ public interface NoticesService {
     public List<Notices> noticesList();
     //删除
     public  int Delete(Integer id);
+
+    //总数
+    public int Count();
+    //分页
+    public List<Notices> Listpage(Integer page, Integer lim);
 }

@@ -14,6 +14,11 @@ public interface RellinksService {
     public int UpdateRellinks(Rellinks rellinks);
     //查询列表
     public List<Rellinks>  RellinksList();
-    //
+    //删除
     public int Delete(Integer id);
+    //总数
+    public int Count();
+    //分页
+    public List<Rellinks> Listpage(Integer page, Integer lim);
+
 }

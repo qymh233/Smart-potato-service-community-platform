@@ -22,4 +22,8 @@ public interface NoticesMapper {
     public List<Notices> noticesList();
     //删除
     public  int Delete(@Param("id") Integer id);
+    //总数
+    public int Count();
+    //分页
+    public List<Notices> Listpage(@Param("page")Integer page, @Param("lim")Integer lim);
 }

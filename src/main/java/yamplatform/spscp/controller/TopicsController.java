@@ -63,11 +63,11 @@ public class TopicsController {
         List<Topics> topicsList;
         String mypagestat=(String) model.getAttribute("mypagestat");
         if(mypagestat.equals("xin")){
-            topicsList=topicsService.TopicsListbyxin();
+            topicsList=topicsService.TopicsListbyxin_ten();
         }else if(mypagestat.equals("jin")){
-           topicsList=topicsService.TopicsListbyjin();
+           topicsList=topicsService.TopicsListbyjin_ten();
         }else if(mypagestat.equals("re")){
-            topicsList=topicsService.TopicsListbyre();
+            topicsList=topicsService.TopicsListbyre_ten();
         }else {
             topicsList=topicsService.TopicsList();
         }

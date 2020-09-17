@@ -38,5 +38,4 @@
 	<select id="CommentsListbytid" resultMap="SelectAll">
     	select * from t_comment where tid = #{tid}  order by commentTime desc
   	</select>
-
 </mapper>

@@ -24,4 +24,12 @@
 	<select id="NewsList" parameterType="INTEGER" resultMap="SelectAll">
     	select * from t_news where uid = #{uid} order by ntime desc
 	</select>
+
+	<select id="Count" resultType="INTEGER">
+    	select count(*) from t_news where uid = #{uid}
+	</select>
+	<select id="Listpage" resultMap="SelectAll">
+    	select * from t_news where uid = #{uid} order by ntime desc limit #{page},#{lim}
+	</select>
+
 </mapper>

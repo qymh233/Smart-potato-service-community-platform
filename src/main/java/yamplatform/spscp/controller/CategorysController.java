@@ -60,7 +60,7 @@ public class CategorysController {
         return "views/Managershtml/Manager_categorys";
     }
 
-    //删除
+    //查看
     @RequestMapping("/find")
     public String find(Model model,@Param("id") Integer id){
         model.addAttribute("categoryID",id);

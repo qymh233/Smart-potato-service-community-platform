@@ -26,4 +26,11 @@
 	<select id="CategorysList" resultMap="SelectAll">
     	select * from t_category
   	</select>
+
+	<select id="Count" resultType="INTEGER">
+    	select count(*) from t_category
+	</select>
+	<select id="Listpage" resultMap="SelectAll">
+    	select * from t_category limit #{page},#{lim}
+	</select>
 </mapper>

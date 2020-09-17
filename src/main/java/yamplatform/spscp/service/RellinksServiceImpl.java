@@ -3,6 +3,7 @@ package yamplatform.spscp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yamplatform.spscp.mapper.RellinksMapper;
+import yamplatform.spscp.pojo.Notices;
 import yamplatform.spscp.pojo.Rellinks;
 
 import java.util.List;
@@ -39,5 +40,18 @@ public class RellinksServiceImpl implements RellinksService{
     public int Delete(Integer id) {
         int t=rellinksMapper.Delete(id);
         return t;
+    }
+
+    @Override
+    public int Count() {
+        int t=rellinksMapper.Count();
+        return t;
+    }
+
+    @Override
+    public List<Rellinks> Listpage(Integer page, Integer lim) {
+        page=(page-1)*lim;
+        List<Rellinks> rellinksList=rellinksMapper.Listpage(page,lim);
+        return rellinksList;
     }
 }

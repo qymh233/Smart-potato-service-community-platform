@@ -22,4 +22,11 @@
 	<select id="LiveMsgsList" resultMap="SelectAll">
     	select * from t_livemsgs order by newtime desc
   	</select>
+
+	<select id="Count" resultType="INTEGER">
+    	select count(*) from t_livemsgs
+	</select>
+	<select id="Listpage" resultMap="SelectAll">
+    	select * from t_livemsgs limit #{page},#{lim}
+	</select>
 </mapper>

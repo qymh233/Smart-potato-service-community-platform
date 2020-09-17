@@ -21,4 +21,9 @@ public interface RellinksMapper {
     public List<Rellinks>  RellinksList();
     //删除
     public int Delete(@Param("id") Integer id);
+
+    //总数
+    public int Count();
+    //分页
+    public List<Rellinks> Listpage(@Param("page")Integer page,@Param("lim")Integer lim);
 }

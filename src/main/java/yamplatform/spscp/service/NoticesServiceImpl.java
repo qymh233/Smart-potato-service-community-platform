@@ -3,6 +3,7 @@ package yamplatform.spscp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yamplatform.spscp.mapper.NoticesMapper;
+import yamplatform.spscp.pojo.Helps;
 import yamplatform.spscp.pojo.Notices;
 
 import java.util.List;
@@ -45,5 +46,18 @@ public class NoticesServiceImpl implements NoticesService {
     public int Delete(Integer id) {
         int t=noticesMapper.Delete(id);
         return t;
+    }
+
+    @Override
+    public int Count() {
+        int t=noticesMapper.Count();
+        return t;
+    }
+
+    @Override
+    public List<Notices> Listpage(Integer page, Integer lim) {
+        page=(page-1)*lim;
+        List<Notices> noticesList=noticesMapper.Listpage(page,lim);
+        return noticesList;
     }
 }

@@ -32,4 +32,12 @@
 	<select id="typesListbycid" resultMap="SelectAll">
     	select * from t_type where typescategoryid=#{cid}
   	</select>
+
+	<select id="Count" resultType="INTEGER">
+    	select count(*) from t_type where typescategoryid=#{cid}
+	</select>
+	<select id="Listpage" resultMap="SelectAll">
+    	select * from t_type where typescategoryid=#{cid} limit #{page},#{lim}
+	</select>
+
 </mapper>

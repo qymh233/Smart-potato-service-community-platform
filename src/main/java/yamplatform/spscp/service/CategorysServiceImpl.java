@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yamplatform.spscp.mapper.CategorysMapper;
 import yamplatform.spscp.pojo.Categorys;
+import yamplatform.spscp.pojo.Rellinks;
 import yamplatform.spscp.pojo.Types;
 
 import java.util.List;
@@ -48,5 +49,18 @@ public class CategorysServiceImpl implements CategorysService{
     public int Delete(Integer id) {
         int t=categorysMapper.Delete(id);
         return t;
+    }
+
+    @Override
+    public int Count() {
+        int t=categorysMapper.Count();
+        return t;
+    }
+
+    @Override
+    public List<Categorys> Listpage(Integer page, Integer lim) {
+        page=(page-1)*lim;
+        List<Categorys> categorysList=categorysMapper.Listpage(page,lim);
+        return categorysList;
     }
 }

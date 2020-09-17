@@ -44,6 +44,9 @@
 		<result property="status" column="status"/>
 	</resultMap>
 	<select id="usersList" resultMap="SelectAll">
-    	select * from t_user
+    	select * from t_user limit #{page},#{lim}
+	</select>
+	<select id="Count" resultType="INTEGER">
+    	select count(*) from t_user
 	</select>
 </mapper>

@@ -3,6 +3,7 @@ package yamplatform.spscp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yamplatform.spscp.mapper.TypesMapper;
+import yamplatform.spscp.pojo.Rellinks;
 import yamplatform.spscp.pojo.Types;
 
 import java.util.List;
@@ -45,5 +46,18 @@ public class TypesServiceImpl implements TypesService{
     public int Delete(Integer id) {
         int t=typesMapper.Delete(id);
         return t;
+    }
+
+    @Override
+    public int Count(Integer cid) {
+        int t=typesMapper.Count(cid);
+        return t;
+    }
+
+    @Override
+    public List<Types> Listpage(Integer page, Integer lim,Integer cid) {
+        page=(page-1)*lim;
+        List<Types> typesList=typesMapper.Listpage(page,lim,cid);
+        return typesList;
     }
 }

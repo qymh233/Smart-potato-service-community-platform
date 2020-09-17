@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yamplatform.spscp.mapper.TopicsMapper;
 import yamplatform.spscp.pojo.Comments;
+import yamplatform.spscp.pojo.PhotoLibrarys;
 import yamplatform.spscp.pojo.Topics;
 import yamplatform.spscp.pojo.Users;
 
@@ -172,6 +173,25 @@ public class TopicsServiceImpl implements TopicsService{
             for(Topics t:topicsList){
                // List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
                // t.setCommentsList(commentsList);
+                Users user=usersService.SelectOnebyid(t.getUid());
+                t.setUser(user);
+            }
+        }
+        return topicsList;
+    }
+
+    @Override
+    public int Count() {
+        int t=topicsMapper.Count();
+        return t;
+    }
+
+    @Override
+    public List<Topics> Listpage(Integer page, Integer lim) {
+        page=(page-1)*lim;
+        List<Topics> topicsList=topicsMapper.Listpage(page,lim);
+        if(topicsList!=null){
+            for(Topics t:topicsList){
                 Users user=usersService.SelectOnebyid(t.getUid());
                 t.setUser(user);
             }

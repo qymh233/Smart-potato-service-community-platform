@@ -3,6 +3,7 @@ package yamplatform.spscp.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import yamplatform.spscp.pojo.Collects;
 import yamplatform.spscp.pojo.LiveMsgs;
 
 import java.util.List;
@@ -17,4 +18,9 @@ public interface LiveMsgsMapper {
     public int InsertLiveMsgs(@Param("liveMsgs") LiveMsgs liveMsgs);
     //查询列表
     public List<LiveMsgs>  LiveMsgsList();
+
+    //总数
+    public int Count();
+    //分页
+    public List<LiveMsgs> Listpage(@Param("page")Integer page, @Param("lim")Integer lim);
 }

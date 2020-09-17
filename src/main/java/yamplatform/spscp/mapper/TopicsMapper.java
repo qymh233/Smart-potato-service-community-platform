@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import yamplatform.spscp.pojo.Topics;
+import yamplatform.spscp.pojo.Types;
 
 import java.util.List;
 
@@ -35,5 +36,10 @@ public interface TopicsMapper {
     //查询>50 , 点赞>50 时间排序
     public List<Topics>  TopicsListbyjin();
     public List<Topics>  TopicsListbyjin_ten();
+
+    //总数
+    public int Count();
+    //分页
+    public List<Topics> Listpage(@Param("page")Integer page, @Param("lim")Integer lim);
 
 }

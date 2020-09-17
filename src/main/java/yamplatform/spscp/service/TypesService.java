@@ -1,5 +1,6 @@
 package yamplatform.spscp.service;
 
+import yamplatform.spscp.pojo.Topics;
 import yamplatform.spscp.pojo.Types;
 
 import java.util.List;
@@ -17,4 +18,9 @@ public interface TypesService {
     public List<Types>  typesListbycid(Integer cid);
     //删除
     public int Delete(Integer id);
+    //总数
+    public int Count(Integer cid);
+    //分页
+    public List<Types> Listpage(Integer page, Integer lim,Integer cid);
+
 }

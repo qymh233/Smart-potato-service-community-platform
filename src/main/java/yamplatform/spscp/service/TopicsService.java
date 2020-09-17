@@ -1,5 +1,6 @@
 package yamplatform.spscp.service;
 
+import yamplatform.spscp.pojo.PhotoLibrarys;
 import yamplatform.spscp.pojo.Topics;
 
 import java.util.List;
@@ -26,4 +27,9 @@ public interface TopicsService {
     public List<Topics>  TopicsListbyre_ten();
     public List<Topics>  TopicsListbyjin();
     public List<Topics>  TopicsListbyjin_ten();
+
+    //总数
+    public int Count();
+    //分页
+    public List<Topics> Listpage(Integer page, Integer lim);
 }

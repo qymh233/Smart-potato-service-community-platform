@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import yamplatform.spscp.pojo.Helps;
+import yamplatform.spscp.pojo.Notices;
 
 import java.util.List;
 
@@ -23,5 +24,9 @@ public interface HelpsMapper {
     public List<Helps> helpsList();
     //删除
     public  int Delete(@Param("id") Integer id);
+    //总数
+    public int Count();
+    //分页
+    public List<Helps> Listpage(@Param("page")Integer page, @Param("lim")Integer lim);
 
 }

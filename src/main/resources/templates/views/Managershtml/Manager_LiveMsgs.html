@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>留言版</title>
+  <link rel="stylesheet" href="../../layui/css/layui.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">智慧马铃薯社区管理系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="/Manager/Manager_users">用户管理</a></li>
+            <li class="layui-nav-item"><a href="/Manager/Manager_topics">论坛管理</a></li>
+            <li class="layui-nav-item"><a href="/Manager/Manager_knowledges">专栏管理</a></li>
+            <li class="layui-nav-item"><a href="/Manager/Manager_photoLibrarys">马铃薯图像库管理</a></li>
+            <li class="layui-nav-item"><a href="/Manager/Manager_relinks">相关连接管理</a></li>
+            <li class="layui-nav-item"><a href="/Manager/Manager_helps">帮助管理</a></li>
+            <li class="layui-nav-item"><a href="/Manager/Manager_notices">公告管理</a></li>
+            <li class="layui-nav-item"><a href="/Manager/Manager_LiveMsgs">留言版</a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;" th:text="${manager.getNickname()}">
+                </a>
+            </li>
+            <li class="layui-nav-item"><a href="/">安全退出</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">功能</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/Manager/Manager_users">用户管理</a></dd>
+                        <dd><a href="/Manager/Manager_topics">论坛管理</a></dd>
+                        <dd><a href="/Manager/Manager_knowledges">专栏管理</a></dd>
+                        <dd><a href="/Manager/Manager_photoLibrarys">马铃薯图像库管理</a></dd>
+                        <dd><a href="/Manager/Manager_relinks">相关连接管理</a></dd>
+                        <dd><a href="/Manager/Manager_helps">帮助管理</a></dd>
+                        <dd><a href="/Manager/Manager_notices">公告管理</a></dd>
+                        <dd><a href="/Manager/Manager_LiveMsgs">留言版</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+  
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+      <blockquote class="layui-elem-quote" style="color: green;font-size: 20px;font-weight: 500;" >留言版</blockquote>
+
+		<div class="layui-col-md12 layadmin-homepage-list-imgtxt message-content">
+		       <div class="media-body" th:each="l: ${liveMsgsList}">
+		          <a href="javascript:;" class="media-left" style="float: left;">
+		             <img th:src="${l.getUser().getPicture()}" height="46px" width="46px">
+		          </a>
+		          <div class="pad-btm">
+		            <p class="fontColor" th:text="${l.getUser().getNickname()}"></p>
+		            <p class="min-font">
+		              <span class="layui-breadcrumb" lay-separator="-" style="visibility: visible;">
+		                 <span lay-separator="" th:text="${ #dates.format(l.getNewtime(),'yyyy-MM-dd HH:mm:ss')}"></span>
+		              </span>
+		            </p>         
+		         </div>
+		          <p class="message-text" th:text="${l.getContent()}"></p>
+				   <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+				   </fieldset>
+		       </div>
+		     </div>
+  </div>
+  
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    智慧马铃薯服务社区平台
+  </div>
+</div>
+<script src="../layui/layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+//JavaScript代码区域
+layui.use(['form', 'layedit', 'laydate'], function(){
+  var form = layui.form
+  ,layer = layui.layer
+  ,layedit = layui.layedit
+  ,laydate = layui.laydate;
+});
+</script>
+</body>
+</html>

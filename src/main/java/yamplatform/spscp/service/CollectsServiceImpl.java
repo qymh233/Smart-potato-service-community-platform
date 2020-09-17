@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yamplatform.spscp.mapper.CollectsMapper;
 import yamplatform.spscp.pojo.Collects;
+import yamplatform.spscp.pojo.PhotoLibrarys;
 import yamplatform.spscp.pojo.Topics;
 
 import java.util.List;
@@ -43,4 +44,17 @@ public class CollectsServiceImpl implements CollectsService{
         }
         return t;
     }
+    @Override
+    public int Count(Integer uid) {
+        int t=collectsMapper.Count(uid);
+        return t;
+    }
+
+    @Override
+    public List<Collects> Listpage(Integer page, Integer lim,Integer uid) {
+        page=(page-1)*lim;
+        List<Collects> photoLibrarysList=collectsMapper.Listpage(page,lim,uid);
+        return photoLibrarysList;
+    }
+
 }

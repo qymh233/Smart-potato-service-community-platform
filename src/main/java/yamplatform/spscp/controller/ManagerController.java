@@ -49,17 +49,15 @@ public class ManagerController {
     @RequestMapping("/usersList")
     @ResponseBody
     public Map<String,Object> usersList(Model model, Integer page, Integer limit){
-        List<Users> usersListSub;
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("code", 0);
-        List<Users> usersList=usersService.usersList();
+        List<Users> usersList=usersService.usersList(page,limit);
         if(usersList == null) {
             return result;
         }
-        Pages pages=new Pages();
-        usersListSub = (List<Users>) pages.listSub(usersList, page, limit);
-        result.put("data",usersListSub);
-        result.put("count",usersList.size());
+        int t=usersService.Count();
+        result.put("data",usersList);
+        result.put("count",t);
         return result;
     }
     //跳转修改用户信息页面
@@ -102,17 +100,15 @@ public class ManagerController {
     @RequestMapping("/linksList")
     @ResponseBody
     public Map<String,Object> linksList(Model model, Integer page, Integer limit){
-        List<Rellinks> linksListSub;
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("code", 0);
-        List<Rellinks> rellinksList=rellinksService.RellinksList();
+        List<Rellinks> rellinksList=rellinksService.Listpage(page,limit);
         if(rellinksList == null) {
             return result;
         }
-        Pages pages=new Pages();
-        linksListSub = (List<Rellinks>) pages.listSub(rellinksList, page, limit);
-        result.put("data",linksListSub);
-        result.put("count",rellinksList.size());
+        int count=rellinksService.Count();
+        result.put("data",rellinksList);
+        result.put("count",count);
         return result;
     }
 
@@ -120,17 +116,15 @@ public class ManagerController {
     @RequestMapping("/helpsList")
     @ResponseBody
     public Map<String,Object> helpsList(Model model, Integer page, Integer limit){
-        List<Helps> helpsListSub;
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("code", 0);
-        List<Helps> helpsList=helpsService.helpsList();
+        List<Helps> helpsList=helpsService.Listpage(page,limit);
         if(helpsList == null) {
             return result;
         }
-        Pages pages=new Pages();
-        helpsListSub = (List<Helps>) pages.listSub(helpsList, page, limit);
-        result.put("data",helpsListSub);
-        result.put("count",helpsList.size());
+        int count=helpsService.Count();
+        result.put("data",helpsList);
+        result.put("count",count);
         return result;
     }
 
@@ -138,17 +132,15 @@ public class ManagerController {
     @RequestMapping("/noticesList")
     @ResponseBody
     public Map<String,Object> noticesList(Model model, Integer page, Integer limit){
-        List<Notices> noticesListSub;
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("code", 0);
-        List<Notices> noticesList=noticesService.noticesList();
+        List<Notices> noticesList=noticesService.Listpage(page,limit);
         if(noticesList == null) {
             return result;
         }
-        Pages pages=new Pages();
-        noticesListSub = (List<Notices>) pages.listSub(noticesList, page, limit);
-        result.put("data",noticesListSub);
-        result.put("count",noticesList.size());
+        int count=noticesService.Count();
+        result.put("data",noticesList);
+        result.put("count",count);
         return result;
     }
 
@@ -156,17 +148,15 @@ public class ManagerController {
     @RequestMapping("/categorysList")
     @ResponseBody
     public Map<String,Object> categorysList(Model model, Integer page, Integer limit){
-        List<Categorys> categorysListSub;
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("code", 0);
-        List<Categorys> categorysList=categorysService.CategorysList();
+        List<Categorys> categorysList=categorysService.Listpage(page,limit);
         if(categorysList == null) {
             return result;
         }
-        Pages pages=new Pages();
-        categorysListSub = (List<Categorys>) pages.listSub(categorysList, page, limit);
-        result.put("data",categorysListSub);
-        result.put("count",categorysList.size());
+        int count=categorysService.Count();
+        result.put("data",categorysList);
+        result.put("count",count);
         return result;
     }
 
@@ -174,17 +164,15 @@ public class ManagerController {
     @RequestMapping("/photolibrarysList")
     @ResponseBody
     public Map<String,Object> photolibrarysList(Model model, Integer page, Integer limit){
-        List<PhotoLibrarys> photolibararysListSub;
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("code", 0);
-        List<PhotoLibrarys> photoLibrarysList=photoLibrarysService.PhotoLibrarysList();
+        List<PhotoLibrarys> photoLibrarysList=photoLibrarysService.Listpage(page,limit);
         if(photoLibrarysList == null) {
             return result;
         }
-        Pages pages=new Pages();
-        photolibararysListSub = (List<PhotoLibrarys>) pages.listSub(photoLibrarysList, page, limit);
-        result.put("data",photolibararysListSub);
-        result.put("count",photoLibrarysList.size());
+        int count=photoLibrarysService.Count();
+        result.put("data",photoLibrarysList);
+        result.put("count",count);
         return result;
     }
 
@@ -192,17 +180,15 @@ public class ManagerController {
     @RequestMapping("/topicsList")
     @ResponseBody
     public Map<String,Object> topicsList(Model model, Integer page, Integer limit){
-        List<Topics> topicsListSub;
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("code", 0);
-        List<Topics> topicsList=topicsService.TopicsList();
+        List<Topics> topicsList=topicsService.Listpage(page,limit);
         if(topicsList == null) {
             return result;
         }
-        Pages pages=new Pages();
-        topicsListSub = (List<Topics>) pages.listSub(topicsList, page, limit);
-        result.put("data",topicsListSub);
-        result.put("count",topicsList.size());
+        int count=topicsService.Count();
+        result.put("data",topicsList);
+        result.put("count",count);
         return result;
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yamplatform.spscp.mapper.HelpsMapper;
 import yamplatform.spscp.pojo.Helps;
+import yamplatform.spscp.pojo.Users;
 
 import java.util.List;
 
@@ -45,5 +46,18 @@ public class HelpsServiceImpl implements HelpsService{
     public int Delete(Integer id) {
         int t=helpsMapper.Delete(id);
         return t;
+    }
+
+    @Override
+    public int Count() {
+        int t=helpsMapper.Count();
+        return t;
+    }
+
+    @Override
+    public List<Helps> Listpage(Integer page, Integer lim) {
+        page=(page-1)*lim;
+        List<Helps> helpsList=helpsMapper.Listpage(page,lim);
+        return helpsList;
     }
 }

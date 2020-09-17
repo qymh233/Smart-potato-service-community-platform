@@ -1,6 +1,7 @@
 package yamplatform.spscp.service;
 
 import yamplatform.spscp.pojo.Categorys;
+import yamplatform.spscp.pojo.News;
 
 import java.util.List;
 
@@ -15,4 +16,8 @@ public interface CategorysService {
     public List<Categorys> CategorysList();
     //删除
     public int Delete(Integer id);
+    //总数
+    public int Count();
+    //分页
+    public List<Categorys> Listpage(Integer page, Integer lim);
 }

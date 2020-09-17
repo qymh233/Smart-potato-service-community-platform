@@ -13,7 +13,9 @@ public interface UsersService {
     //更新一条用户
     public int UpdateUsers(Users users);
     //查询所有用户
-    public List<Users> usersList();
+    public List<Users> usersList(Integer page,Integer limit);
     //删除用户
     public int DeleteUsers(Integer id);
+    //总数
+    public int Count();
 }

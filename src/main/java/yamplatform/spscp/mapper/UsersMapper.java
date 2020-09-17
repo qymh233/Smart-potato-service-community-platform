@@ -18,7 +18,9 @@ public interface UsersMapper {
     //更新
     public int UpdateUsers(@Param("users") Users users);
     //查询所有用户
-    public List<Users> usersList();
+    public List<Users> usersList(@Param("page")Integer page,@Param("lim")Integer lim);
     //删除用户
     public int DeleteUsers(@Param("id")Integer id);
+    //总数
+    public int Count();
 }

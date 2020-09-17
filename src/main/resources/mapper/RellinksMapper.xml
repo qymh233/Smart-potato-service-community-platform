@@ -29,4 +29,13 @@
 	<select id="RellinksList" resultMap="SelectAll">
     	select * from t_rellinks
   	</select>
+
+
+	<select id="Count" resultType="INTEGER">
+    	select count(*) from t_rellinks
+	</select>
+	<select id="Listpage" resultMap="SelectAll">
+    	select * from t_rellinks limit #{page},#{lim}
+	</select>
+
 </mapper>

@@ -23,4 +23,11 @@
 	<select id="CollectsList" parameterType="INTEGER" resultMap="SelectAll">
     	select * from t_collect where uid = #{uid} order by ctime desc
 	</select>
+
+	<select id="Count" resultType="INTEGER">
+    	select count(*) from t_collect where uid = #{uid}
+	</select>
+	<select id="Listpage" resultMap="SelectAll">
+    	select * from t_collect where uid = #{uid} order by ctime desc limit #{page},#{lim}
+	</select>
 </mapper>

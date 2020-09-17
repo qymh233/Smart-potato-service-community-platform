@@ -31,18 +31,16 @@ public class TypesController {
     @RequestMapping("/typesList")
     @ResponseBody
     public Map<String,Object> typesList(Model model, Integer page, Integer limit){
-        List<Types> typesListSub;
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("code", 0);
         Integer cid=(Integer) model.getAttribute("categoryID");
-        List<Types> typesList=typesService.typesListbycid(cid);
+        List<Types> typesList=typesService.Listpage(page,limit,cid);
         if(typesList == null) {
             return result;
         }
-        Pages pages=new Pages();
-        typesListSub = (List<Types>) pages.listSub(typesList, page, limit);
-        result.put("data",typesListSub);
-        result.put("count",typesList.size());
+        int count=typesService.Count(cid);
+        result.put("data",typesList);
+        result.put("count",count);
         return result;
     }
     //修改页面
@@ -89,7 +87,7 @@ public class TypesController {
         typesService.InsertTypes(type);
         return "views/Managershtml/Manager_types";
     }
-    //删除
+    //返回上一页
     @RequestMapping("/returnpage")
     public String returnpage(Model model){
         return "views/Managershtml/Manager_types";
