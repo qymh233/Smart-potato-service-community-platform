@@ -45,6 +45,10 @@ public class TopicsServiceImpl implements TopicsService{
     public int DeleteTopics(Integer id) {
         commentsService.DeleteComments(id);
         int t=topicsMapper.DeleteTopics(id);
+        //同时删除评论
+        if(t!=0){
+            commentsService.DeleteComments(t);
+        }
         return t;
     }
 
@@ -53,8 +57,8 @@ public class TopicsServiceImpl implements TopicsService{
         List<Topics> topicsList=topicsMapper.TopicsList();
         if(topicsList!=null){
             for(Topics t:topicsList){
-                List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
-                t.setCommentsList(commentsList);
+               // List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
+               // t.setCommentsList(commentsList);
                 Users user=usersService.SelectOnebyid(t.getUid());
                 t.setUser(user);
             }
@@ -67,8 +71,8 @@ public class TopicsServiceImpl implements TopicsService{
         List<Topics> topicsList=topicsMapper.TopicsListbyuid(uid);
         if(topicsList!=null){
             for(Topics t:topicsList){
-                List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
-                t.setCommentsList(commentsList);
+                //List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
+                //t.setCommentsList(commentsList);
                 Users user=usersService.SelectOnebyid(t.getUid());
                 t.setUser(user);
             }
@@ -81,8 +85,8 @@ public class TopicsServiceImpl implements TopicsService{
         List<Topics> topicsList=topicsMapper.searchTopicsList(question);
         if(topicsList!=null){
             for(Topics t:topicsList){
-                List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
-                t.setCommentsList(commentsList);
+               // List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
+               // t.setCommentsList(commentsList);
                 Users user=usersService.SelectOnebyid(t.getUid());
                 t.setUser(user);
             }
@@ -96,8 +100,8 @@ public class TopicsServiceImpl implements TopicsService{
         List<Topics> topicsList=topicsMapper.TopicsListbyxin();
         if(topicsList!=null){
             for(Topics t:topicsList){
-                List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
-                t.setCommentsList(commentsList);
+                //List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
+                //t.setCommentsList(commentsList);
                 Users user=usersService.SelectOnebyid(t.getUid());
                 t.setUser(user);
             }
@@ -110,8 +114,8 @@ public class TopicsServiceImpl implements TopicsService{
         List<Topics> topicsList=topicsMapper.TopicsListbyxin_ten();
         if(topicsList!=null){
             for(Topics t:topicsList){
-                List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
-                t.setCommentsList(commentsList);
+                //List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
+               // t.setCommentsList(commentsList);
                 Users user=usersService.SelectOnebyid(t.getUid());
                 t.setUser(user);
             }
@@ -124,8 +128,8 @@ public class TopicsServiceImpl implements TopicsService{
         List<Topics> topicsList=topicsMapper.TopicsListbyre();
         if(topicsList!=null){
             for(Topics t:topicsList){
-                List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
-                t.setCommentsList(commentsList);
+               // List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
+               // t.setCommentsList(commentsList);
                 Users user=usersService.SelectOnebyid(t.getUid());
                 t.setUser(user);
             }
@@ -138,8 +142,8 @@ public class TopicsServiceImpl implements TopicsService{
         List<Topics> topicsList=topicsMapper.TopicsListbyre_ten();
         if(topicsList!=null){
             for(Topics t:topicsList){
-                List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
-                t.setCommentsList(commentsList);
+                //List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
+               // t.setCommentsList(commentsList);
                 Users user=usersService.SelectOnebyid(t.getUid());
                 t.setUser(user);
             }
@@ -152,8 +156,8 @@ public class TopicsServiceImpl implements TopicsService{
         List<Topics> topicsList=topicsMapper.TopicsListbyjin();
         if(topicsList!=null){
             for(Topics t:topicsList){
-                List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
-                t.setCommentsList(commentsList);
+                //List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
+                //t.setCommentsList(commentsList);
                 Users user=usersService.SelectOnebyid(t.getUid());
                 t.setUser(user);
             }
@@ -166,8 +170,8 @@ public class TopicsServiceImpl implements TopicsService{
         List<Topics> topicsList=topicsMapper.TopicsListbyjin_ten();
         if(topicsList!=null){
             for(Topics t:topicsList){
-                List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
-                t.setCommentsList(commentsList);
+               // List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
+               // t.setCommentsList(commentsList);
                 Users user=usersService.SelectOnebyid(t.getUid());
                 t.setUser(user);
             }

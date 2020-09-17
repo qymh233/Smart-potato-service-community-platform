@@ -26,7 +26,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/Topics")
-@SessionAttributes({"user","manager","mypagestat"})
+@SessionAttributes({"user","manager","mypagestat","myquestion"})
 public class TopicsController {
     @Autowired
     TopicsService topicsService;
@@ -34,7 +34,7 @@ public class TopicsController {
     CollectsService collectsService;
     @Autowired
     NewsService newsService;
-    String myquestion="";//搜索
+   // String myquestion="";//搜索
     //跳转论坛页面
     @RequestMapping("/Topics")
     public String Topics(Model model, @Param("page")String page){
@@ -177,7 +177,8 @@ public class TopicsController {
     //跳转查询结果
    @RequestMapping("/findSignIn")
    public String findSignIn(Model model,@Param("question")String question){
-       myquestion=question;
+       String myquestion=question;
+       model.addAttribute("myquestion",myquestion);
        model.addAttribute("question",question);
        return "views/Topicshtml/findSignIn";
    }
@@ -188,6 +189,7 @@ public class TopicsController {
         List<Topics> topicsListSub;
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("code", 0);
+        String myquestion=(String) model.getAttribute("myquestion");
         List<Topics> topicsList=topicsService.searchTopicsList(myquestion);
         if(topicsList == null) {
             return result;
