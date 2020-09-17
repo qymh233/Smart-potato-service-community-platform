@@ -30,17 +30,15 @@ public class PhotoLibrarysController {
     @RequestMapping("/photoLibrarysList")
     @ResponseBody
     public Map<String,Object> photoLibrarysList(Model model,Integer page, Integer limit){
-        List<PhotoLibrarys> photoLibrarysListSub;
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("code", 0);
-        List<PhotoLibrarys> photoLibrarysList=photoLibrarysService.PhotoLibrarysList();
+        List<PhotoLibrarys> photoLibrarysList=photoLibrarysService.Listpage(page,limit);
         if(photoLibrarysList == null) {
             return result;
         }
-        Pages pages=new Pages();
-        photoLibrarysListSub = (List<PhotoLibrarys>) pages.listSub(photoLibrarysList, page, limit);
-        result.put("data",photoLibrarysListSub);
-        result.put("count",photoLibrarysList.size());
+        int count=photoLibrarysService.Count();
+        result.put("data",photoLibrarysList);
+        result.put("count",count);
         return result;
     }
 //查看具体内容

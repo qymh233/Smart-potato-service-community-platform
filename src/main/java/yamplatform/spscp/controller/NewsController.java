@@ -32,18 +32,16 @@ public class NewsController {
     @RequestMapping("/newsList")
     @ResponseBody
     public Map<String,Object> newsList(Model model, Integer page, Integer limit){
-        List<News> newsListSub;
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("code", 0);
         Users user=(Users) model.getAttribute("user");
-        List<News> newsList=newsService.NewsList(user.getId());
+        List<News> newsList=newsService.Listpage(page,limit,user.getId());
         if(newsList == null) {
             return result;
         }
-        Pages pages=new Pages();
-        newsListSub = (List<News>) pages.listSub(newsList, page, limit);
-        result.put("data",newsListSub);
-        result.put("count",newsList.size());
+        int count=newsService.Count(user.getId());
+        result.put("data",newsList);
+        result.put("count",count);
         return result;
     }
 }

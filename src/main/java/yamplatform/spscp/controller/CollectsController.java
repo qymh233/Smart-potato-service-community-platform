@@ -31,18 +31,16 @@ public class CollectsController {
     @RequestMapping("/collectsList")
     @ResponseBody
     public Map<String,Object> collectsList(Model model, Integer page, Integer limit){
-        List<Collects> collectsListSub;
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("code", 0);
         Users user=(Users) model.getAttribute("user");
-        List<Collects> collectsList=collectsService.CollectsList(user.getId());
+        List<Collects> collectsList=collectsService.Listpage(page,limit, user.getId());
         if(collectsList == null) {
             return result;
         }
-        Pages pages=new Pages();
-        collectsListSub = (List<Collects>) pages.listSub(collectsList, page, limit);
-        result.put("data",collectsListSub);
-        result.put("count",collectsList.size());
+        int count=collectsService.Count(user.getId());
+        result.put("data",collectsList);
+        result.put("count",count);
         return result;
     }
     //删除
