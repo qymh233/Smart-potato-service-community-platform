@@ -123,8 +123,8 @@ layui.use(['form', 'layedit', 'laydate'], function(){
   //自定义验证规则
   form.verify({
     title: function(value){
-      if(value.length < 5){
-        return '标题至少得5个字符哦';
+      if(value.length < 3){
+        return '标题至少得3个字符哦';
       }
     }
     ,content: function(value){

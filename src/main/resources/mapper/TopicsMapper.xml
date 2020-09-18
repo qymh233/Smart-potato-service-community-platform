@@ -37,8 +37,11 @@
     	select * from t_topic
   	</select>
 	<select id="TopicsListbyuid" resultMap="SelectAll">
-    	select * from t_topic where uid = #{uid}
+    	select * from t_topic where uid = #{uid} limit #{page},#{lim}
   	</select>
+	<select id="Countbyuid" resultType="INTEGER">
+    	select count(*) from t_topic where uid = #{uid}
+	</select>
 	<select id="searchTopicsList" resultMap="SelectAll">
     	select * from t_topic where title like "%"#{question,jdbcType=VARCHAR}"%"
   	</select>

@@ -17,7 +17,9 @@ public interface TopicsService {
     //查询列表
     public List<Topics>  TopicsList();
     //查询列表byuid
-    public List<Topics>  TopicsListbyuid(Integer uid);
+    public List<Topics>  TopicsListbyuid(Integer page, Integer lim,Integer uid);
+
+    public int Countbyuid(Integer id);
     //查询列表
     public List<Topics>  searchTopicsList(String question);
     //条件查询

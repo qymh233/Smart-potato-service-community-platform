@@ -68,8 +68,8 @@ public class TopicsServiceImpl implements TopicsService{
     }
 
     @Override
-    public List<Topics> TopicsListbyuid(Integer uid) {
-        List<Topics> topicsList=topicsMapper.TopicsListbyuid(uid);
+    public List<Topics> TopicsListbyuid(Integer page, Integer lim,Integer uid) {
+        List<Topics> topicsList=topicsMapper.TopicsListbyuid(page,lim,uid);
         if(topicsList!=null){
             for(Topics t:topicsList){
                 //List<Comments> commentsList=commentsService.CommentsListbytid(t.getId());
@@ -81,6 +81,11 @@ public class TopicsServiceImpl implements TopicsService{
         return topicsList;
     }
 
+    public int Countbyuid(Integer uid){
+        int t=topicsMapper.Countbyuid(uid);
+        return t;
+
+    }
     @Override
     public List<Topics> searchTopicsList(String question) {
         List<Topics> topicsList=topicsMapper.searchTopicsList(question);

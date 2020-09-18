@@ -61,23 +61,39 @@ public class TopicsController {
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("code", 0);
         List<Topics> topicsList;
+        int count=0;
         String mypagestat=(String) model.getAttribute("mypagestat");
-        if(mypagestat.equals("xin")){
-            topicsList=topicsService.TopicsListbyxin_ten();
-        }else if(mypagestat.equals("jin")){
-           topicsList=topicsService.TopicsListbyjin_ten();
-        }else if(mypagestat.equals("re")){
-            topicsList=topicsService.TopicsListbyre_ten();
-        }else {
-            topicsList=topicsService.TopicsList();
-        }
-        if(topicsList == null) {
-            return result;
-        }
         Pages pages=new Pages();
-        topicsListSub = (List<Topics>) pages.listSub(topicsList, page, limit);
-        result.put("data",topicsListSub);
-        result.put("count",topicsList.size());
+        if(mypagestat.equals("xin")){
+            topicsListSub=topicsService.TopicsListbyxin_ten();
+            if(topicsListSub == null) {
+                return result;
+            }
+            count=10;
+            topicsList = (List<Topics>) pages.listSub(topicsListSub, page, limit);
+        }else if(mypagestat.equals("jin")){
+            topicsListSub=topicsService.TopicsListbyjin_ten();
+            if(topicsListSub == null) {
+                return result;
+            }
+            count=10;
+            topicsList = (List<Topics>) pages.listSub(topicsListSub, page, limit);
+        }else if(mypagestat.equals("re")){
+            topicsListSub=topicsService.TopicsListbyre_ten();
+            if(topicsListSub == null) {
+                return result;
+            }
+            count=10;
+            topicsList = (List<Topics>) pages.listSub(topicsListSub, page, limit);
+        }else {
+            topicsList=topicsService.Listpage(page,limit);
+            if(topicsList == null) {
+                return result;
+            }
+            count=topicsService.Count();
+        }
+        result.put("data",topicsList);
+        result.put("count",count);
         return result;
     }
 //跳转上传帖子页面
@@ -209,18 +225,16 @@ public class TopicsController {
     @RequestMapping("/per_topicsList")
     @ResponseBody
     public Map<String,Object> per_topicsList(Model model,Integer page, Integer limit){
-        List<Topics> topicsListSub;
         Map<String,Object> result = new HashMap<String,Object>();
         result.put("code", 0);
         Users user=(Users) model.getAttribute("user");
-        List<Topics> topicsList=topicsService.TopicsListbyuid(user.getId());
+        List<Topics> topicsList=topicsService.TopicsListbyuid(page,limit,user.getId());
         if(topicsList == null) {
             return result;
         }
-        Pages pages=new Pages();
-        topicsListSub = (List<Topics>) pages.listSub(topicsList, page, limit);
-        result.put("data",topicsListSub);
-        result.put("count",topicsList.size());
+        int count=topicsService.Countbyuid(user.getId());
+        result.put("data",topicsList);
+        result.put("count",count);
         return result;
     }
     //用户查看帖子

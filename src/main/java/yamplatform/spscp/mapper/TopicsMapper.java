@@ -25,7 +25,9 @@ public interface TopicsMapper {
     //查询列表
     public List<Topics>  searchTopicsList(@Param("question") String question);
     //查询列表byuid
-    public List<Topics>  TopicsListbyuid(@Param("uid") Integer uid);
+    public List<Topics>  TopicsListbyuid(@Param("page")Integer page, @Param("lim")Integer lim,@Param("uid") Integer uid);
+
+    public  int Countbyuid(@Param("uid")Integer uid);
     //条件查询
     //时间排序
     public List<Topics>  TopicsListbyxin();
