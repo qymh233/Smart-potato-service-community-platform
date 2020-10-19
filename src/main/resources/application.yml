@@ -17,7 +17,7 @@ upload:
     accessKey: Riwkhl0HEjK_PCWBsH8sAn9GyD3ZDoP6oQ2z3xHS
     secretKey: M1DYrx3PlNJDsFipKXpSugrPSThe4_pCNVyTMY1_
     bucket: potatopic
-    domain: qgmi75d9d.hb-bkt.clouddn.com
+    domain: cdn.potatopic.top
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
