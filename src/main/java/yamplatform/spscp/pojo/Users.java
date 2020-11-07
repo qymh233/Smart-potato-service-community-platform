@@ -10,7 +10,7 @@ public class Users {
     private String password;
     private String nickname; // 昵称
     private String sex = "男";
-    private String picture = "http://localhost:8080/img/Avatar/default.jpg"; // 头像
+    private String picture = "http://cdn.potatopic.top/face_default.jpg"; // 头像
     private String email = "";
     private String comefrom = ""; // 来自
     private String introduction = ""; // 个人简介
