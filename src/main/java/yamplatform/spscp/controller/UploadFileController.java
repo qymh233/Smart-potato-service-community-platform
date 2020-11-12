@@ -31,4 +31,15 @@ public class UploadFileController {
         map.put("url",res);
         return map;
     }
+    @RequestMapping("/rich")
+    @ResponseBody
+    public Map<String,Object> uploadFileRich(Model model, @RequestParam("file") MultipartFile file) {
+        // 上传到七牛云
+        UploadFile uploadFile = new UploadFileQiniu(uploadProperties.getQiniu());
+        String res=uploadFile.uploadFile(file);
+        res="http://"+res;
+        Map map = new HashMap<String,Object>();
+        map.put("location",res);
+        return map;
+    }
 }

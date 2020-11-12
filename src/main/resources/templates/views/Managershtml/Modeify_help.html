@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>帮助管理</title>
   <link rel="stylesheet" href="../../layui/css/layui.css">
+  <script src="https://cdn.bootcdn.net/ajax/libs/tinymce/5.5.1/tinymce.min.js"></script>
+  <script>
+    tinymce.init({
+      selector: '#mytextarea',
+      plugins: 'image',
+      toolbar: 'image',
+      height:500,
+      images_upload_url: '/upload/rich',
+    });
+  </script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -68,7 +78,7 @@
                 <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入新题目" class="layui-input" style="width: 200px;">
               </div>
             </div>
-            <textarea name="cont" id="demo" style="display: none;" th:text="${manager_helps.getContent()}"></textarea>
+            <textarea name="cont" id="mytextarea"  th:text="${manager_helps.getContent()}"></textarea>
             <center><button type="submit" formaction="/Helps/Modeify_help" class="layui-btn layui-btn-normal">确认修改</button></center>
           </form>
         </div>
@@ -84,34 +94,12 @@
 </div>
 <script src="../layui/layui.js"></script>
 <script>
-  //编辑器
-  layui.use('layedit', function(){
-    var layedit = layui.layedit;
-    layedit.build('demo');   //建立编辑器
-    layedit.set({
-      //暴露layupload参数设置接口 --详细查看layupload参数说明
-      tool: [
-        'html', 'code', 'strong',  'underline', 'del', 'addhr', '|', 'fontFomatt', 'colorpicker', 'face'
-        , '|', 'left', 'center', 'right', '|', 'link', 'unlink',
-        , '|', 'fullScreen'
-      ]
-      ,height: 500, //设置编辑器高度
-    });
-  });
-</script>
-<script>
   //JavaScript代码区域
-  layui.use(['form', 'layedit', 'laydate'], function(){
+  layui.use(['form', 'laydate'], function(){
     var form = layui.form
             ,layer = layui.layer
-            ,layedit = layui.layedit
             ,laydate = layui.laydate;
   });
-  var layedit = layui.layedit;
-  var index= layedit.build('demo',{
-  });
-  var content = layedit.getContent(index);
-  alert(content);
 </script>
 <script>
   //JavaScript代码区域
