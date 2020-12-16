@@ -5,6 +5,7 @@ public class Rellinks {
     private Integer id;
     private String title;//题目
     private String url;//连接
+    private String cont=null;//内容
 
     public Integer getId() {
         return id;
@@ -30,12 +31,21 @@ public class Rellinks {
         this.url = url;
     }
 
+    public String getCont() {
+        return cont;
+    }
+
+    public void setCont(String cont) {
+        this.cont = cont;
+    }
+
     @Override
     public String toString() {
-        return "rellinks{" +
+        return "Rellinks{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", url='" + url + '\'' +
+                ", cont='" + cont + '\'' +
                 '}';
     }
 }

@@ -32,13 +32,16 @@ public class RellinksController {
         return "views/Managershtml/Modeify_link";
     }
     @RequestMapping("/Modeify_link")
-    public String Modeify_link(Model model,@Param("title") String title,@Param("url") String url){
+    public String Modeify_link(Model model,@Param("title") String title,@Param("url") String url,@Param("cont") String cont){
         Rellinks rellink=(Rellinks) model.getAttribute("manager_links");
         if(title!=null&&!title.equals("")){
             rellink.setTitle(title);
         }
         if(url!=null&&!url.equals("")){
             rellink.setUrl(url);
+        }
+        if(cont!=null&&!cont.equals("")){
+            rellink.setCont(cont);
         }
         rellinksService.UpdateRellinks(rellink);
         return "views/Managershtml/Manager_links";
@@ -55,10 +58,13 @@ public class RellinksController {
         return "views/Managershtml/add_link";
     }
     @RequestMapping("/add_link")
-    public String add_link(Model model,@Param("title") String title,@Param("url") String url){
+    public String add_link(Model model,@Param("title") String title,@Param("url") String url,@Param("cont") String cont){
         Rellinks rellink=new Rellinks();
         rellink.setTitle(title);
         rellink.setUrl(url);
+        if(cont!=null&&!cont.equals("")){
+            rellink.setCont(cont);
+        }
         rellinksService.InsertRellinks(rellink);
         return "views/Managershtml/Manager_links";
     }

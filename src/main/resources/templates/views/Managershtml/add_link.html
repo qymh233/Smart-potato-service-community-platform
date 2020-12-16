@@ -71,6 +71,12 @@
                 <input type="text" id="url" name="url" lay-verify="title" autocomplete="off" placeholder="请输入链接" class="layui-input" style="width: 200px;">
               </div>
             </div>
+            <div class="layui-form-item layui-form-text">
+              <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">内容</label>
+              <div class="layui-input-block">
+                <textarea name="cont"  placeholder="请输入内容" class="layui-textarea" ></textarea>
+              </div>
+            </div>
             <center><button type="submit" formaction="/Rellinks/add_link" class="layui-btn layui-btn-normal" onclick='return checkpasswd()'>确认添加</button></center>
           </form>
         </div>

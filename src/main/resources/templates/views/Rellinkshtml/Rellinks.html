@@ -86,6 +86,7 @@
     <i class="layui-icon layui-timeline-axis" ></i>
     <div class="layui-timeline-content layui-text">
       <div class="layui-timeline-title"><a th:href="${r.getUrl()}" target="_blank"> <span style="color: black;font-size: 30px" th:text="${r.getTitle()}"></span></a></div>
+      <div class="layui-colla-content layui-show" th:if="${r.getCont()} ne null "><span th:text="${r.getCont()}"></span></div>
     </div>
   </li>
 </ul>
