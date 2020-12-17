@@ -42,13 +42,16 @@
   <div class="layui-side layui-bg-black">
     <div class="layui-side-scroll">
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='登陆与注册')}">登陆与注册</a></li>
-        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='密码注意事项')}">密码注意事项</a></li>
-        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='如何发表帖子')}">如何发表帖子</a></li>
-        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='如何评论帖子')}">如何评论帖子</a></li>
-        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='联系我们')}">联系我们</a></li>
-      </ul>
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test" th:each="he: ${Helpslist}">
+        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title=${he.getTitle()})}" th:text="${he.getTitle()}"></a></li>
+   </ul>
+<!--      <ul class="layui-nav layui-nav-tree"  lay-filter="test">-->
+<!--        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='登陆与注册')}">登陆与注册</a></li>-->
+<!--        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='密码注意事项')}">密码注意事项</a></li>-->
+<!--        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='如何发表帖子')}">如何发表帖子</a></li>-->
+<!--        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='如何评论帖子')}">如何评论帖子</a></li>-->
+<!--        <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='联系我们')}">联系我们</a></li>-->
+<!--      </ul>-->
     </div>
   </div>
   

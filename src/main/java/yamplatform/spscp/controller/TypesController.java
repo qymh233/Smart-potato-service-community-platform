@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/Types")
-@SessionAttributes({"user","manager","manager_types","categoryID","categoryName"})
+@SessionAttributes({"user","manager","manager_types","categoryID","categoryName","Helpslist","Noticelist"})
 public class TypesController {
     @Autowired
     TypesService typesService;

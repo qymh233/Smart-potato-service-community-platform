@@ -9,17 +9,21 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import yamplatform.spscp.pojo.Helps;
 import yamplatform.spscp.service.HelpsService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/Helps")
-@SessionAttributes({"user","manager","manager_helps"})
+@SessionAttributes({"user","manager","manager_helps","Helpslist"})
 public class HelpsController {
     @Autowired
     HelpsService helpsService;
-//跳转帮助页面
+    //跳转帮助页面
     @RequestMapping("/Help_Landing_registration")
     public String Help_Landing_registration(@Param("title") String title, Model model){
         Helps helps=helpsService.SelectOne(title);
         model.addAttribute("helps",helps);
+        List<Helps> helpsList=helpsService.helpsList();
+        model.addAttribute("Helpslist",helpsList);
         return "views/Helpshtml/Help_Landing_registration";
     }
 
@@ -29,6 +33,8 @@ public class HelpsController {
     public String Modeify(Model model,@Param("title") String title ){
         Helps helps=helpsService.SelectOne(title);
         model.addAttribute("manager_helps",helps);
+        List<Helps> helpsList=helpsService.helpsList();
+        model.addAttribute("Helpslist",helpsList);
         return "views/Managershtml/Modeify_help";
     }
     @RequestMapping("/Modeify_help")
@@ -41,12 +47,16 @@ public class HelpsController {
             help.setContent(cont);
         }
         helpsService.UpdateHelps(help);
+        List<Helps> helpsList=helpsService.helpsList();
+        model.addAttribute("Helpslist",helpsList);
         return "views/Managershtml/Manager_helps";
     }
     //删除
     @RequestMapping("/delete")
     public String delete(Model model,@Param("id") Integer id){
         helpsService.Delete(id);
+        List<Helps> helpsList=helpsService.helpsList();
+        model.addAttribute("Helpslist",helpsList);
         return "views/Managershtml/Manager_helps";
     }
     //添加页面
@@ -60,6 +70,8 @@ public class HelpsController {
         help.setTitle(title);
         help.setContent(cont);
         helpsService.InsertHelp(help);
+        List<Helps> helpsList=helpsService.helpsList();
+        model.addAttribute("Helpslist",helpsList);
         return "views/Managershtml/Manager_helps";
     }
 }

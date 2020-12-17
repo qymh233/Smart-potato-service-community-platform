@@ -47,12 +47,13 @@
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
         <li class="layui-nav-item layui-nav-itemed">
           <a href="javascript:;">帮助</a>
-          <dl class="layui-nav-child">
-            <dd><a th:href="@{/Helps/Help_Landing_registration(title='登陆与注册')}">登陆与注册</a></dd>
-            <dd><a th:href="@{/Helps/Help_Landing_registration(title='密码注意事项')}">密码注意事项</a></dd>
-            <dd><a th:href="@{/Helps/Help_Landing_registration(title='如何发表帖子')}">如何发表帖子</a></dd>
-            <dd><a th:href="@{/Helps/Help_Landing_registration(title='如何评论帖子')}">如何评论帖子</a></dd>
-            <dd><a th:href="@{/Helps/Help_Landing_registration(title='联系我们')}">联系我们</a></dd>
+          <dl class="layui-nav-child" th:each="he: ${Helpslist}">
+            <dd><a th:href="@{/Helps/Help_Landing_registration(title=${he.getTitle()})}" th:text="${he.getTitle()}"></a></dd>
+<!--            <dd><a th:href="@{/Helps/Help_Landing_registration(title='登陆与注册')}">登陆与注册</a></dd>-->
+<!--            <dd><a th:href="@{/Helps/Help_Landing_registration(title='密码注意事项')}">密码注意事项</a></dd>-->
+<!--            <dd><a th:href="@{/Helps/Help_Landing_registration(title='如何发表帖子')}">如何发表帖子</a></dd>-->
+<!--            <dd><a th:href="@{/Helps/Help_Landing_registration(title='如何评论帖子')}">如何评论帖子</a></dd>-->
+<!--            <dd><a th:href="@{/Helps/Help_Landing_registration(title='联系我们')}">联系我们</a></dd>-->
           </dl>
         </li>
       </ul>

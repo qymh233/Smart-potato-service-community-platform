@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import yamplatform.spscp.pojo.Notices;
 import yamplatform.spscp.service.NoticesService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/Notices")
-@SessionAttributes({"user","manager","manager_notices"})
+@SessionAttributes({"user","manager","manager_notices","Noticelist"})
 public class NoticesController {
     @Autowired
     NoticesService noticesService;
@@ -20,6 +22,8 @@ public class NoticesController {
     public String Notice_Privacy_copyright(@Param("title") String title, Model model){
         Notices notice=noticesService.SelectOne(title);
         model.addAttribute("notice",notice);
+        List<Notices> noticesList=noticesService.noticesList();
+        model.addAttribute("Noticelist",noticesList);
         return "views/Noticeshtml/Notice_Privacy_copyright";
     }
 
@@ -29,6 +33,8 @@ public class NoticesController {
     public String Modeify(Model model,@Param("title") String title ){
         Notices notice=noticesService.SelectOne(title);
         model.addAttribute("manager_notices",notice);
+        List<Notices> noticesList=noticesService.noticesList();
+        model.addAttribute("Noticelist",noticesList);
         return "views/Managershtml/Modeify_notice";
     }
     @RequestMapping("/Modeify_notice")
@@ -41,12 +47,16 @@ public class NoticesController {
             notice.setAnnouncement(cont);
         }
         noticesService.UpdateNotice(notice);
+        List<Notices> noticesList=noticesService.noticesList();
+        model.addAttribute("Noticelist",noticesList);
         return "views/Managershtml/Manager_notices";
     }
     //删除
     @RequestMapping("/delete")
     public String delete(Model model,@Param("id") Integer id){
         noticesService.Delete(id);
+        List<Notices> noticesList=noticesService.noticesList();
+        model.addAttribute("Noticelist",noticesList);
         return "views/Managershtml/Manager_notices";
     }
     //添加页面
@@ -60,6 +70,8 @@ public class NoticesController {
         notice.setTitle(title);
         notice.setAnnouncement(cont);
         noticesService.InsertNotice(notice);
+        List<Notices> noticesList=noticesService.noticesList();
+        model.addAttribute("Noticelist",noticesList);
         return "views/Managershtml/Manager_notices";
     }
 }

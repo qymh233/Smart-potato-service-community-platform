@@ -44,12 +44,13 @@
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
         <li class="layui-nav-item layui-nav-itemed">
           <a href="javascript:;">公告</a>
-          <dl class="layui-nav-child">
-            <dd><a th:href="@{/Notices/Notice_Privacy_copyright(title='隐私和版权')}">隐私和版权</a></dd>
-            <dd><a th:href="@{/Notices/Notice_Privacy_copyright(title='系统测试')}">社区平台测试</a></dd>
-            <dd><a th:href="@{/Notices/Notice_Privacy_copyright(title='反馈作者')}">反馈作者</a></dd>
-            <dd><a th:href="@{/Notices/Notice_Privacy_copyright(title='关于社区')}">关于社区</a></dd>
-            <dd><a th:href="@{/Notices/Notice_Privacy_copyright(title='关于作者')}">关于作者</a></dd>
+          <dl class="layui-nav-child" th:each="notice: ${Noticelist}">
+            <dd><a th:href="@{/Notices/Notice_Privacy_copyright(title=${notice.getTitle()})}" th:text="${notice.getTitle()}"></a></dd>
+<!--            <dd><a th:href="@{/Notices/Notice_Privacy_copyright(title='隐私和版权')}">隐私和版权</a></dd>-->
+<!--            <dd><a th:href="@{/Notices/Notice_Privacy_copyright(title='系统测试')}">社区平台测试</a></dd>-->
+<!--            <dd><a th:href="@{/Notices/Notice_Privacy_copyright(title='反馈作者')}">反馈作者</a></dd>-->
+<!--            <dd><a th:href="@{/Notices/Notice_Privacy_copyright(title='关于社区')}">关于社区</a></dd>-->
+<!--            <dd><a th:href="@{/Notices/Notice_Privacy_copyright(title='关于作者')}">关于作者</a></dd>-->
           </dl>
         </li>
       </ul>
@@ -62,12 +63,13 @@
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
         <li class="layui-nav-item layui-nav-itemed">
           <a href="javascript:;">帮助</a>
-          <dl class="layui-nav-child">
-            <dd><a th:href="@{/Helps/Help_Landing_registration(title='登陆与注册')}">登陆与注册</a></dd>
-            <dd><a th:href="@{/Helps/Help_Landing_registration(title='密码注意事项')}">密码注意事项</a></dd>
-            <dd><a th:href="@{/Helps/Help_Landing_registration(title='如何发表帖子')}">如何发表帖子</a></dd>
-            <dd><a th:href="@{/Helps/Help_Landing_registration(title='如何评论帖子')}">如何评论帖子</a></dd>
-            <dd><a th:href="@{/Helps/Help_Landing_registration(title='联系我们')}">联系我们</a></dd>
+          <dl class="layui-nav-child" th:each="he: ${Helpslist}">
+            <dd><a th:href="@{/Helps/Help_Landing_registration(title=${he.getTitle()})}" th:text="${he.getTitle()}"></a></dd>
+<!--            <dd><a th:href="@{/Helps/Help_Landing_registration(title='登陆与注册')}">登陆与注册</a></dd>-->
+<!--            <dd><a th:href="@{/Helps/Help_Landing_registration(title='密码注意事项')}">密码注意事项</a></dd>-->
+<!--            <dd><a th:href="@{/Helps/Help_Landing_registration(title='如何发表帖子')}">如何发表帖子</a></dd>-->
+<!--            <dd><a th:href="@{/Helps/Help_Landing_registration(title='如何评论帖子')}">如何评论帖子</a></dd>-->
+<!--            <dd><a th:href="@{/Helps/Help_Landing_registration(title='联系我们')}">联系我们</a></dd>-->
           </dl>
         </li>
       </ul>

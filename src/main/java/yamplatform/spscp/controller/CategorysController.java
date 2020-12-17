@@ -13,7 +13,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/Categorys")
-@SessionAttributes({"user","manager","manager_categorys","categoryID","categoryName"})
+@SessionAttributes({"user","manager","manager_categorys","categoryID","categoryName","Helpslist","Noticelist"})
 public class CategorysController {
     @Autowired
     CategorysService categorysService;

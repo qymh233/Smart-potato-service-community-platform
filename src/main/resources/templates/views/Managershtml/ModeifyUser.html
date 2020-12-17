@@ -61,13 +61,13 @@
           <form class="layui-form" method="post">
             <div class="layui-form-item">
               <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">用户姓名</label>
-              <label class="layui-form-label">
+              <label class="layui-form-mid">
                 <span th:text="${manager_user.getUsername()}"></span>
               </label>
             </div>
             <div class="layui-form-item">
               <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">昵称</label>
-              <label class="layui-form-label">
+              <label class="layui-form-mid">
                 <span th:text="${manager_user.getNickname()}"></span>
               </label>
               <div class="layui-input-block">
@@ -76,7 +76,7 @@
             </div>
             <div class="layui-form-item">
               <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">密码</label>
-              <label class="layui-form-label">
+              <label class="layui-form-mid">
                 <span th:text="${manager_user.getPassword()}"></span>
               </label>
               <div class="layui-input-block">
@@ -92,7 +92,7 @@
             </div>
             <div class="layui-form-item">
               <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">邮箱</label>
-              <label class="layui-form-label">
+              <label class="layui-form-mid">
                 <span th:text="${manager_user.getEmail()}"></span>
               </label>
               <div class="layui-input-block">
@@ -101,7 +101,7 @@
             </div>
             <div class="layui-form-item">
               <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">职业</label>
-              <label class="layui-form-label">
+              <label class="layui-form-mid">
                 <span th:text="${manager_user.getProfession()}"></span>
               </label>
               <div class="layui-input-block">
@@ -110,7 +110,7 @@
             </div>
             <div class="layui-form-item">
               <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">现居地</label>
-              <label class="layui-form-label">
+              <label class="layui-form-mid">
                 <span th:text="${manager_user.getComefrom()}"></span>
               </label>
               <div class="layui-input-block">
@@ -119,8 +119,7 @@
             </div>
             <div class="layui-form-item">
               <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">个人简介</label>
-              <br/>
-              <br/>
+
               <div class="layui-input-block">
                 <textarea name="introduction" class="layui-textarea" placeholder="请输入内容"></textarea>
               </div>

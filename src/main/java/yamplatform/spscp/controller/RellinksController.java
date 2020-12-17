@@ -13,7 +13,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/Rellinks")
-@SessionAttributes({"user","manager_links","manager"})
+@SessionAttributes({"user","manager_links","manager","Helpslist","Noticelist"})
 public class RellinksController {
     @Autowired
     RellinksService rellinksService;

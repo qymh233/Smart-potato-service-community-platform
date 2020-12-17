@@ -14,7 +14,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/LiveMsgs")
-@SessionAttributes({"user"})
+@SessionAttributes({"user","Helpslist"})
 public class LiveMsgsController {
     @Autowired
     LiveMsgsService liveMsgsService;

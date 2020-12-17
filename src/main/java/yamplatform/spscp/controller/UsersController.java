@@ -6,8 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import yamplatform.spscp.pojo.Helps;
+import yamplatform.spscp.pojo.Notices;
 import yamplatform.spscp.pojo.Topics;
 import yamplatform.spscp.pojo.Users;
+import yamplatform.spscp.service.HelpsService;
+import yamplatform.spscp.service.NoticesService;
 import yamplatform.spscp.service.TopicsService;
 import yamplatform.spscp.service.UsersService;
 
@@ -18,12 +22,16 @@ import java.util.List;
 * */
 @Controller
 @RequestMapping("Users")
-@SessionAttributes({"user"})
+@SessionAttributes({"user","Helpslist","Noticelist"})
 public class UsersController {
     @Autowired
     UsersService usersService;
     @Autowired
     TopicsService topicsService;
+    @Autowired
+    HelpsService helpsService;
+    @Autowired
+    NoticesService noticesService;
     //登陆
     @RequestMapping("/login")
     public String login(@Param("username")String username, @Param("password")String password, Model model){
@@ -33,6 +41,12 @@ public class UsersController {
             return "views/login";
         }
         model.addAttribute("user",user);
+        //帮助集合
+        List<Helps> helpsList=helpsService.helpsList();
+        model.addAttribute("Helpslist",helpsList);
+        //公告集合
+        List<Notices> noticesList=noticesService.noticesList();
+        model.addAttribute("Noticelist",noticesList);
         //帖子查询
         List<Topics> topicsListxin=topicsService.TopicsListbyxin_ten();
         model.addAttribute("topicsListxin",topicsListxin);
