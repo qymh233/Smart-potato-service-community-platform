@@ -61,27 +61,41 @@
           <form class="layui-form" method="post">
             <div class="layui-form-item">
               <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">题目</label>
-              <label class="layui-form-label" style="width: 200px">
+              <label class="layui-form-mid">
                 <span th:text="${manager_photolibrarys.getTitle()}"></span>
               </label>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; "></label>
               <div class="layui-input-block">
                 <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入新题目" class="layui-input" style="width: 200px;">
               </div>
             </div>
             <div class="layui-form-item">
               <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">链接</label>
-              <label class="layui-form-label" style="width: 200px">
+              <label class="layui-form-mid">
                 <span th:text="${manager_photolibrarys.getUrl()}"></span>
               </label>
-              <br>
-              <br>
-              <br>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; "></label>
               <div class="layui-input-block">
                 <input type="text" name="url" lay-verify="title" autocomplete="off" placeholder="请输入新链接" class="layui-input" style="width: 200px;">
               </div>
             </div>
-            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">描述</label>
-            <textarea name="cont" id="demo" style="display: none;" th:text="${manager_photolibrarys.getDescribed()}"></textarea>
+            <div class="layui-form-item">
+              <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">预览</label>
+              <label class="layui-form-mid">
+                <img th:if="${manager_photolibrarys.getUrl().substring(manager_photolibrarys.getUrl().length()-3)} eq 'jpg' " th:src="${manager_photolibrarys.getUrl()}" style="width: 100px;height: 100px;">
+                <span th:if="${manager_photolibrarys.getUrl().substring(manager_photolibrarys.getUrl().length()-3)} ne 'jpg' " th:text="无法预览压缩包"></span>
+              </label>
+            </div>
+            <div class="layui-form-item layui-form-text">
+              <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">描述</label>
+              <div class="layui-input-block">
+                <textarea name="cont" id="demo" style="display: none;" th:text="${manager_photolibrarys.getDescribed()}"></textarea>
+              </div>
+            </div>
             <center><button type="submit" formaction="/PhotoLibrarys/Modeify_photolibrarys" class="layui-btn layui-btn-normal">确认修改</button></center>
           </form>
         </div>

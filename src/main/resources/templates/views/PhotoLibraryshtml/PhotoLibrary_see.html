@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>首页</title>
+  <title>图片查看</title>
   <link rel="stylesheet" href="../../layui/css/layui.css">
 </head>
 <body class="layui-layout-body">
@@ -59,35 +59,41 @@
       <blockquote class="layui-elem-quote" style="color: green;font-size: 20px;font-weight: 500;">查看详情</blockquote>
         <div id="form-box">
           <div class="layui-form-item">
-            <label class="layui-form-label font-style">标题</label>
-            <label class="layui-form-label" style="width: 200px;">
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">标题</label>
+            <label class="layui-form-mid">
               <span class="span-style" th:text="${photoLibrary.getTitle()}"></span>
             </label>
           </div>
 
           <div class="layui-form-item">
-            <label class="layui-form-label font-style">上传者</label>
-            <label class="layui-form-label">
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">上传者</label>
+            <label class="layui-form-mid">
               <span class="span-style" th:text="${photoLibrary.getUser().getNickname()}"></span>
             </label>
           </div>
 
           <div class="layui-form-item">
-            <label class="layui-form-label font-style">上传时间</label>
-            <label class="layui-form-label" style="width: 150px;">
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">上传时间</label>
+            <label class="layui-form-mid">
               <span class="span-style"  th:text="${#dates.format(photoLibrary.getUptime(),'yyyy-MM-dd HH:mm:ss')}"></span>
             </label>
           </div>
 
           <div class="layui-form-item">
-            <label class="layui-form-label font-style">被浏览次数</label>
-            <label class="layui-form-label">
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">浏览次数</label>
+            <label class="layui-form-mid">
               <span class="span-style" th:text="${photoLibrary.getConDownload()}"></span>
             </label>
           </div>
-
           <div class="layui-form-item">
-            <label class="layui-form-label font-style">描述</label>
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">预览</label>
+            <label class="layui-form-mid">
+              <img th:if="${photoLibrary.getUrl().substring(photoLibrary.getUrl().length()-3)} eq 'jpg' " th:src="${photoLibrary.getUrl()}" style="width: 100px;height: 100px;">
+              <span th:if="${photoLibrary.getUrl().substring(photoLibrary.getUrl().length()-3)} ne 'jpg' " th:text="无法预览压缩包"></span>
+            </label>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">描述</label>
             <div class="layui-input-block">
               <textarea readonly class="layui-textarea" th:text="${photoLibrary.getDescribed()}"></textarea>
             </div>
