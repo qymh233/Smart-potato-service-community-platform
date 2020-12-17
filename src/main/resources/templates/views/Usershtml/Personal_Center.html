@@ -73,48 +73,48 @@
             </label>
           </div>
           <div class="layui-form-item">
-            <label class="layui-form-label font-style">用户名</label>
-            <label class="layui-form-label">
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">用户名</label>
+            <label class="layui-form-mid">
               <span class="span-style" th:text="${user.getUsername()}"></span>
             </label>
           </div>
           <div class="layui-form-item">
-            <label class="layui-form-label font-style">昵称</label>
-            <label class="layui-form-label">
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">昵称</label>
+            <label class="layui-form-mid">
               <span class="span-style" th:text="${user.getNickname()}"></span>
             </label>
           </div>
           <div class="layui-form-item">
-            <label class="layui-form-label font-style">性别</label>
-            <label class="layui-form-label">
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">性别</label>
+            <label class="layui-form-mid">
               <span class="span-style" th:text="${user.getSex()}"></span>
             </label>
           </div>
           <div class="layui-form-item">
-            <label class="layui-form-label font-style">邮箱</label>
-            <label class="layui-form-label">
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">邮箱</label>
+            <label class="layui-form-mid">
               <span class="span-style" th:text="${user.getEmail()}"></span>
             </label>
           </div><div class="layui-form-item">
-          <label class="layui-form-label  font-style">职业</label>
-          <label class="layui-form-label">
+          <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">职业</label>
+          <label class="layui-form-mid">
             <span class="span-style" th:text="${user.getProfession()}"></span>
           </label>
         </div>
           <div class="layui-form-item">
-            <label class="layui-form-label  font-style">现居地</label>
-            <label class="layui-form-label">
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">现居地</label>
+            <label class="layui-form-mid">
               <span class="span-style" th:text="${user.getComefrom()}"></span>
             </label>
           </div>
           <div class="layui-form-item" >
-            <label class="layui-form-label  font-style">注册时间</label>
-            <label class="layui-form-label">
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">注册时间</label>
+            <label class="layui-form-mid">
               <span class="span-style" th:text="${#dates.format(user.getRegisterTime(),'yyyy-MM-dd')}"></span>
             </label>
           </div>
           <div class="layui-form-item">
-            <label class="layui-form-label  font-style">个人简介</label>
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">个人简介</label>
             <div class="layui-input-block">
               <textarea readonly class="layui-textarea" th:text="${user.getIntroduction()}"></textarea>
             </div>

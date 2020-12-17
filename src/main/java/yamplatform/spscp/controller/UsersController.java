@@ -66,10 +66,13 @@ public class UsersController {
     }
     //修改资料
     @RequestMapping("/self_Modify")
-    public String self_Modify(Model model,@Param("nickname") String nickname,@Param("sex") String sex,@Param("email") String email,@Param("profession") String profession,@Param("comefrom") String comefrom,@Param("introduction") String introduction){
+    public String self_Modify(Model model,@Param("nickname") String nickname,@Param("picturl")String picturl,@Param("sex") String sex,@Param("email") String email,@Param("profession") String profession,@Param("comefrom") String comefrom,@Param("introduction") String introduction){
         Users user=(Users)model.getAttribute("user");
         if(nickname!=null&&!nickname.equals("")){
             user.setNickname(nickname);
+        }
+        if(picturl!=null&&!picturl.equals("")){
+            user.setPicture(picturl);
         }
         if(sex!=null&&!sex.equals("")){
             user.setSex(sex);

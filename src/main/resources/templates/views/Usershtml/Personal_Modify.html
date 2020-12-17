@@ -75,13 +75,24 @@
           <form class="layui-form" method="post">
              <div class="layui-form-item">
                   <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">用户姓名</label>
-                  <label class="layui-form-label">
+                  <label class="layui-form-mid">
                   <span th:text="${user.getUsername()}"></span>
                 </label>
               </div>
               <div class="layui-form-item">
+                  <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">照片</label>
+                  <div class="layui-input-block">
+                      <button type="button" class="layui-btn" id="upload1">上传图片</button>
+                      <input type="hidden" id="picturl" name="picturl" value=""/>
+                      <div class="layui-upload-list">
+                          <img class="layui-upload-img" width="100px" height="80px" id="demo1"/>
+                          <p id="demoText"></p>
+                      </div>
+                  </div>
+              </div>
+              <div class="layui-form-item">
                   <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">昵称</label>
-                  <label class="layui-form-label">
+                  <label class="layui-form-mid">
                   <span th:text="${user.getNickname()}"></span>
                 </label>
                   <div class="layui-input-block">
@@ -97,7 +108,7 @@
               </div>
               <div class="layui-form-item">
                   <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">邮箱</label>
-                  <label class="layui-form-label">
+                  <label class="layui-form-mid">
                   <span th:text="${user.getEmail()}"></span>
                 </label>
                   <div class="layui-input-block">
@@ -106,7 +117,7 @@
               </div>
               <div class="layui-form-item">
                   <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">职业</label>
-                  <label class="layui-form-label">
+                  <label class="layui-form-mid">
                   <span th:text="${user.getProfession()}"></span>
                 </label>
                   <div class="layui-input-block">
@@ -115,7 +126,7 @@
               </div>
               <div class="layui-form-item">
                   <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">现居地</label>
-                  <label class="layui-form-label">
+                  <label class="layui-form-mid">
                   <span th:text="${user.getComefrom()}"></span>
                 </label>
                   <div class="layui-input-block">
@@ -153,12 +164,42 @@ layui.use('element', function(){
   var element = layui.element;
   
 });
-layui.use(['form', 'upload'], function(){
+layui.use(['form'], function(){
     var form = layui.form;
-
     form.render();  // 加入这一句
 });
+layui.use('upload', function(){
+    var upload = layui.upload
+        , $ = layui.jquery;
+    var uploadInst = upload.render({
+        elem: '#upload1' //绑定元素
+        ,url: '/upload/img' //'/Comments/uploadsee'
+        ,before: function(obj){
+            //预读本地文件示例，不支持ie8
+            obj.preview(function(index, file, result){
+                $('#demo1').attr('src', result); //图片链接（base64）
+            });
+        }
+        ,done: function(res){
+            //如果上传失败
+            if(res.code > 0){
+                return layer.msg('上传失败');
+            }
+            //上传成功
+            alert("上传成功"+res.url);
+            document.getElementById("picturl").value = res.url;
 
+        }
+        ,error: function(){
+            //演示失败状态，并实现重传
+            var demoText = $('#demoText');
+            demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+            demoText.find('.demo-reload').on('click', function(){
+                uploadInst.upload();
+            });
+        }
+    });
+});
 function validate_required(field,alerttxt)
 {
     with (field)
