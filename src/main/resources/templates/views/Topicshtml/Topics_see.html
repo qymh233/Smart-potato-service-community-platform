@@ -88,13 +88,13 @@
 		          <br>
 				   <br>
 				   <a th:href="@{/Topics/Topic_Collect(id=${topic.getId()})}" class="media-left" style="float: left;">
-					   <i class="layui-icon layui-icon-rate-half" style="font-size: 30px; color: #1E9FFF;"></i>
+					   <i class="layui-form-mid layui-icon layui-icon-rate-half" style="font-size: 30px; color: #1E9FFF;"></i>
 				   </a>
 		          <a th:href="@{/Topics/Topic_nice(id=${topic.getId()})}" class="media-left" style="float: left;">
-		          	<i class="layui-icon layui-icon-praise" style="font-size: 30px; color: #1E9FFF;"></i>  
+		          	<i class="layui-form-mid layui-icon layui-icon-praise" style="font-size: 30px; color: #1E9FFF;"></i>
 		          </a>
-		          <p class="min-font">
-		              <span class="layui-breadcrumb" lay-separator="-" style="visibility: visible;">
+		          <p class="media-left" style="float: left;">
+		              <span class="layui-form-mid layui-breadcrumb" lay-separator="-" style="visibility: visible;">
 		                <span lay-separator="" th:text="${topic.getCountnice()}"></span>
 		              </span>
 		            </p>

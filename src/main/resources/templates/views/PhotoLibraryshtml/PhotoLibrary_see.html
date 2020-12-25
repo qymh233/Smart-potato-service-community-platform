@@ -87,9 +87,12 @@
           </div>
           <div class="layui-form-item">
             <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">预览</label>
-            <label class="layui-form-mid">
+            <label class="layui-form-mid" th:if="${photoLibrary.getUrl()} ne '' ">
               <img th:if="${photoLibrary.getUrl().substring(photoLibrary.getUrl().length()-3)} eq 'jpg' " th:src="${photoLibrary.getUrl()}" style="width: 100px;height: 100px;">
               <span th:if="${photoLibrary.getUrl().substring(photoLibrary.getUrl().length()-3)} ne 'jpg' " th:text="无法预览压缩包"></span>
+            </label>
+            <label class="layui-form-mid" th:if="${photoLibrary.getUrl()} eq '' ">
+              <span th:text="没有资源"></span>
             </label>
           </div>
           <div class="layui-form-item">

@@ -101,44 +101,46 @@ public class TopicsController {
     public String Topic_up(){
         return "views/Topicshtml/Topics_up";
     }
+    //上传图片到本地的方法
 //上传图片
-    @RequestMapping(value = "/uploadimg" , method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String, Object> upload(HttpServletRequest servletRequest,
-                                      @RequestParam("file") MultipartFile file
-    ) throws IOException {
 
-        //如果文件内容不为空，则写入上传路径
-        if (!file.isEmpty()) {
-            //上传文件路径
-            String path = "E:\\ideaproject\\spscp\\src\\main\\resources\\static\\img\\Topics\\" ;
-            //上传文件名
-            String filename = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" +file.getOriginalFilename();
-            File filepath = new File(path, filename);
-            //判断路径是否存在，没有就创建一个
-            if (!filepath.getParentFile().exists()) {
-                filepath.getParentFile().mkdirs();
-            }
-            //将上传文件保存到一个目标文档中
-            File file1 = new File(path + File.separator + filename);
-            file.transferTo(file1);
-            Map<String, Object> res = new HashMap<>();
-            String dburl="http://localhost:8080/img/Topics/"+filename;
-            //返回的是一个url对象
-            res.put("url", dburl);
-            res.put("msg","ok");
-            res.put("code",0);
-            return res;
-
-        } else {
-            Map<String, Object> res = new HashMap<>();
-            //返回的是一个url对象
-            res.put("url", null);
-            res.put("msg","no");
-            res.put("code",100);
-            return res;
-        }
-    }
+//    @RequestMapping(value = "/uploadimg" , method = RequestMethod.POST)
+//    @ResponseBody
+//    public Map<String, Object> upload(HttpServletRequest servletRequest,
+//                                      @RequestParam("file") MultipartFile file
+//    ) throws IOException {
+//
+//        //如果文件内容不为空，则写入上传路径
+//        if (!file.isEmpty()) {
+//            //上传文件路径
+//            String path = "E:\\ideaproject\\spscp\\src\\main\\resources\\static\\img\\Topics\\" ;
+//            //上传文件名
+//            String filename = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" +file.getOriginalFilename();
+//            File filepath = new File(path, filename);
+//            //判断路径是否存在，没有就创建一个
+//            if (!filepath.getParentFile().exists()) {
+//                filepath.getParentFile().mkdirs();
+//            }
+//            //将上传文件保存到一个目标文档中
+//            File file1 = new File(path + File.separator + filename);
+//            file.transferTo(file1);
+//            Map<String, Object> res = new HashMap<>();
+//            String dburl="http://localhost:8080/img/Topics/"+filename;
+//            //返回的是一个url对象
+//            res.put("url", dburl);
+//            res.put("msg","ok");
+//            res.put("code",0);
+//            return res;
+//
+//        } else {
+//            Map<String, Object> res = new HashMap<>();
+//            //返回的是一个url对象
+//            res.put("url", null);
+//            res.put("msg","no");
+//            res.put("code",100);
+//            return res;
+//        }
+//    }
 
     //添加帖子
     @RequestMapping("/topic_add")
@@ -159,7 +161,13 @@ public class TopicsController {
 //查看帖子
     @RequestMapping("/Topic_see")
     public String Topic_see(Model model,@Param("id") Integer id){
+        Users user=(Users) model.getAttribute("user");
         Topics topic=topicsService.SelectOne(id);
+        if(topic.getUser().getId()!=user.getId()){
+            topic.setCountsee(topic.getCountsee()+1);
+            topicsService.UpdateTopics(topic);
+            topic=topicsService.SelectOne(id);
+        }
         model.addAttribute("topic",topic);
         return "views/Topicshtml/Topics_see";
     }
