@@ -54,8 +54,14 @@ public class ManagerPageController {
     //留言查看
     @RequestMapping("/Manager_LiveMsgs")
     public String Manager_LiveMsgs(Model model){
-        List<LiveMsgs> liveMsgsList=liveMsgsService.LiveMsgsList();
-        model.addAttribute("liveMsgsList",liveMsgsList);
         return "views/Managershtml/Manager_LiveMsgs";
+    }
+    //留言回复页面
+    @RequestMapping("/Manager_LiveMsgsRecont")
+    public String Manager_LiveMsgsRecont(Model model, Integer id){
+        LiveMsgs liveMsgsR=liveMsgsService.SelectOne(id);
+        model.addAttribute("liveMsgsR",liveMsgsR);
+        System.out.println(liveMsgsR);
+        return "views/Managershtml/Manager_LiveMsgsRecont";
     }
 }

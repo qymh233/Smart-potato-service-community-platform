@@ -38,6 +38,8 @@ public class ManagerController {
     PhotoLibrarysService photoLibrarysService;
     @Autowired
     TopicsService topicsService;
+    @Autowired
+    LiveMsgsService liveMsgsService;
     //登陆
     @RequestMapping("/login")
     public String login(@Param("username")String username, @Param("password")String password, Model model){
@@ -193,5 +195,30 @@ public class ManagerController {
         result.put("data",topicsList);
         result.put("count",count);
         return result;
+    }
+    //返回留言列表
+    @RequestMapping("/LiveMsgslistP")
+    @ResponseBody
+    public Map<String,Object> LiveMsgslist(Model model, Integer page){
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("code", 0);
+        List<LiveMsgs> liveMsgsList=liveMsgsService.Listpage(page,10);
+        if(liveMsgsList == null) {
+            return result;
+        }
+        int count=liveMsgsService.Count();
+        int counts=count/10+1;
+        result.put("data",liveMsgsList);
+        result.put("pages",counts);
+        return result;
+    }
+    //留言版回复
+    @RequestMapping("/LiveMsgsRcont")
+    public String  LiveMsgsRcont(Model model, Integer id,String recont){
+        //更新回复
+        if(recont!=null&&!recont.equals("")){
+            int t=liveMsgsService.UpdateLiveMsgsRecont(id,recont);
+        }
+        return "views/Managershtml/Manager_LiveMsgs";
     }
 }
