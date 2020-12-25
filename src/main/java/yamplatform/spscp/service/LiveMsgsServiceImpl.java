@@ -40,6 +40,12 @@ public class LiveMsgsServiceImpl implements LiveMsgsService{
     }
 
     @Override
+    public int UpdateLiveMsgsRecont(Integer id, String recont) {
+        int t=liveMsgsMapper.UpdateLiveMsgsRecont(id,recont);
+        return t;
+    }
+
+    @Override
     public int Count() {
         int t=liveMsgsMapper.Count();
         return t;

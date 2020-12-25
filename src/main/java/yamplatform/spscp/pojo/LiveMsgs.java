@@ -7,6 +7,7 @@ public class LiveMsgs {
     private Integer id;
     private Integer uid;
     private String content;//内容
+    private String recont="请等待管理员回复";//回复
     private Date newtime;//时间
 
     private Users user;
@@ -51,12 +52,21 @@ public class LiveMsgs {
         this.user = user;
     }
 
+    public String getRecont() {
+        return recont;
+    }
+
+    public void setRecont(String recont) {
+        this.recont = recont;
+    }
+
     @Override
     public String toString() {
         return "LiveMsgs{" +
                 "id=" + id +
                 ", uid=" + uid +
                 ", content='" + content + '\'' +
+                ", recont='" + recont + '\'' +
                 ", newtime=" + newtime +
                 ", user=" + user +
                 '}';

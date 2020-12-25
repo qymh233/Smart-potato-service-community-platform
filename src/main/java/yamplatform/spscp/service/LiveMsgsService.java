@@ -1,7 +1,6 @@
 package yamplatform.spscp.service;
 
 import yamplatform.spscp.pojo.LiveMsgs;
-import yamplatform.spscp.pojo.PhotoLibrarys;
 
 import java.util.List;
 
@@ -12,6 +11,8 @@ public interface LiveMsgsService {
     public int InsertLiveMsgs(LiveMsgs liveMsgs);
     //查询列表
     public List<LiveMsgs> LiveMsgsList();
+    //更新回复
+    public int UpdateLiveMsgsRecont(Integer id,String recont);
     //总数
     public int Count();
     //分页

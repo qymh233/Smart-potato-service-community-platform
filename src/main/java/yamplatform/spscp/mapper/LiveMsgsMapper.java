@@ -18,7 +18,8 @@ public interface LiveMsgsMapper {
     public int InsertLiveMsgs(@Param("liveMsgs") LiveMsgs liveMsgs);
     //查询列表
     public List<LiveMsgs>  LiveMsgsList();
-
+    //更新回复
+    public int UpdateLiveMsgsRecont(@Param("id") Integer id,@Param("recont") String recont);
     //总数
     public int Count();
     //分页
