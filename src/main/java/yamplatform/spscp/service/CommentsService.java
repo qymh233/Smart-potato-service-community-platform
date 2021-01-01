@@ -2,6 +2,7 @@ package yamplatform.spscp.service;
 
 
 import yamplatform.spscp.pojo.Comments;
+import yamplatform.spscp.pojo.LiveMsgs;
 
 
 import java.util.List;
@@ -19,5 +20,10 @@ public interface CommentsService {
     public List<Comments>  CommentsList();
     //查询列表byuid
     public List<Comments>  CommentsListbytid(Integer tid);
+
+    //总数
+    public int Count(Integer tid);
+    //分页
+    public List<Comments> Listpage(Integer tid,Integer page, Integer lim);
 
 }

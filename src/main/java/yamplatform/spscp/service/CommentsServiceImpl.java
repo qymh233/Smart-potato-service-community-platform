@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yamplatform.spscp.mapper.CommentsMapper;
 import yamplatform.spscp.pojo.Comments;
+import yamplatform.spscp.pojo.LiveMsgs;
 import yamplatform.spscp.pojo.Users;
 
 import java.util.List;
@@ -58,6 +59,25 @@ public class CommentsServiceImpl implements CommentsService {
     @Override
     public List<Comments> CommentsListbytid(Integer tid) {
         List<Comments> commentsList=commentsMapper.CommentsListbytid(tid);
+        if(commentsList!=null){
+            for(Comments c:commentsList){
+                Users user=usersService.SelectOnebyid(c.getUid());
+                c.setUser(user);
+            }
+        }
+        return commentsList;
+    }
+
+    @Override
+    public int Count(Integer tid) {
+        int t=commentsMapper.Count(tid);
+        return t;
+    }
+
+    @Override
+    public List<Comments> Listpage(Integer tid, Integer page, Integer lim) {
+        page=(page-1)*lim;
+        List<Comments> commentsList=commentsMapper.Listpage(tid,page,lim);
         if(commentsList!=null){
             for(Comments c:commentsList){
                 Users user=usersService.SelectOnebyid(c.getUid());

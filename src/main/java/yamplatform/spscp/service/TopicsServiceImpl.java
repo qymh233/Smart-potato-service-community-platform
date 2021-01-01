@@ -22,8 +22,8 @@ public class TopicsServiceImpl implements TopicsService{
     public Topics SelectOne(Integer id) {
         Topics topic=topicsMapper.SelectOne(id);
         if(topic!=null){
-            List<Comments> commentsList=commentsService.CommentsListbytid(topic.getId());
-            topic.setCommentsList(commentsList);
+//            List<Comments> commentsList=commentsService.CommentsListbytid(topic.getId());
+//            topic.setCommentsList(commentsList);
             Users user=usersService.SelectOnebyid(topic.getUid());
             topic.setUser(user);
         }

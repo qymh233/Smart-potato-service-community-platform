@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import yamplatform.spscp.pojo.Comments;
+import yamplatform.spscp.pojo.LiveMsgs;
 
 import java.util.List;
 
@@ -23,6 +24,11 @@ public interface CommentsMapper {
     public List<Comments>  CommentsList();
     //查询列表byuid
     public List<Comments>  CommentsListbytid(@Param("tid") Integer tid);
+
+    //总数
+    public int Count(@Param("tid") Integer tid);
+    //分页
+    public List<Comments> Listpage(@Param("tid") Integer tid,@Param("page")Integer page, @Param("lim")Integer lim);
 
 
 }
