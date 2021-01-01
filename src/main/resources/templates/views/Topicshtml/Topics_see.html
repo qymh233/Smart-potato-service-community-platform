@@ -94,8 +94,11 @@
 		          <img th:if="${topic.getPicturl()} ne null" th:src="${topic.getPicturl()}" height="200px" width="200px">
 		          <br>
 				   <br>
-				   <a th:href="@{/Topics/Topic_Collect(id=${topic.getId()})}" class="media-left" style="float: left;">
-					   <i class="layui-form-mid layui-icon layui-icon-rate-half" style="font-size: 30px; color: #1E9FFF;"></i>
+				   <a th:if="${cfill} eq 'cfill' " th:href="@{/Topics/Topic_Collectqu(id=${topic.getId()})}" class="media-left" style="float: left;">
+					   <i class="layui-form-mid layui-icon layui-icon-star-fill" style="font-size: 30px; color: #1E9FFF;"></i>
+				   </a>
+				   <a th:if="${cfill} eq 'cnull' " th:href="@{/Topics/Topic_Collect(id=${topic.getId()})}" class="media-left" style="float: left;">
+					   <i class="layui-form-mid layui-icon layui-icon-star" style="font-size: 30px; color: #1E9FFF;"></i>
 				   </a>
 		          <a th:href="@{/Topics/Topic_nice(id=${topic.getId()})}" class="media-left" style="float: left;">
 		          	<i class="layui-form-mid layui-icon layui-icon-praise" style="font-size: 30px; color: #1E9FFF;"></i>

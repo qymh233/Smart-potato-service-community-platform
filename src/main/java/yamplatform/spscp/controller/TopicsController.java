@@ -168,6 +168,14 @@ public class TopicsController {
             topicsService.UpdateTopics(topic);
             topic=topicsService.SelectOne(id);
         }
+        int t=hadcollect(user.getId(),topic.getId());
+        if(t!=0){
+            //收藏了
+            model.addAttribute("cfill","cfill");
+        }else {
+            //没收藏了
+            model.addAttribute("cfill","cnull");
+        }
         model.addAttribute("topic",topic);
         return "views/Topicshtml/Topics_see";
     }
@@ -192,12 +200,24 @@ public class TopicsController {
         collect.setTname(oldtopic.getTitle());
         collect.setUid(user.getId());
         collect.setUname(oldtopic.getUser().getNickname());
-        collectsService.Insertone(collect);
+        int t=collectsService.Insertone(collect);
+        //收藏了
+        model.addAttribute("cfill","cfill");
         Topics topic=topicsService.SelectOne(id);
         model.addAttribute("topic",topic);
         return "views/Topicshtml/Topics_see";
     }
-
+    //取消收藏
+    @RequestMapping("/Topic_Collectqu")
+    public String Topic_Collectqu(Model model,@Param("id") Integer id){
+        Topics topic=topicsService.SelectOne(id);
+        Users user=(Users) model.getAttribute("user");
+        //取消藏了
+        collectsService.Deletebytiduid(topic.getId(), user.getId());
+        model.addAttribute("cfill","cnull");
+        model.addAttribute("topic",topic);
+        return "views/Topicshtml/Topics_see";
+    }
     //跳转查询结果
    @RequestMapping("/findSignIn")
    public String findSignIn(Model model,@Param("question")String question){
@@ -249,6 +269,43 @@ public class TopicsController {
     @RequestMapping("/Personal_Topic_see")
     public String Personal_Topic_see(Model model,@Param("id") Integer id){
         Topics topic=topicsService.SelectOne(id);
+        Users user=(Users) model.getAttribute("user");
+        int t=hadcollect(user.getId(),topic.getId());
+        if(t!=0){
+            //收藏了
+            model.addAttribute("cfill","cfill");
+        }else {
+            //没收藏了
+            model.addAttribute("cfill","cnull");
+        }
+        model.addAttribute("topic",topic);
+        return "views/Usershtml/Personal_Topics_see";
+    }
+    //收藏帖子
+    @RequestMapping("/Topic_Collectself")
+    public String Topic_Collectself(Model model,@Param("id") Integer id){
+        Collects collect=new Collects();
+        Topics oldtopic=topicsService.SelectOne(id);
+        Users user=(Users) model.getAttribute("user");
+        collect.setTid(id);
+        collect.setTname(oldtopic.getTitle());
+        collect.setUid(user.getId());
+        collect.setUname(oldtopic.getUser().getNickname());
+        int t=collectsService.Insertone(collect);
+        //收藏了
+        model.addAttribute("cfill","cfill");
+        Topics topic=topicsService.SelectOne(id);
+        model.addAttribute("topic",topic);
+        return "views/Usershtml/Personal_Topics_see";
+    }
+    //取消收藏
+    @RequestMapping("/Topic_Collectquself")
+    public String Topic_Collectquself(Model model,@Param("id") Integer id){
+        Topics topic=topicsService.SelectOne(id);
+        Users user=(Users) model.getAttribute("user");
+        //取消藏了
+        collectsService.Deletebytiduid(topic.getId(), user.getId());
+        model.addAttribute("cfill","cnull");
         model.addAttribute("topic",topic);
         return "views/Usershtml/Personal_Topics_see";
     }
@@ -266,6 +323,14 @@ public class TopicsController {
         Users user=(Users) model.getAttribute("user");
         newsService.Delete(id,user.getId());
         Topics topic=topicsService.SelectOne(id);
+        int t=hadcollect(user.getId(),topic.getId());
+        if(t!=0){
+            //收藏了
+            model.addAttribute("cfill","cfill");
+        }else {
+            //没收藏了
+            model.addAttribute("cfill","cnull");
+        }
         model.addAttribute("topic",topic);
         return "views/Usershtml/Personal_Topics_see";
     }
@@ -283,6 +348,16 @@ public class TopicsController {
     public String delete(Model model,@Param("id") Integer id){
         topicsService.DeleteTopics(id);
         return "views/Managershtml/Manager_topics";
+    }
+
+    //判断是否收藏
+    public Integer hadcollect(Integer uid,Integer tid){
+        Integer t=0;
+        t=collectsService.hadcollect(uid,tid);
+        if(t==null){
+            return 0;
+        }
+        return t;
     }
 
 }

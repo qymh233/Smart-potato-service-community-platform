@@ -22,6 +22,12 @@ public class CollectsServiceImpl implements CollectsService{
     }
 
     @Override
+    public int Deletebytiduid(Integer tid, Integer uid) {
+        int t=collectsMapper.Deletebytiduid(tid,uid);
+        return t;
+    }
+
+    @Override
     public List<Collects> CollectsList(Integer uid) {
         List<Collects> collectsList=collectsMapper.CollectsList(uid);
         return collectsList;
@@ -40,7 +46,7 @@ public class CollectsServiceImpl implements CollectsService{
             }
         }
         if(t==0){
-            t=collectsMapper.Insertone(collect);
+            collectsMapper.Insertone(collect);
         }
         return t;
     }
@@ -55,6 +61,13 @@ public class CollectsServiceImpl implements CollectsService{
         page=(page-1)*lim;
         List<Collects> photoLibrarysList=collectsMapper.Listpage(page,lim,uid);
         return photoLibrarysList;
+    }
+
+    @Override
+    public Integer hadcollect(Integer uid, Integer tid) {
+        Integer t=0;
+        t=collectsMapper.hadcollect(uid,tid);
+        return t;
     }
 
 }

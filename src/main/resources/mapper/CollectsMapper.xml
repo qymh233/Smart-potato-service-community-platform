@@ -11,6 +11,10 @@
 	<delete id="Delete">
     	delete from t_collect where id = #{id}
   	</delete>
+	<!-- 删除 -->
+	<delete id="Deletebytiduid">
+    	delete from t_collect where tid = #{tid} and uid = #{uid}
+  	</delete>
 	<!-- 查询所有用户 -->
 	<resultMap type="yamplatform.spscp.pojo.Collects" id="SelectAll">
 		<result property="id" column="id"/>
@@ -29,5 +33,9 @@
 	</select>
 	<select id="Listpage" resultMap="SelectAll">
     	select * from t_collect where uid = #{uid} order by ctime desc limit #{page},#{lim}
+	</select>
+
+	<select id="hadcollect" resultType="INTEGER">
+		select * from t_collect where uid = #{uid} and tid = #{tid}
 	</select>
 </mapper>
