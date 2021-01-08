@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>相关连接管理</title>
+  <title>轮播图管理</title>
   <link rel="stylesheet" href="../../layui/css/layui.css">
 </head>
 <body class="layui-layout-body">
@@ -60,21 +60,9 @@
           <form class="layui-form" method="post">
 
             <div class="layui-form-item">
-              <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">题目</label>
-              <label class="layui-form-mid">
-                <span th:text="${manager_links.getTitle()}"></span>
-              </label>
-            </div>
-            <div class="layui-form-item">
-              <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; "></label>
-              <div class="layui-input-block">
-                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入新题目" class="layui-input" style="width: 200px;">
-              </div>
-            </div>
-            <div class="layui-form-item">
               <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">链接</label>
               <label class="layui-form-mid">
-                <span th:text="${manager_links.getUrl()}"></span>
+                <span th:text="${manager_carousels.getUrl()}"></span>
               </label>
             </div>
             <div class="layui-form-item">
@@ -83,13 +71,7 @@
                 <input type="text" name="url" lay-verify="title" autocomplete="off" placeholder="请输入新链接" class="layui-input" style="width: 200px;">
               </div>
             </div>
-            <div class="layui-form-item layui-form-text">
-              <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">内容</label>
-              <div class="layui-input-block">
-                <textarea name="cont"  class="layui-textarea" th:text="${manager_links.getCont()}"></textarea>
-              </div>
-            </div>
-            <center><button type="submit" formaction="/Rellinks/Modeify_link" class="layui-btn layui-btn-normal">确认修改</button></center>
+            <center><button type="submit" formaction="/Carousels/Modeify_carsouels" class="layui-btn layui-btn-normal">确认修改</button></center>
           </form>
         </div>
       </div>

@@ -6,14 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import yamplatform.spscp.pojo.Helps;
-import yamplatform.spscp.pojo.Notices;
-import yamplatform.spscp.pojo.Topics;
-import yamplatform.spscp.pojo.Users;
-import yamplatform.spscp.service.HelpsService;
-import yamplatform.spscp.service.NoticesService;
-import yamplatform.spscp.service.TopicsService;
-import yamplatform.spscp.service.UsersService;
+import yamplatform.spscp.pojo.*;
+import yamplatform.spscp.service.*;
 
 import java.util.List;
 /*
@@ -32,6 +26,8 @@ public class UsersController {
     HelpsService helpsService;
     @Autowired
     NoticesService noticesService;
+    @Autowired
+    CarouselsService carouselsService;
     //登陆
     @RequestMapping("/login")
     public String login(@Param("username")String username, @Param("password")String password, Model model){
@@ -41,6 +37,9 @@ public class UsersController {
             return "views/login";
         }
         model.addAttribute("user",user);
+        //轮播图集合
+        List<Carousels> carouselsList=carouselsService.CarouselsList();
+        model.addAttribute("carouselsList",carouselsList);
         //帮助集合
         List<Helps> helpsList=helpsService.helpsList();
         model.addAttribute("Helpslist",helpsList);

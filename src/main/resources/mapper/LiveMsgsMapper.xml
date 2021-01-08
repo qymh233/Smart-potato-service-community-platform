@@ -33,6 +33,6 @@
     	select count(*) from t_livemsgs
 	</select>
 	<select id="Listpage" resultMap="SelectAll">
-    	select * from t_livemsgs limit #{page},#{lim}
+    	select * from t_livemsgs order by newtime desc limit #{page},#{lim}
 	</select>
 </mapper>

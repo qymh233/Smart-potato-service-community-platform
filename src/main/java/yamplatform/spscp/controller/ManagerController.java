@@ -40,6 +40,8 @@ public class ManagerController {
     TopicsService topicsService;
     @Autowired
     LiveMsgsService liveMsgsService;
+    @Autowired
+    CarouselsService carouselsService;
     //登陆
     @RequestMapping("/login")
     public String login(@Param("username")String username, @Param("password")String password, Model model){
@@ -113,6 +115,21 @@ public class ManagerController {
         }
         int count=rellinksService.Count();
         result.put("data",rellinksList);
+        result.put("count",count);
+        return result;
+    }
+    //返回轮播图列表
+    @RequestMapping("/carouselsList")
+    @ResponseBody
+    public Map<String,Object> carouselsList(Model model, Integer page, Integer limit){
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("code", 0);
+        List<Carousels> carouselsList=carouselsService.Listpage(page,limit);
+        if(carouselsList == null) {
+            return result;
+        }
+        int count=carouselsService.Count();
+        result.put("data",carouselsList);
         result.put("count",count);
         return result;
     }

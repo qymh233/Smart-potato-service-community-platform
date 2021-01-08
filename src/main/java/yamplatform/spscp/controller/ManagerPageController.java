@@ -41,6 +41,11 @@ public class ManagerPageController {
     public String Manager_relinks(Model model){
         return "views/Managershtml/Manager_links";
     }
+    //连接管理页面
+    @RequestMapping("/Manager_carousels")
+    public String Manager_carousels(Model model){
+        return "views/Managershtml/Manager_carousels";
+    }
     //帮助管理页面
     @RequestMapping("/Manager_helps")
     public String Manager_helps(Model model){
