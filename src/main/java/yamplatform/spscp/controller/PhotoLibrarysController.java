@@ -55,45 +55,45 @@ public class PhotoLibrarysController {
     public String PhotoLibrary_upload(Model model){
         return "views/PhotoLibraryshtml/PhotoLibrary_upload";
     }
-   @RequestMapping(value="/uploadSource" , method = RequestMethod.POST)
-   @ResponseBody
-   public Map<String,Object> downloadimg(Model model,@RequestParam("file") MultipartFile file) {
-       Map map = new HashMap<String,Object>();
-       System.out.println(file);
-       String pathString = null;
-       String dburl;
-       String fname=null;
-       if(file!=null) {
-           String filename = file.getOriginalFilename();
-           //Check for Unix-style path
-           int unixSep = filename.lastIndexOf('/');
-           //Check for Windows-style path
-           int winSep = filename.lastIndexOf('\\');
-           //cut off at latest possible point
-           int pos = (winSep > unixSep ? winSep:unixSep);
-           if (pos != -1)
-               filename = filename.substring(pos + 1);
-           fname=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" +filename;
-           pathString = "E:\\ideaproject\\spscp\\src\\main\\resources\\static\\img\\PhotoLibrary\\" + fname;
-       }
-       try {
-           File files=new File(pathString);
-           //打印查看上传路径
-           if(!files.getParentFile().exists()){
-               files.getParentFile().mkdirs();
-           }
-           file.transferTo(files);
-           map.put("msg","ok");
-           map.put("code",0);
-           dburl="http://localhost:8080/img/PhotoLibrary/"+fname;
-           map.put("url",dburl);
-       } catch (Exception e) {
-           map.put("msg","error");
-           map.put("code",100);
-           e.printStackTrace();
-       }
-       return map;
-   }
+//   @RequestMapping(value="/uploadSource" , method = RequestMethod.POST)
+//   @ResponseBody
+//   public Map<String,Object> downloadimg(Model model,@RequestParam("file") MultipartFile file) {
+//       Map map = new HashMap<String,Object>();
+//       System.out.println(file);
+//       String pathString = null;
+//       String dburl;
+//       String fname=null;
+//       if(file!=null) {
+//           String filename = file.getOriginalFilename();
+//           //Check for Unix-style path
+//           int unixSep = filename.lastIndexOf('/');
+//           //Check for Windows-style path
+//           int winSep = filename.lastIndexOf('\\');
+//           //cut off at latest possible point
+//           int pos = (winSep > unixSep ? winSep:unixSep);
+//           if (pos != -1)
+//               filename = filename.substring(pos + 1);
+//           fname=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" +filename;
+//           pathString = "E:\\ideaproject\\spscp\\src\\main\\resources\\static\\img\\PhotoLibrary\\" + fname;
+//       }
+//       try {
+//           File files=new File(pathString);
+//           //打印查看上传路径
+//           if(!files.getParentFile().exists()){
+//               files.getParentFile().mkdirs();
+//           }
+//           file.transferTo(files);
+//           map.put("msg","ok");
+//           map.put("code",0);
+//           dburl="http://localhost:8080/img/PhotoLibrary/"+fname;
+//           map.put("url",dburl);
+//       } catch (Exception e) {
+//           map.put("msg","error");
+//           map.put("code",100);
+//           e.printStackTrace();
+//       }
+//       return map;
+//   }
     @RequestMapping("/photolibrarys_add")
     public String photolibrarys_add(Model model,@Param("title") String title,@Param("content")String cont,@Param("picturl")String picturl){
         Users user=(Users) model.getAttribute("user");
