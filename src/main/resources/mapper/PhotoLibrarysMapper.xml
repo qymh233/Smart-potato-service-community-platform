@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yamplatform.spscp.mapper.PhotoLibrarysMapper">
+	<resultMap type="yamplatform.spscp.pojo.PhotoLibrarys" id="SelectAll">
+		<result property="id" column="id"/>
+		<result property="title" column="title"/>
+		<result property="url" column="url"/>
+		<result property="conDownload" column="conDownload"/>
+		<result property="uptime" column="uptime"/>
+		<result property="described" column="described"/>
+		<result property="uid" column="uid"/>
+	</resultMap>
+	<!-- 查询一个栏目 -->
+	<select id="SelectOne" parameterType="Integer" resultType="yamplatform.spscp.pojo.PhotoLibrarys">
+    select * from t_photoLibrarys where id = #{id}
+  </select>
+	<!-- 插入栏目 -->
+	<insert id="InsertphotoLibrarys" parameterType="yamplatform.spscp.pojo.PhotoLibrarys">
+		insert into t_photoLibrarys(title,url,conDownload,uptime,described,uid) values(
+		#{photoLibrarys.title,jdbcType=VARCHAR},#{photoLibrarys.url,jdbcType=VARCHAR},#{photoLibrarys.conDownload,jdbcType=INTEGER},
+		now(),#{photoLibrarys.described,jdbcType=VARCHAR},#{photoLibrarys.uid,jdbcType=INTEGER})
+	</insert>
+	<!-- 更新栏目 -->
+	<update id="UpdatephotoLibrarys">
+	  update t_photoLibrarys set title = #{photoLibrarys.title} , url = #{photoLibrarys.url}  , conDownload = #{photoLibrarys.conDownload} , described = #{photoLibrarys.described} where id = #{photoLibrarys.id}
+	</update>
+	<!-- 查询所有栏目 -->
+
+	<select id="photoLibrarysList" resultMap="SelectAll">
+    	select * from t_photoLibrarys
+  	</select>
+	<delete id="Delete">
+    	delete from t_photoLibrarys where id = #{id}
+  	</delete>
+	<!--模糊查询-->
+	<select id="likelist" resultMap="SelectAll">
+		select * from t_photoLibrarys where
+		<foreach item="item" index="index" collection="findlikelist"  open="(" separator="or" close=")">
+			described like CONCAT('%',#{item},'%')
+		</foreach>
+	</select>
+
+
+	<select id="Count" resultType="INTEGER">
+    	select count(*) from t_photoLibrarys
+	</select>
+	<select id="Listpage" resultMap="SelectAll">
+    	select * from t_photoLibrarys limit #{page},#{lim}
+	</select>
+</mapper>

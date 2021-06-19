@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yamplatform.spscp.mapper.LiveMsgsMapper">
+	<resultMap type="yamplatform.spscp.pojo.LiveMsgs" id="SelectAll">
+		<result property="id" column="id"/>
+		<result property="uid" column="uid"/>
+		<result property="content" column="content"/>
+		<result property="newtime" column="newtime"/>
+		<result property="recont" column="recont"/>
+	</resultMap>
+	<!-- 查询一个留言 -->
+	<select id="SelectOne" parameterType="Integer" resultType="yamplatform.spscp.pojo.LiveMsgs">
+    select * from t_livemsgs where id = #{id}
+  </select>
+	<!-- 插入留言 -->
+	<insert id="InsertLiveMsgs" parameterType="yamplatform.spscp.pojo.LiveMsgs">
+		insert into t_livemsgs(newtime,content,uid,recont) values(
+		now(),#{liveMsgs.content,jdbcType=VARCHAR},#{liveMsgs.uid,jdbcType=INTEGER},#{liveMsgs.recont,jdbcType=VARCHAR})
+	</insert>
+	<!--更新回复-->
+	<update id="UpdateLiveMsgsRecont">
+		update t_livemsgs set recont = #{recont}
+	  where id= #{id}
+	</update>
+	<!-- 查询所有留言 -->
+	<select id="LiveMsgsList" resultMap="SelectAll">
+    	select * from t_livemsgs order by newtime desc
+  	</select>
+
+	<select id="Count" resultType="INTEGER">
+    	select count(*) from t_livemsgs
+	</select>
+	<select id="Listpage" resultMap="SelectAll">
+    	select * from t_livemsgs order by newtime desc limit #{page},#{lim}
+	</select>
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yamplatform.spscp.mapper.UsersMapper">
+	<!-- 查询一个用户 -->
+	<select id="SelectOne" parameterType="String" resultType="yamplatform.spscp.pojo.Users">
+    select * from t_user where username = #{username}
+  </select>
+	<select id="SelectOnebyid" parameterType="INTEGER" resultType="yamplatform.spscp.pojo.Users">
+    select * from t_user where id = #{id}
+  </select>
+	<!-- 删除 -->
+	<delete id="DeleteUsers">
+    	delete from t_user where id = #{id}
+  	</delete>
+	<!-- 插入用户 -->
+	<insert id="InsertUsers" parameterType="yamplatform.spscp.pojo.Users">
+		insert into t_user(username,password,nickname,sex,picture,email,comefrom,introduction,profession,registerTime,status)
+		values(#{users.username,jdbcType=VARCHAR},#{users.password,jdbcType=VARCHAR},#{users.nickname,jdbcType=VARCHAR},
+		#{users.sex,jdbcType=VARCHAR},#{users.picture,jdbcType=VARCHAR},#{users.email,jdbcType=VARCHAR},
+		#{users.comefrom,jdbcType=VARCHAR},#{users.introduction,jdbcType=LONGVARCHAR},#{users.profession,jdbcType=VARCHAR},
+		now(),#{users.status,jdbcType=INTEGER})
+	</insert>
+	<!-- 更新用户 -->
+	<update id="UpdateUsers">
+	  update t_user set password = #{users.password} ,nickname = #{users.nickname} ,introduction = #{users.introduction} ,
+	  sex = #{users.sex} ,email = #{users.email} ,profession = #{users.profession} ,comefrom = #{users.comefrom}
+	  where username=#{users.username}
+	</update>
+	<!-- 查询所有用户 -->
+	<resultMap type="yamplatform.spscp.pojo.Users" id="SelectAll">
+		<result property="id" column="id"/>
+		<result property="username" column="username"/>
+		<result property="password" column="password"/>
+		<result property="nickname" column="nickname"/>
+		<result property="sex" column="sex"/>
+		<result property="picture" column="picture"/>
+		<result property="email" column="email"/>
+		<result property="comefrom" column="comefrom"/>
+		<result property="introduction" column="introduction"/>
+		<result property="profession" column="profession"/>
+		<result property="registerTime" column="registerTime"/>
+		<result property="status" column="status"/>
+	</resultMap>
+	<select id="usersList" resultMap="SelectAll">
+    	select * from t_user limit #{page},#{lim}
+	</select>
+	<select id="Count" resultType="INTEGER">
+    	select count(*) from t_user
+	</select>
+</mapper>

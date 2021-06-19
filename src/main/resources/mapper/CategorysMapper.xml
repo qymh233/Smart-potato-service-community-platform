@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yamplatform.spscp.mapper.CategorysMapper">
+	<!-- 查询一个栏目 -->
+	<select id="SelectOne" parameterType="Integer" resultType="yamplatform.spscp.pojo.Categorys">
+    select * from t_category where id = #{id}
+  </select>
+	<!-- 插入栏目 -->
+	<insert id="InsertCategorys" parameterType="yamplatform.spscp.pojo.Categorys">
+		insert into t_category(name) values(#{categorys.name,jdbcType=VARCHAR})
+	</insert>
+	<delete id="Delete">
+    	delete from t_category where id = #{id}
+  	</delete>
+	<!-- 更新栏目 -->
+	<update id="UpdateCategorys">
+	  update t_category set name=#{categorys.name} where id=#{categorys.id}
+	</update>
+	<!-- 查询所有栏目 -->
+	<resultMap type="yamplatform.spscp.pojo.Categorys" id="SelectAll">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+	</resultMap>
+	<select id="CategorysList" resultMap="SelectAll">
+    	select * from t_category
+  	</select>
+
+	<select id="Count" resultType="INTEGER">
+    	select count(*) from t_category
+	</select>
+	<select id="Listpage" resultMap="SelectAll">
+    	select * from t_category limit #{page},#{lim}
+	</select>
+</mapper>

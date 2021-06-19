@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>图片查看</title>
+  <link rel="stylesheet" href="../../layui/css/layui.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo">智慧马铃薯服务社区平台</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item"><a href="/home">首页</a></li>
+      <li class="layui-nav-item"><a th:href="@{/Topics/Topics(page='lun')}">论坛</a></li>
+      <li class="layui-nav-item"><a href="/Categorys/Knowledge_column">知识专栏</a></li>
+      <li class="layui-nav-item"><a href="/PhotoLibrarys/PhotoLibrary">马铃薯图像库</a></li>
+      <li class="layui-nav-item"><a href="/Rellinks/Rellinks">友情连接</a></li>
+      <li class="layui-nav-item"><a th:href="@{/Helps/Help_Landing_registration(title='登陆与注册')}">帮助</a></li>
+      <li class="layui-nav-item"><a th:href="@{/Notices/Notice_Privacy_copyright(title='隐私和版权')}">公告</a></li>
+      <li class="layui-nav-item"><a th:href="@{/LiveMsgs/LiveMsgs_see}">留言版</a></li>
+      <div class="layui-nav-item">
+        <form method="post" onsubmit="return validate_form(this)">
+          <li class="layui-nav-item"><input  name="question" id="question" type="text"  class="layui-input"></li>
+          <li class="layui-nav-item"><button type="submit" formaction="/Topics/findSignIn" class="layui-btn layui-btn-radius">Search</button></li>
+        </form>
+      </div>
+    </ul>	
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;" th:text="${user.getNickname()}">
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="/Users/Personal_Center">个人中心</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="/">安全退出</a></li>
+    </ul>
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item layui-nav-itemed">
+          <a href="/PhotoLibrarys/PhotoLibrary">马铃薯图像库</a>
+        </li>
+        <li class="layui-nav-item layui-nav-itemed">
+          <a href="/PhotoLibrarys/PhotoLibrary_upload">我要上传</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div class="layui-row">
+      <blockquote class="layui-elem-quote" style="color: green;font-size: 20px;font-weight: 500;">查看详情</blockquote>
+        <div id="form-box">
+          <div class="layui-form-item">
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">标题</label>
+            <label class="layui-form-mid">
+              <span class="span-style" th:text="${photoLibrary.getTitle()}"></span>
+            </label>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">上传者</label>
+            <label class="layui-form-mid">
+              <span class="span-style" th:text="${photoLibrary.getUser().getNickname()}"></span>
+            </label>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">上传时间</label>
+            <label class="layui-form-mid">
+              <span class="span-style"  th:text="${#dates.format(photoLibrary.getUptime(),'yyyy-MM-dd HH:mm:ss')}"></span>
+            </label>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">浏览次数</label>
+            <label class="layui-form-mid">
+              <span class="span-style" th:text="${photoLibrary.getConDownload()}"></span>
+            </label>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">预览</label>
+            <label class="layui-form-mid" th:if="${photoLibrary.getUrl()} ne '' ">
+              <img th:if="${photoLibrary.getUrl().substring(photoLibrary.getUrl().length()-3)} eq 'jpg' " th:src="${photoLibrary.getUrl()}" style="width: 100px;height: 100px;">
+              <span th:if="${photoLibrary.getUrl().substring(photoLibrary.getUrl().length()-3)} ne 'jpg' " th:text="无法预览压缩包"></span>
+            </label>
+            <label class="layui-form-mid" th:if="${photoLibrary.getUrl()} eq '' ">
+              <span th:text="没有资源"></span>
+            </label>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label" style="font-size:18px; color:#000000; font-weight: bold; ">描述</label>
+            <div class="layui-input-block">
+              <textarea readonly class="layui-textarea" th:text="${photoLibrary.getDescribed()}"></textarea>
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">
+              <a href="/PhotoLibrarys/PhotoLibrary" class="layui-btn layui-btn-lg layui-btn-normal">返回上一页</a>
+            </label>
+            <div class=" layui-inline" style="margin-left: 50px;">
+              <label class="layui-form-label">
+              <a class="layui-btn layui-btn-danger layui-btn-lg" th:href="@{${photoLibrary.getUrl()}}" th:download="${photoLibrary.getTitle()}" target="_blank">下载</a>
+            </label>
+            </div>
+          </div>
+        </div>
+
+
+
+    </div>
+            
+       
+  </div>
+  
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    智慧马铃薯服务社区平台
+  </div>
+</div>
+<script src="../layui/layui.js"></script>
+<script>
+//JavaScript代码区域
+layui.use('element', function(){
+  var element = layui.element;
+  
+});
+
+function validate_required(field,alerttxt)
+{
+  with (field)
+  {
+    if (value==null||value=="")
+    {alert(alerttxt);return false}
+    else {return true}
+  }
+}
+
+function validate_form(thisform)
+{
+  with (thisform)
+  {
+    if (validate_required(question,"搜索框不可以为空")==false)
+    {question.focus();return false}
+  }
+}
+</script>
+</body>
+</html>

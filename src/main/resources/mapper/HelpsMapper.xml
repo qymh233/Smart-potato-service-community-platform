@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yamplatform.spscp.mapper.HelpsMapper">
+	<!-- 查询一个公告 -->
+	<select id="SelectOne" parameterType="String" resultType="yamplatform.spscp.pojo.Helps">
+    select * from t_help where title = #{title}
+  </select>
+	<select id="Selectbyid" parameterType="INTEGER" resultType="yamplatform.spscp.pojo.Helps">
+    select * from t_help where id = #{id}
+  </select>
+	<!-- 插入公告 -->
+	<insert id="InsertHelps" parameterType="yamplatform.spscp.pojo.Helps">
+		insert into t_help(content,title,newtime) values(#{helps.content,jdbcType=VARCHAR},#{helps.title,jdbcType=VARCHAR},now())
+	</insert>
+	<!-- 删除 -->
+	<delete id="Delete">
+    	delete from t_help where id = #{id}
+  	</delete>
+	<!-- 更新公告 -->
+	<update id="UpdateHelps">
+	  update t_help set content=#{helps.content} , title = #{helps.title} , newtime= now() where id=#{helps.id}
+	</update>
+	<!-- 查询所有用户 -->
+	<resultMap type="yamplatform.spscp.pojo.Helps" id="SelectAll">
+		<result property="id" column="id"/>
+		<result property="content" column="content"/>
+		<result property="title" column="title"/>
+		<result property="newtime" column="newtime"/>
+	</resultMap>
+	<select id="helpsList" resultMap="SelectAll">
+    	select * from t_help
+	</select>
+	<select id="Count" resultType="INTEGER">
+    	select count(*) from t_help
+	</select>
+	<select id="Listpage" resultMap="SelectAll">
+    	select * from t_help limit #{page},#{lim}
+	</select>
+</mapper>
